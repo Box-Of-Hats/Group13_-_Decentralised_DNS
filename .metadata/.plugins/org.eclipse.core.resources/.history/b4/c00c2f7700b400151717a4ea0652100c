@@ -1,0 +1,10 @@
+package group13Project;
+
+public class Node {
+	public Node {
+		
+	}
+	public void newNode(Properties config) {
+		
+	}
+}

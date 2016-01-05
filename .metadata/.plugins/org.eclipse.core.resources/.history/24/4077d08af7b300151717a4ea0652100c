@@ -1,0 +1,22 @@
+package group13Project;
+import java.io.File;
+public class Config {
+	
+	private boolean hasConfig = false;
+	private String os;
+	
+	public Config() {
+		//check if config file exist on local system
+		setOs(System.getProperty("os.name"));
+		System.out.println(System.getProperty("user.home"));
+		
+		
+		
+	}
+	private void setOs(String osName) {
+		this.os = osName;
+	}
+	public boolean hasConfig(){
+		return hasConfig;
+	}
+}

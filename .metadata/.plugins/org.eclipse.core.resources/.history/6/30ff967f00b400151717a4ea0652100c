@@ -1,0 +1,12 @@
+package group13Project;
+
+import java.util.Properties;
+
+public class Node {
+	public Node {
+		
+	}
+	public void newNode(Properties config) {
+		
+	}
+}

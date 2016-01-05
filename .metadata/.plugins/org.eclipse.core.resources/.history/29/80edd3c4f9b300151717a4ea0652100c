@@ -1,0 +1,36 @@
+package group13Project;
+import java.io.File;
+import java.io.IOException;
+public class Config {
+	
+	private boolean hasConfig = false;
+	private String ConfigFolderDir;
+	
+	
+	
+	public Config() {
+		
+		//check if config file exist on local system
+		setConfigFolderDir(System.getProperty("user.home") + "Desktop/group13ProjectFolder/");
+		File configFile = new File(System.getProperty("user.home"), "Desktop/group13ProjectFolder/conf.properties");
+		setHasConfig(configFile.exists());
+		
+		
+		
+	}
+	private void setConfigFolderDir(String dir) {
+		
+	}
+	private void setHasConfig(Boolean hasConfig) {
+		this.hasConfig = hasConfig;
+	}
+	public void createConfig() throws IOException {
+		if(this.hasConfig == false) {
+			File newConfig = new File();
+		}
+	}
+	
+	public boolean hasConfig(){
+		return hasConfig;
+	}
+}

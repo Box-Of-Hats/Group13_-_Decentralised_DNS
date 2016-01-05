@@ -1,0 +1,17 @@
+package group13Project;
+
+import java.io.IOException;
+
+public class app {
+	public static void main(String[] args) throws IOException{
+		double timeS = System.nanoTime();
+		Config conf = new Config();
+		System.out.println(conf.hasConfig());
+		if(conf.hasConfig() == false) {
+			conf.createConfig();
+		} else {
+			
+		}
+		
+	}
+}

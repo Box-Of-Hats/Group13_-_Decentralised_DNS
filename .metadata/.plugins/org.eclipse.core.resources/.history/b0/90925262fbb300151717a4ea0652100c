@@ -1,0 +1,14 @@
+package group13Project;
+public class app {
+	public static void main(String[] args){
+		double timeS = System.nanoTime();
+		Config conf = new Config();
+		//System.out.println(conf.hasConfig());
+		if(conf.hasConfig() == false) {
+			conf.createConfig();
+		} else {
+			
+		}
+		
+	}
+}

@@ -1,0 +1,64 @@
+package group13Project;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+public class Config {
+	
+	private boolean hasConfig = false;
+	private String configFolderDir;
+	private File config;
+	
+	
+	
+	public Config() {
+		
+		//check if config file exist on local system
+		setConfigFolderDir(System.getProperty("user.home") + File.separator+ "Desktop/group13ProjectFolder");
+		File configFile = new File(System.getProperty("user.home"), "Desktop"+ File.separator+ "group13ProjectFolder" + File.separator +"config.properties");
+		setHasConfig(configFile.exists());
+		
+		
+	}
+	private void setConfigFolderDir(String dir) {
+		this.configFolderDir = dir;
+	}
+	private void setHasConfig(Boolean hasConfig) {
+		this.hasConfig = hasConfig;
+	}
+	public boolean createConfig() throws IOException {
+		if(this.hasConfig == false) {
+			
+			File dir = new File(this.configFolderDir);
+			File config = new File(dir ,  File.separator+"config.properties");
+			
+			//Check if folder is created
+			System.out.println(config.exists());
+			if(!dir.exists()) {
+				dir.mkdirs();
+				try {
+					
+					setHasConfig(config.createNewFile());
+					setConfig(config);
+					
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
+			} else if(!config.exists()) {
+				try {
+					setHasConfig(config.createNewFile());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return this.hasConfig;
+	}
+	
+	public boolean hasConfig(){
+		return hasConfig;
+	}
+}

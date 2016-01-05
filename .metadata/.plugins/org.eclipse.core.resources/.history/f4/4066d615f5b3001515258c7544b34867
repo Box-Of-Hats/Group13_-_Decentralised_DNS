@@ -1,0 +1,14 @@
+package group13Project;
+
+public class Config {
+	
+	private boolean hasConfig = false;
+	public Config() {
+		//set up
+		
+	}
+	
+	public boolean hasConfig(){
+		return hasConfig();
+	}
+}
