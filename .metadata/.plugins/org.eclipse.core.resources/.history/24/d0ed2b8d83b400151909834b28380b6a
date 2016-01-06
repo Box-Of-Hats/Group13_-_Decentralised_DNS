@@ -1,0 +1,116 @@
+package group13Project.GUI;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+public class GUIMainFrame extends JFrame {
+	
+	// Instance variables -- GUI components
+    private JPanel panel;
+    private JLabel instructionLabel;
+   
+    private JLabel status;
+    
+
+    private JTextArea inputArea;
+    private JTextArea outputArea;
+    private JButton shortenButton;
+    private JButton selectFile;
+    private JLabel errorMes;
+    private JFileChooser fileChooser;
+    private String filePath;
+    private static final int FRAME_WIDTH = 500;
+    private static final int FRAME_HEIGHT = 400;
+
+    private static final Color headerBGColour = new Color(212,217,222);
+    private static final Color headerFGColour = new Color(78,90,101);
+    private static final Color mainBGColour = new Color(234, 236, 238);
+    private static final Color mainFGColour = new Color(78,90,101);
+
+    private static final Color btnHover = new Color(176, 182, 187);
+    private static final Color red = new Color(245, 100, 100);
+    
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		super();
+		
+		// Constants
+	    
+	    
+	    // Instance variables -- GUI components
+	    
+	    
+	    // Constructor
+	        
+	        // Set up the frame
+        setSize( FRAME_WIDTH, FRAME_HEIGHT );
+        
+        
+        // Set up the panel and layout manager
+        panel = new JPanel();
+        GridLayout grid = new GridLayout( 0, 1 );  // a one-column layout
+        panel.setLayout( grid );
+        
+        add( panel );  // add panel to the JFrame
+
+        // Set up and add components
+
+        //main label
+        instructionLabel = new JLabel( "Enter your message in the field below and click 'Shorten'" );
+
+        instructionLabel.setOpaque(true);
+        instructionLabel.setBackground(headerBGColour);
+        instructionLabel.setForeground(headerFGColour);
+        instructionLabel.setFont(new Font("Arial Narrow", Font.BOLD, 20));
+        instructionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        //set instructionLabel to frame
+        panel.add( instructionLabel );
+
+
+        //input
+        inputArea = new JTextArea();
+
+        inputArea.setLineWrap(true);
+        inputArea.setWrapStyleWord(true);
+        inputArea.setMargin(new Insets(10,10,10,10));
+        
+        inputArea.setOpaque(true);
+        inputArea.setFont(new Font("Arial Narrow", Font.PLAIN, 16));
+        inputArea.setBackground(mainBGColour);
+        inputArea.setForeground(mainFGColour);
+
+        //set inputArea to frame
+        panel.add( inputArea );
+        
+        //output area
+        outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        outputArea.setOpaque(true);
+        outputArea.setFont(new Font("Arial Narrow", Font.PLAIN, 16));
+        outputArea.setBackground(mainBGColour);
+        outputArea.setForeground(mainFGColour);
+
+        outputArea.setMargin(new Insets(10,10,10,10));
+        
+        //set outputArea to frame
+        panel.add( outputArea );
+
+	}
+	
+	public void updateStatus(String status) {
+		
+	}
+}

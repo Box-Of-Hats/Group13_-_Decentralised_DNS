@@ -1,0 +1,21 @@
+package group13Project.GUI;
+
+public class GUIMainFrame {
+	// Instance variables -- GUI components
+    private JPanel panel;
+    private JLabel instructionLabel;
+   
+    private JLabel status;
+    
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		
+	}
+	
+	public void updateStatus(String status) {
+		
+	}
+}

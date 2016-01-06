@@ -1,0 +1,88 @@
+package group13Project.GUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import net.miginfocom.swing.MigLayout;
+
+public class GUIMainFrame extends JFrame {
+	
+	// Instance variables -- GUI components
+    private JPanel panel;
+    private JLabel title;
+    private JLabel message;
+    private JLabel status;
+    
+    
+    JLabel settingsLabel = new JLabel("Dashboard Settings");
+    JLabel nameLabel = new JLabel("Name:");
+    JLabel zipLabel = new JLabel("Zip Code:");
+    JLabel emailLabel = new JLabel("Email:");
+    JLabel avatarLabel = new JLabel("Avatar Image:");
+    JTextField fNameField = new JTextField(10);
+    JTextField mNameField = new JTextField(1);
+    JTextField lNameField = new JTextField(15);
+    JTextField zipField = new JTextField(5);
+    JTextField emailField = new JTextField(20);
+    JTextField avatarField = new JTextField(30);
+    JButton okBttn = new JButton("Ok");
+    JButton cancelBttn = new JButton("Cancel");
+    JButton helpBttn = new JButton("Help");
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		super();
+		
+		setSize(600, 400);
+		buildMiGDashboard().setVisible(true);
+		
+        
+		
+	}
+	public JPanel buildMiGDashboard() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new MigLayout());
+        buildMiGForm(panel);
+        return panel;
+    }
+	private void buildMiGForm(JPanel panel) {
+        panel.add(settingsLabel, "span, center, gapbottom 15");
+        panel.add(nameLabel, "align label");
+        panel.add(fNameField);
+        panel.add(mNameField);
+
+        //wrap keyword starts a new row
+        panel.add(lNameField, "wrap");
+
+        //align label triggers platform-specific label alignment
+        panel.add(zipLabel, "align label");
+        panel.add(zipField, "wrap");
+        panel.add(emailLabel,"align label");
+
+        //span keyword lets emailField use the rest of the row
+        panel.add(emailField, "span");
+        panel.add(avatarLabel, "align label");
+        panel.add(avatarField, "span");
+
+        //tag identifies the type of button
+        panel.add(okBttn, "tag ok, span, split 3, sizegroup bttn");
+
+        //sizegroups set all members to the size of the biggest member
+        panel.add(cancelBttn, "tag cancel, sizegroup bttn");
+        panel.add(helpBttn, "tag help, sizegroup bttn");
+    }
+	
+	public void updateStatus(String status) {
+		
+	}
+}

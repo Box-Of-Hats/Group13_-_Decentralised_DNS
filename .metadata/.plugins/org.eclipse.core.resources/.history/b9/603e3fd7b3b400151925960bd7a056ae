@@ -1,0 +1,122 @@
+package group13Project.GUI;
+
+
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+
+public class GUIMainFrame extends JFrame {
+	
+	// Instance variables -- GUI components
+
+    private JFrame setUpFrame = new JFrame("Group 13 Project - Set up");
+    private JPanel setUpPanel = new JPanel();
+    private JLabel status = new JLabel();
+    private JLabel welcomeMessage = new JLabel("Welcome, Please wait a moment while complete the setup.");
+    private JLabel foreName = new JLabel();
+    
+    private static final Color headerBGColour = new Color(212,217,222);
+    private static final Color headerFGColour = new Color(78,90,101);
+    private static final Color mainBGColour = new Color(234, 236, 238);
+    private static final Color mainFGColour = new Color(78,90,101);
+    
+
+    
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 
+	 */
+    public GUIMainFrame() {
+    	
+    	//already setup
+    }
+	public GUIMainFrame(Boolean setup) {
+
+	    if(setup == true){
+		
+			this.setupView();
+			
+			frame.add(panel);
+			
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.pack();
+			frame.setVisible(true);
+		}
+        
+		
+	}
+	public void setupView() {
+		
+		frame.setMinimumSize(new Dimension(400, 300));
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    
+	    frame.setLocation(x, y);
+	    panel.setLayout(new GridLayout(0,1));
+		
+		welcomeMessage.setOpaque(true);
+	    welcomeMessage.setFont(new Font("Serif",Font.PLAIN, 16));
+	    welcomeMessage.setBackground(headerBGColour);
+	    welcomeMessage.setForeground(headerFGColour);
+	    welcomeMessage.setMaximumSize(new Dimension(800, 100));
+	    welcomeMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	    
+	    status.setOpaque(true);
+	    status.setFont(new Font("Serif", Font.ITALIC, 16));
+	    status.setBackground(mainBGColour);
+	    status.setForeground(mainFGColour);
+	    status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	    
+	    panel.add(welcomeMessage);
+	    panel.add(status);
+	}
+	public void newDeviceView(String IP) {
+		frame.dispose();
+		
+		frame = new JFrame("New Device Set up.");
+		frame.setMinimumSize(new Dimension(800, 700));
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    
+	    frame.setLocation(x, y);
+	    panel.setLayout(new GridLayout(0,1));
+		
+		welcomeMessage.setOpaque(true);
+	    welcomeMessage.setFont(new Font("Serif",Font.PLAIN, 16));
+	    welcomeMessage.setBackground(headerBGColour);
+	    welcomeMessage.setForeground(headerFGColour);
+	    welcomeMessage.setMaximumSize(new Dimension(800, 100));
+	    welcomeMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	    
+	    status.setOpaque(true);
+	    status.setFont(new Font("Serif", Font.ITALIC, 16));
+	    status.setBackground(mainBGColour);
+	    status.setForeground(mainFGColour);
+	    status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	    
+	    panel.add(welcomeMessage);
+	    panel.add(status);
+	
+	}
+	
+	public void updateStatus(String status) {
+		
+		this.status.setText(status);
+		
+	}
+}

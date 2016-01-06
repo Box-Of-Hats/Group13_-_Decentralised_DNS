@@ -15,7 +15,10 @@ public class Config {
 		//check if config file exist on local system
 		setConfigFolderDir(System.getProperty("user.home") + File.separator+ "Desktop/group13ProjectFolder");
 		File configFile = new File(System.getProperty("user.home"), "Desktop"+ File.separator+ "group13ProjectFolder" + File.separator +"config.properties");
-		setHasConfig(configFile.exists());
+		if(configFile.exists()) {
+			setConfig(configFile);
+			setHasConfig(true);
+		}
 		
 		
 	}
@@ -25,7 +28,7 @@ public class Config {
 	private void setHasConfig(Boolean hasConfig) {
 		this.hasConfig = hasConfig;
 	}
-	public File createConfig() throws IOException {
+	public void createConfig() throws IOException {
 		if(this.hasConfig == false) {
 			
 			File dir = new File(this.configFolderDir);
@@ -53,9 +56,13 @@ public class Config {
 				}
 			}
 		}
+		
+		
+	}
+	public File getConfig(){
 		return this.config;
 	}
-	private void setConfig(File f) {
+	public void setConfig(File f) {
 		this.config = f;
 	}
 	public boolean hasConfig(){

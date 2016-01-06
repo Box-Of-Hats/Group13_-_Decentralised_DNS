@@ -1,7 +1,0 @@
-package group13Project;
-
-public class Config {
-	public Config() {
-		
-	}
-}

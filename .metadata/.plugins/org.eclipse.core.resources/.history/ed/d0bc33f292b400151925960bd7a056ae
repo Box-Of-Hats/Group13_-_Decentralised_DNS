@@ -1,0 +1,43 @@
+package group13Project.GUI;
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+
+public class GUIMainFrame extends JFrame {
+	
+	// Instance variables -- GUI components
+
+    private JFrame frame = new JFrame("Group 13 Project - Set up");
+    private JPanel panel = new JPanel();
+
+    private JLabel WelcomeMessage = new JLabel("Welcome, Please wait a moment while comple the setup.");
+    
+
+    
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		
+		panel.setLayout(new MigLayout());
+		panel.add(WelcomeMessage, "width 400,height 200, growx");
+		frame.add(panel);
+		
+		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+        
+		
+	}
+	
+	
+	public void updateStatus(String status) {
+		
+	}
+}

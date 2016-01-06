@@ -1,0 +1,55 @@
+package group13Project.GUI;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+
+import net.miginfocom.layout.AC;
+import net.miginfocom.layout.CC;
+import net.miginfocom.layout.LC;
+import net.miginfocom.swing.MigLayout;
+
+public class GUIMainFrame extends JFrame {
+	
+	// Instance variables -- GUI components
+    private JPanel panel;
+
+    
+    
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		super();
+		setSize(400,200);
+		// Layout, Column and Row constraints as arguments.
+		MigLayout layout = new MigLayout(
+		     new LC().fillX(),
+			 new AC().align("right").gap("rel").grow().fill(),
+			 new AC().gap("10"));
+
+		JPanel panel = new JPanel(layout);
+
+		panel.add(new JLabel("Enter size:"));
+		panel.add(new JTextField(""),new CC().wrap());
+		panel.add(new JLabel("Enter weight:"));
+		panel.add(new JTextField(""));
+		
+        
+		
+	}
+	
+	
+	public void updateStatus(String status) {
+		
+	}
+}

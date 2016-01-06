@@ -1,0 +1,11 @@
+package group13Project;
+
+public class Internet {
+	public Internet() {
+		
+	}
+	
+	public Boolean hasValidInternetConnection() {
+		return status;
+	}
+}

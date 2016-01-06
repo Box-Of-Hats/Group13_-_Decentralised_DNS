@@ -1,8 +1,0 @@
-package group13Project;
-
-public class Config {
-	private bool hasConfig = false;
-	public Config() {
-		
-	}
-}

@@ -1,0 +1,11 @@
+package group13Project.GUI;
+
+public class GUIMainFrame {
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public void updateStatus(String status) {
+		
+	}
+}

@@ -1,0 +1,15 @@
+package group13Project.GUI;
+
+public class GUIMainFrame {
+	
+	/* 
+	 * Creates a GUI interface for user.
+	 */
+	public GUIMainFrame(Boolean setup) {
+		
+	}
+	
+	public void updateStatus(String status) {
+		
+	}
+}
