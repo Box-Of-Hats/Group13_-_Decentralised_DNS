@@ -133,7 +133,7 @@ public class GUIMainFrame extends JFrame {
 	    int y = (int) ((dimension.getHeight() - newDeviceFrame.getHeight()) / 2);
 	    
 	    newDeviceFrame.setLocation(x, y);
-	    newDevicePanel.setLayout(new MigLayout("  wrap 2, align center ,fillx"));
+	    newDevicePanel.setLayout(new MigLayout(" debug, wrap 2, align center ,fillx"));
 
 	    // START title styling
 	    newDeviceTitle.setText("Setup your new Device");
@@ -219,7 +219,6 @@ public class GUIMainFrame extends JFrame {
         ipTA.setText(IP);
         ipTA.setOpaque(true);
         ipTA.setFont(inputFont);
-        ipTA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 	    
         
         ipTA.setForeground(mainFGColour);
