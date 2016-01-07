@@ -288,7 +288,8 @@ public class GUIMainFrame extends JFrame {
 	    			forenameHelper.setForeground(red);
 	    			hasError = true;
 	    		} else {
-	    			forenameHelper.setText("");
+	    			if(forenameHelper.getText() != "Please enter your forename.")
+	    				forenameHelper.setText("");
 	    				
 	    			tickForename.setForeground(blue);
 	    			hasError = false;

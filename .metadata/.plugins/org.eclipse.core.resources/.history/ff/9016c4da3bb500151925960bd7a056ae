@@ -288,7 +288,8 @@ public class GUIMainFrame extends JFrame {
 	    			forenameHelper.setForeground(red);
 	    			hasError = true;
 	    		} else {
-	    			forenameHelper.setText("");
+	    			if(forenameHelper.getText() != "Please enter your forename.")
+	    				forenameHelper.setText("");
 	    				
 	    			tickForename.setForeground(blue);
 	    			hasError = false;
@@ -299,7 +300,8 @@ public class GUIMainFrame extends JFrame {
 	    			surnameHelper.setForeground(red);
 	    			hasError = true;
 	    		} else {
-	    			surnameHelper.setText("");
+	    			if(surnameHeper.getText() != "Please enter your surname.")
+	    				forenameHelper.setText("");
 	   
 	    			tickSurname.setForeground(blue);
 	    			hasError = false;
@@ -312,8 +314,8 @@ public class GUIMainFrame extends JFrame {
 	    			
 	    			
 	    		} else {
-	    	
-	    			aliasHelper.setText("");
+	    			if(aliasHelper.getText() != "Please enter your name that other device would reconise you by.")
+	    				aliasHelper.setText("");
 	   
 	    			tickAlias.setForeground(blue);
 	    			hasError = false;
