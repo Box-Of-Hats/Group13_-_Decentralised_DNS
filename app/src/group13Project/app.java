@@ -24,8 +24,12 @@ public class app {
 				
 			}
 			File config = conf.getConfig();
-			System.out.println(conf.hasConfig());
-			frame.newDeviceView(internetConf.getDeviceIPAddressToString());
+			
+			if(frame.newDeviceView(internetConf.getDeviceIPAddressToString())) {
+				Cryptography crypt = new Cryptography();
+			}
+			
+			
 			//set up new node
 			
 		}

@@ -1,12 +1,16 @@
 package group13Project;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public class Config {
 	
 	private boolean hasConfig = false;
 	private String configFolderDir;
 	private File config = null;
+	private Boolean isSetUp= null;
+	
 	
 	
 	
@@ -18,6 +22,7 @@ public class Config {
 		if(configFile.exists()) {
 			setConfig(configFile);
 			setHasConfig(true);
+			
 		}
 		
 		
@@ -43,6 +48,7 @@ public class Config {
 				try {
 					setHasConfig(config.createNewFile());
 					setConfig(config);
+					this.setIsSetUp(false);
 					
 				} catch(IOException e) {
 					e.printStackTrace();
@@ -51,6 +57,14 @@ public class Config {
 				try {
 					setHasConfig(config.createNewFile());
 					setConfig(config);
+					Properties properties = new Properties();
+					properties.load(new FileInputStream(this.configFolderDir + File.separator + "config.properies"));
+					if(properties.getProperty("setup") == "")
+						this.setIsSetUp(false);
+					else
+						this.setIsSetUp(true);
+					
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -58,6 +72,9 @@ public class Config {
 		}
 		
 		
+	}
+	public void setIsSetUp(Boolean s) {
+		this.isSetUp = s;
 	}
 	public File getConfig(){
 		return this.config;

@@ -1,0 +1,30 @@
+package group13Project.security;
+
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
+public class Cryptography {
+	private PublicKey publicKey;
+	private PrivateKey privateKey;
+	
+	public Cryptography() {
+		try {
+			KeyPairGenerator key = KeyPairGenerator.getInstance("RSA");
+			key.initialize(1024);
+			
+			KeyPair pair = key.genKeyPair();
+			this.privateKey = pair.getPrivate();
+			this.publicKey = pair.getPublic() ;
+			
+			System.out.println(privateKey);
+		} catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+	}
+	public Cryptography(int strength) {
+		
+	}
+}

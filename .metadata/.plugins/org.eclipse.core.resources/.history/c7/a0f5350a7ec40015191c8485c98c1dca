@@ -1,0 +1,13 @@
+package group13Project.security;
+
+public class Cryptography {
+	private String publicKey;
+	private String privateKey;
+	
+	public Cryptography() {
+		
+	}
+	public Cryptography(int strength) {
+		
+	}
+}
