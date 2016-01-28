@@ -9,6 +9,7 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.SignatureException;
+import java.security.spec.X509EncodedKeySpec;
 
 
 public class Cryptography {
@@ -17,6 +18,7 @@ public class Cryptography {
 	private Signature sig;
 	private final int minStrength = 512;
 	private final int normStrength = 1024;
+	private byte[] encMessage;
 	
 	public Cryptography() throws Exception {
 		try {
@@ -88,18 +90,38 @@ public class Cryptography {
 	  * @throws SignatureException 
 	  */
 	public byte[] encrypt(String message) throws SignatureException {
-		byte[] encMessage = null;
+		
 		
 		//add message to Signature
 		sig.update(message.getBytes());
 		
 		//Sign Signature
-		encMessage = sig.sign();
+		this.encMessage = sig.sign();
 		
 		//Return Signed message
-		return encMessage;
+		return this.encMessage;
 	}
-
+	/**
+	 * Check if the integrity of the message
+	 * 
+	 * @param signature
+	 * 			:boolean isVerified
+	 * 
+	 * @return boolean
+	 * @throws SignatureException 
+	 */
+	public boolean verifySig(byte[] signature) {
+		try {
+			
+			boolean verifies = false;
+			// Check if signature is intact 
+			return verifies;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+			
+		} 
+	}
 }
 
 
