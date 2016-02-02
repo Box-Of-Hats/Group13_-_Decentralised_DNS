@@ -19,19 +19,7 @@ public class app {
 			frame.updateStatus("Checking Configuration");
 			Config conf = new Config();
 			
-			if(conf.isSetUp() == true) {
-				
-				/*
-				 * 
-				 * Existing User
-				 * 
-				 */
-				
-				//conf.getAllDetails();
-				
-				
-			} else if(conf.isSetUp() == false && conf.hasConfig() == false) {
-				
+			if(conf.hasConfig() == false) {
 				
 				/*
 				 * 
@@ -44,25 +32,19 @@ public class app {
 				
 				
 				
-				//Where you setup the chord system.
 			} else {
+				
 				
 				/*
 				 * 
-				 * New user adding personal details
-				 * 
+				 *  An existing User uses the network
+				 *  
+				 *  
 				 */
 				
-				frame.newDeviceView(internetConf.getDeviceIPAddressToString());
-				if(frame.newDeviceSetUp()) {
-					
-					//save all new details into properties
-					String[] newDetails = frame.getAllDetails();
-					conf.addProp("forename", newDetails[0]);
-					conf.addProp("surname", newDetails[2]);
-					conf.addProp("alias", newDetails[3]);
-					conf.addProp("IP", internetConf.getDeviceIPAddressToString());
-				}
+				System.out.println(frame.getAllDetails());
+				
+				//Where you setup the chord system.
 			}
 			
 			

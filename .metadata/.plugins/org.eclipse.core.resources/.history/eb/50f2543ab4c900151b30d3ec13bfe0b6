@@ -55,7 +55,6 @@ public class app {
 				
 				frame.newDeviceView(internetConf.getDeviceIPAddressToString());
 				if(frame.newDeviceSetUp()) {
-					
 					//save all new details into properties
 					String[] newDetails = frame.getAllDetails();
 					conf.addProp("forename", newDetails[0]);

@@ -102,6 +102,6 @@ public class Config {
 		return hasConfig;
 	}
 	public boolean isSetUp() {
-		return this.setup;
+		return this.setup
 	}
 }

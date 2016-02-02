@@ -27,10 +27,9 @@ public class app {
 				 * 
 				 */
 				
-				//conf.getAllDetails();
 				
 				
-			} else if(conf.isSetUp() == false && conf.hasConfig() == false) {
+			} else if(conf.isSetUp() == false) {
 				
 				
 				/*
@@ -42,7 +41,7 @@ public class app {
 				
 				conf.createConfig();
 				
-				
+				System.out.println(frame.getAllDetails());
 				
 				//Where you setup the chord system.
 			} else {
@@ -52,17 +51,7 @@ public class app {
 				 * New user adding personal details
 				 * 
 				 */
-				
 				frame.newDeviceView(internetConf.getDeviceIPAddressToString());
-				if(frame.newDeviceSetUp()) {
-					
-					//save all new details into properties
-					String[] newDetails = frame.getAllDetails();
-					conf.addProp("forename", newDetails[0]);
-					conf.addProp("surname", newDetails[2]);
-					conf.addProp("alias", newDetails[3]);
-					conf.addProp("IP", internetConf.getDeviceIPAddressToString());
-				}
 			}
 			
 			

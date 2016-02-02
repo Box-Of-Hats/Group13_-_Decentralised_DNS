@@ -77,12 +77,19 @@ public class GUIMainFrame extends JFrame {
     private static final int aliasLength = 16;
 
     private Boolean newDeviceViewComplete = false;
+
+    
+    
+    
 	
 	/* 
 	 * Creates a GUI interface for user.
 	 
 	 */
-    
+    public GUIMainFrame() {
+    	
+    	//already setup
+    }
 	public GUIMainFrame(Boolean setup) {
 
 	    if(setup == true){
@@ -127,9 +134,12 @@ public class GUIMainFrame extends JFrame {
 		setUpFrame.pack();
 		setUpFrame.setVisible(true);
 	}
-	public void newDeviceView(String IP) {	
+	public void newDeviceView(String IP) {
+		boolean errorCheckingPassed = false;
+	
 		
 		setUpFrame.dispose();
+		
 		
 		newDeviceFrame.setMinimumSize(new Dimension(800, 700));
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -356,8 +366,7 @@ public class GUIMainFrame extends JFrame {
 	    		
 	    		if(hasError == false)
 	    			newDeviceViewComplete = true;
-	    		
-	    			
+	  
 	    	}
 	    });
 	

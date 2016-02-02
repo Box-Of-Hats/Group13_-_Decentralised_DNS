@@ -78,8 +78,7 @@ public class Config {
 		
 		// loop through each key-value pair
 		
-		// write to properties file
-		
+		// write to config file
 	}
 	public void addProp(String keyName, String keyValue) {
 		Properties prop = new Properties();
@@ -100,8 +99,5 @@ public class Config {
 	}
 	public boolean hasConfig(){
 		return hasConfig;
-	}
-	public boolean isSetUp() {
-		return this.setup;
 	}
 }

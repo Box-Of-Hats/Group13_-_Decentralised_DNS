@@ -127,9 +127,12 @@ public class GUIMainFrame extends JFrame {
 		setUpFrame.pack();
 		setUpFrame.setVisible(true);
 	}
-	public void newDeviceView(String IP) {	
+	public void newDeviceView(String IP) {
+
+	
 		
 		setUpFrame.dispose();
+		
 		
 		newDeviceFrame.setMinimumSize(new Dimension(800, 700));
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -356,7 +359,6 @@ public class GUIMainFrame extends JFrame {
 	    		
 	    		if(hasError == false)
 	    			newDeviceViewComplete = true;
-	    		
 	    			
 	    	}
 	    });
