@@ -77,6 +77,10 @@ public class GUIMainFrame extends JFrame {
     private static final int aliasLength = 16;
 
     private Boolean newDeviceViewComplete = false;
+
+    
+    
+    
 	
 	/* 
 	 * Creates a GUI interface for user.
@@ -130,8 +134,9 @@ public class GUIMainFrame extends JFrame {
 		setUpFrame.pack();
 		setUpFrame.setVisible(true);
 	}
-	public boolean newDeviceView(String IP) {
+	public void newDeviceView(String IP) {
 		boolean errorCheckingPassed = false;
+	
 		
 		setUpFrame.dispose();
 		
@@ -316,58 +321,54 @@ public class GUIMainFrame extends JFrame {
 		newDeviceFrame.pack();
 		newDeviceFrame.setVisible(true);
 		
-		 nextBtn.addActionListener(new ActionListener() {
+		nextBtn.addActionListener(new ActionListener() {
 		    	
-
-				public void actionPerformed(ActionEvent e)	{
-		    		Boolean hasError = null;
-		    		//error checking
-		    		
-		    		if(forenameTA.getText().length() < 1 || forenameTA.getText().length() > forenameLength) {
-		    			forenameHelper.setText("Please enter your forename, must with within 32 characters");
-		    			forenameHelper.setForeground(red);
-		    			hasError = true;
-		    		} else {
-		    			forenameHelper.setText("");
-		    				
-		    			tickForename.setForeground(blue);
-		    			hasError = false;
-		    		}
-		    		
-		    		if(surnameTA.getText().length() < 1 || surnameTA.getText().length() > surnameLength) {
-		    			surnameHelper.setText("Please enter your surname, must with within 32 characters");
-		    			surnameHelper.setForeground(red);
-		    			hasError = true;
-		    		} else {
-		    			surnameHelper.setText("");
-		   
-		    			tickSurname.setForeground(blue);
-		    			hasError = false;
-		    		}
-		    		
-		    		if(aliasTA.getText().length() < 1 || aliasTA.getText().length() > aliasLength) {
-		    			aliasHelper.setText("Please enter your alias, must with within 16 characters");
-		    			aliasHelper.setForeground(red);
-		    			hasError = true;
-		    			
-		    			
-		    		} else {
-		    	
-		    			aliasHelper.setText("");
-		   
-		    			tickAlias.setForeground(blue);
-		    			hasError = false;
-		    		}
-		    		
-		    		if(hasError == false){
-		    			newDeviceViewComplete = true;
-		    		}
-		    		
-		  
-		    	}
-		    });
-		    //END nextBTN styling
-		    return true;
+				
+			public void actionPerformed(ActionEvent e)	{
+	    		Boolean hasError = null;
+	    		//error checking
+	    		
+	    		if(forenameTA.getText().length() < 1 || forenameTA.getText().length() > forenameLength) {
+	    			forenameHelper.setText("Please enter your forename, must with within 32 characters");
+	    			forenameHelper.setForeground(red);
+	    			hasError = true;
+	    		} else {
+	    			forenameHelper.setText("");
+	    				
+	    			tickForename.setForeground(blue);
+	    			hasError = false;
+	    		}
+	    		
+	    		if(surnameTA.getText().length() < 1 || surnameTA.getText().length() > surnameLength) {
+	    			surnameHelper.setText("Please enter your surname, must with within 32 characters");
+	    			surnameHelper.setForeground(red);
+	    			hasError = true;
+	    		} else {
+	    			surnameHelper.setText("");
+	   
+	    			tickSurname.setForeground(blue);
+	    			hasError = false;
+	    		}
+	    		
+	    		if(aliasTA.getText().length() < 1 || aliasTA.getText().length() > aliasLength) {
+	    			aliasHelper.setText("Please enter your alias, must with within 16 characters");
+	    			aliasHelper.setForeground(red);
+	    			hasError = true;
+	    			
+	    			
+	    		} else {
+	    	
+	    			aliasHelper.setText("");
+	   
+	    			tickAlias.setForeground(blue);
+	    			hasError = false;
+	    		}
+	    		
+	    		if(hasError == false)
+	    			newDeviceViewComplete = true;
+	  
+	    	}
+	    });
 	
 	}
 	
@@ -378,5 +379,16 @@ public class GUIMainFrame extends JFrame {
 		
 		this.status.setText(status);
 		
+	}
+	public boolean newDeviceSetUp() {
+		return this.newDeviceViewComplete;
+	}
+	public String[] getAllDetails() {
+		String[] returnVals = new String[3];
+		returnVals[0] = this.forenameTA.getText();
+		returnVals[1] = this.surnameTA.getText();
+		returnVals[2] = this.aliasTA.getText();
+		
+		return returnVals;
 	}
 }

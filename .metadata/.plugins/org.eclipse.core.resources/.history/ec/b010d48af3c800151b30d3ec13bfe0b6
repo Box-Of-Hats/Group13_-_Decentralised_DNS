@@ -1,0 +1,13 @@
+package algorithms;
+
+import java.util.*;
+public class RandomArray {
+	public RandomArray(int n) {
+		int[] array = new int[n];
+		for(int a : array) {
+			a = (int) Math.random() * 10;
+		}
+		Arrays.fill(array, (int) (Math.random() * 50 + 1));
+		System.out.println(Arrays.toString(array));
+	}
+}

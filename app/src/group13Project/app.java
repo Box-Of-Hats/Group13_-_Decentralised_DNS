@@ -15,27 +15,46 @@ public class app {
 		
 		Internet internetConf = new Internet();
 		frame.updateStatus("Checking Internet Connection");
-		if(internetConf.hasValidInternetConnection()){
+		if(internetConf.hasValidInternetConnection()) {
 			frame.updateStatus("Checking Configuration");
 			Config conf = new Config();
 			
 			if(conf.hasConfig() == false) {
 				
+				/*
+				 * 
+				 *  A new User joins the network
+				 *  
+				 *  
+				 */
+				
 				conf.createConfig();
 				
+				frame.newDeviceView(internetConf.getDeviceIPAddressToString());
+				
+				// Update config with new device settings
+				conf.updateStatus(frame.getNewdeviceSettings());
+				
+				
+			} else if(conf.checkStatus() == true) {
+				
+				/*
+				 * 
+				 *  An existing User uses the network
+				 *  
+				 *  
+				 */
+				
+				
+				
+				//Where you setup the chord system.
 			}
-			File config = conf.getConfig();
-			
-			if(frame.newDeviceView(internetConf.getDeviceIPAddressToString())) {
-				Cryptography crypt = new Cryptography();
-				byte[] a = crypt.encrypt("Hello World");
-				System.out.println(a);
-				System.out.println(crypt.verifySig(a));
-			}
 			
 			
-			//set up new node
+		
 			
+		} else {
+			frame.updateStatus("No Internget connection available");
 		}
 	}
 }

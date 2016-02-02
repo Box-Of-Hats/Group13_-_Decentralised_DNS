@@ -1,6 +1,7 @@
 package group13Project;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,7 +10,8 @@ public class Config {
 	private boolean hasConfig = false;
 	private String configFolderDir;
 	private File config = null;
-	private Boolean isSetUp= null;
+	private boolean setup;
+	
 	
 	
 	
@@ -22,7 +24,6 @@ public class Config {
 		if(configFile.exists()) {
 			setConfig(configFile);
 			setHasConfig(true);
-			
 		}
 		
 		
@@ -48,7 +49,7 @@ public class Config {
 				try {
 					setHasConfig(config.createNewFile());
 					setConfig(config);
-					this.setIsSetUp(false);
+					this.setup = false;
 					
 				} catch(IOException e) {
 					e.printStackTrace();
@@ -58,11 +59,11 @@ public class Config {
 					setHasConfig(config.createNewFile());
 					setConfig(config);
 					Properties properties = new Properties();
-					properties.load(new FileInputStream(this.configFolderDir + File.separator + "config.properies"));
+					properties.load(new FileInputStream(this.configFolderDir + File.separator + "config.properties"));
 					if(properties.getProperty("setup") == "")
-						this.setIsSetUp(false);
+						this.setup = false;
 					else
-						this.setIsSetUp(true);
+						this.setup = true;
 					
 					
 				} catch (IOException e) {
@@ -73,8 +74,22 @@ public class Config {
 		
 		
 	}
-	public void setIsSetUp(Boolean s) {
-		this.isSetUp = s;
+	public void updateStatus(String[] values) {
+		
+		// loop through each key-value pair
+		
+		// write to config file
+	}
+	public void addProp(String keyName, String keyValue) {
+		Properties prop = new Properties();
+		try  {
+			prop.load(new FileInputStream(this.configFolderDir + File.separator + "config.properties"));
+			prop.setProperty(keyName, keyValue);
+			prop.store(new FileOutputStream(this.configFolderDir + File.separator + "config.properties"), "Added or updated a properity.");
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public File getConfig(){
 		return this.config;

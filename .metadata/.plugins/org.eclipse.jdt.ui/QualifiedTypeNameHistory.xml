@@ -23,8 +23,11 @@
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="javax.swing.JDialog"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
-<fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.security.Signature"/>
 <fullyQualifiedTypeName name="java.security.SecureRandom"/>
+<fullyQualifiedTypeName name="group13Project.security.Cryptography"/>
+<fullyQualifiedTypeName name="java.security.spec.X509EncodedKeySpec"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 </qualifiedTypeNameHistroy>
