@@ -1,8 +1,0 @@
-package algorithms;
-
-import java.util.*;
-public class RandomArray {
-	public RandomArray(int n) {
-		
-	}
-}
