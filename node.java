@@ -18,12 +18,21 @@ public class node {
 	public void findClosest() {
 		//
 	}
-	public String getNode() {
+	public String getNodeIP(nodeID) {
 		//Geoff
+		//Based on the assumption fingerTable is a HashMap
+		if (fingerTable.containsKey(nodeID)) {
+			return fingerTable.get(nodeID);
+		} else {
+			//find closest node in finger table then return that IP
+		}
 	}
 	public boolean sendMessage(String message, int destNode) {
 		//Geoff
-		String ip = getNode(node);
+		String ip = getNodeIP(node);
+		//Sending message using networking class
+		//This is a guess and will need editing
+		sendMessage(ip, new Message(MessageType.recieveMessage,message));
 	}
 	public boolean recieveMessage(String message) {
 		//Geoff
