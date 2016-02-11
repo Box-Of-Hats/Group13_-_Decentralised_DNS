@@ -13,7 +13,7 @@ public class Node {
 
 	public Map getFingerTable() {
 		//Jake and Jamie
-		//Accessor for fingertable
+		//Accessor for fingerTable
 		return fingerTable;
 	}
 
@@ -22,7 +22,7 @@ public class Node {
 		return id;
 	}
 
-	public int setID(int newId){
+	public void setID(int newId){
 		id = newId;
 	}
 
@@ -50,6 +50,7 @@ public class Node {
 		//Jammy and Chris
 	}
 
+	/*
 	public Map findClosest(int nodeId) {
 		/* Find Closest works to find the node with the given GUID or if such a node does not exist it finds
 		   the closest node past the searched for GUID. It finds this by walking through the the chord using
@@ -58,14 +59,16 @@ public class Node {
 		   the node in its finger table with the highest GUID that is smaller than the target GUID, until either
 		   the target GUID is found or the first finger in a node's look up table is greater than the target GUID
 		   in this case this finger is taken as the closest
-		*/
+		
 	}
+	*/
+
 	
 	public int findClosestNodeInFinger(int nodeId) {
 		int check = 10;
         int count = 0;
 
-        Set set = m1.entrySet();
+        Set set = fingerTable.entrySet();
         Iterator i = set.iterator();
         int shortestDist = 0;
         int closestNode = 0;
@@ -86,7 +89,7 @@ public class Node {
 
         return closestNode;
 	}
-
+	/*
 	public String findNodeIP(int nodeID) {
 		//Geoff
 		//Based on the assumption fingerTable is a HashMap
@@ -107,7 +110,7 @@ public class Node {
 		//This is a guess and will need editing
 		sendMessage(ip, new Message(MessageType.recieveMessage,message));
 	}
-
+	*/
 	public boolean recieveMessage(String message) {
 		//Geoff
 		System.out.println(message);
