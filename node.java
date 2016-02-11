@@ -8,20 +8,36 @@ public class node {
 	type will be so please change and update them. :)
 	*/
 	private Map fingerTable;
+	private int id;
+
+	public Map getFingerTable() {
+		//Jake and Jamie
+		//Accessor for fingertable
+		return fingerTable;
+	}
+
+	public int getID (){
+		//Accessor method for id
+		return id;
+	}
+
+	public int setID(int newId){
+		id = newId;
+	}
+
 	public void join() {
 		//Jake and Jamie
 	}
+
 	public void leave() {
 		//Jammy and Chris
 	}
-	public void getFingerTable() {
-		//Jake and Jamie
-	}
+
 	public void findClosest() {
-		//
+		//Geoff: wasn't sure what find closest was, so wrote this instead
+		//Geoff: sorry if this is what findClosest() should do
 	}
-	//wasn't sure what find closest was, so wrote this instead
-	//sorry if this is what findClosest() should do
+	
 	public int findClosestNodeInFinger(int nodeId) {
 		int check = 10;
         int count = 0;
@@ -47,7 +63,8 @@ public class node {
 
         return closestNode;
 	}
-	public String getNodeIP(nodeID) {
+
+	public String findNodeIP(int nodeID) {
 		//Geoff
 		//Based on the assumption fingerTable is a HashMap
 		if (fingerTable.containsKey(nodeID)) {
@@ -59,6 +76,7 @@ public class node {
 			return sendGetNodeIP(nearestNodeIP,nodeIP);
 		}
 	}
+
 	public boolean sendMessage(String message, int destNode) {
 		//Geoff
 		String ip = getNodeIP(node);
@@ -66,6 +84,7 @@ public class node {
 		//This is a guess and will need editing
 		sendMessage(ip, new Message(MessageType.recieveMessage,message));
 	}
+
 	public boolean recieveMessage(String message) {
 		//Geoff
 		System.out.println(message);
