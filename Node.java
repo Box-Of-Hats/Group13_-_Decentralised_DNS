@@ -130,7 +130,7 @@ public class Node {
 
 		//Tell nodes that should point to this node where they should point
 		for (int i = 0; i < 3; i++) {
-			targetGUID = id - Math.pow(2, (i - 1));
+			targetGUID = (id - Math.pow(2, (i - 1))) % 5;
 			HashMap targetNode = findPredecessor(targetGUID);
 			HashMap thisNode = new HashMap();
 			thisNode.put(id, ip);
@@ -189,7 +189,7 @@ public class Node {
 	}
 	*/
 	
-	public HashMap findNode (int nodeId, String direction) {
+	public HashMap findSuccesor(int nodeId) {
 		/*Checks to see if the current node is the predecessor of where the node should be
 		  and if so returns the first successor of where the node should be*/
 		if (id < nodeId && nodeId < fingerTable.firstEntry().getKey())
@@ -197,56 +197,39 @@ public class Node {
 
 		/*Checks to see if the id is in the local finger table and if so returns it, while keeping track
 		of the closest one to the searched for node*/
-		int closestNode = 0;
+		Map closestPrecedingNode;
+		int closestNodeDistance = 0;
 		for (Map.Entry<Interger, String> entry : fingerTable.entrySet()) {
 			if (entry.getKey() == nodeId)
 				return entry;
 
-			if (entry.getKey() < nodeId) {
+			int distance = nodeId - entry.getKey();
+			if (distance < 0)
+				distance = 5 - Math.abs(distance);
 
-			}
+			if (closestNodeDistance == 0 || distance < closestNode)
+				closestPrecedingNode = entry;
 		}
+
+		return requestSuccesor(nodeId, entry);
 		
 	}
 
-	/*public int findClosestNodeInFinger(int nodeId) {
-
-		int check = 10;
-        int count = 0;
-
-        Set set = fingerTable.entrySet();
-        Iterator i = set.iterator();
-        int shortestDist = 0;
-        int closestNode = 0;
-        while(i.hasNext()) {
-            Map.Entry me = (Map.Entry)i.next();
-            int dist = Math.abs(check - (int)me.getKey());
-            if (count == 0 ) {
-                shortestDist = dist;
-                closestNode = (int)me.getKey();
-            } else {
-                if (dist < shortestDist) {
-                    shortestDist = dist;
-                    closestNode = (int)me.getKey();
-                }
-            }
-            count++;
-        }
-
-        return closestNode;
+	public HashMap requestSuccesor(int nodeId, Map nodeToRequest) {
+		/*Uses Jacks code to call the findSuccesor code of the closest node to the trageted node
+		  Whose GUID does not exceed the target node's*/
 	}
-	/*
-	public String findNodeIP(int nodeID) {
-		//Geoff
-		//Based on the assumption fingerTable is a HashMap
-		if (fingerTable.containsKey(nodeID)) {
-			return fingerTable.get(nodeID);
-		} else {
-			//find closest node in finger table then return that IP
-			String nearestNodeIP = fingerTable.get(findClosestNodeInFinger(nodeID));
-			//Use networking class to coonect call NodeIP function on another node
-			return sendGetNodeIP(nearestNodeIP,nodeIP);
-		}
+
+	public HashMap findPredecessor(int nodeId) {
+		//Checks to see if  the predecessor of the current node fits
+		if ((predecessor.getKey() == nodeId) || (nodeId < id && predecessor.getKey() < nodeId))
+			return predecessor;
+
+		return requestPredecessor(nodeId, predecessor)
+	}
+
+	public HashMap requestPredecessor(int nodeId, Map nodeToRequest) {
+		//Uses Jacks code and just iterates around backwards until it finds the node before
 	}
 
 	public boolean sendMessage(String message, int destNode) {
