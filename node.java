@@ -28,20 +28,21 @@ public class node {
 
         Set set = m1.entrySet();
         Iterator i = set.iterator();
-        int shortestDist;
-        int closestNode;
+        int shortestDist = 0;
+        int closestNode = 0;
         while(i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
             int dist = Math.abs(check - (int)me.getKey());
             if (count == 0 ) {
                 shortestDist = dist;
-                closestNode = me.getKey();
+                closestNode = (int)me.getKey();
             } else {
                 if (dist < shortestDist) {
                     shortestDist = dist;
-                    closestNode = me.getKey();
+                    closestNode = (int)me.getKey();
                 }
             }
+            count++;
         }
 
         return closestNode;
