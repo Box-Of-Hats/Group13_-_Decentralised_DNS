@@ -75,7 +75,7 @@ public class Node {
 		predecessor = precedingNode;
 	}
 
-	public void join(String bootstrapNodeId) {
+	public void join(String bootstrapNodeIp) {
 		//Jake and Jamie
 		/* The new Node, n, given the IP of an arbitray existing node, p, gained my some outside mechanism
 		   first copies the existing finger table of p, and then calculates the nodes to which it should point
@@ -93,7 +93,7 @@ public class Node {
 		*/
 
 		//Get finger table of given IP
-		TreeMap copiedFingerTable = requestFingerTable(bootstrapNodeId);
+		TreeMap copiedFingerTable = requestFingerTable(bootstrapNodeIp);
 
 		//Hash ip to get potential GUID
 		byte[] byteIP = ip.getBytes();
@@ -132,6 +132,16 @@ public class Node {
 		}
 	}
 
+	public TreeMap requestFingerTable(String nodeIp) {
+		//Uses Jacks code to call the getFingerTable method of the connecting Node
+	}
+
+	public void updateOthers(String targetIp, int fingerNum, int nodeId, String nodeIp) {
+		/*Uses jacks code to contact a node that needs to update its finger table and tells
+		  It which finger the node should replace and gives it the nodes 
+		*/
+	}
+
 	public void leave() {
 		//Jammy and Chris
 		
@@ -152,6 +162,7 @@ public class Node {
 		
 	}
 	*/
+	}
 	
 	public int findClosestNodeInFinger(int nodeId) {
 
