@@ -8,8 +8,21 @@ public class node {
 	type will be so please change and update them. :)
 	*/
 	private Map fingerTable;
-	public void join() {
-		//Jake and Jamie
+	public void join(String bootNodeIP) {
+		/* The new Node, n, given the IP of an arbitray existing node, p, gained my some outside mechanism
+		   first copies the existing finger table of p, and then calculates the nodes to which it should point
+		   in its finger table.
+		   The node needs to then find its direct predecessor in the network.
+		   The node then uses the finger table to look up the nodes it should point to, if the node is not
+		   currently part of the network then it finds the closest node whose id is past the fingered node.
+		   (This can be extended to reduce the O time of the look up, ONLY DO THIS IF WE HAVE TIME)
+		   n must then inform the network that it has joined, to do this it finds the first node that could 
+		   possibly have it as the ith finger in its table, and changes the table entry to point to itself.
+		   (In the full version the node will then go to its direct successor and take responsibility for
+		   the keys it should have.)
+		   The node must also inform its direct succesor (i.e. the first finger in its table) that it has
+		   joined so that it can update its predecessor.
+		*/
 	}
 	public void leave() {
 		//Jammy and Chris
