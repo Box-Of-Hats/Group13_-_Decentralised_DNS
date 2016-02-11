@@ -37,6 +37,7 @@ public class Node {
 	}
 
 	public String getIPAddress(){
+		//Accessor for node ip address
 		return ip;
 	}
 
@@ -52,14 +53,17 @@ public class Node {
 	}
 
 	public void setId(int newId){
+		//Setter method for Node ID
 		id = newId;
 	}
 
 	public Map getPredecessor() {
+		//Accessor for predecessor
 		return predecessor;
 	}
 
 	public void setPredecessor(Map precedingNode) {
+		//Setter method for precedingNode
 		predecessor = precedingNode;
 	}
 
