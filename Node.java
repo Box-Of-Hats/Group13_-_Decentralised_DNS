@@ -189,9 +189,24 @@ public class Node {
 	}
 	*/
 	
-	public HashMap findNode (int nodeId) {
+	public HashMap findNode (int nodeId, String direction) {
+		/*Checks to see if the current node is the predecessor of where the node should be
+		  and if so returns the first successor of where the node should be*/
+		if (id < nodeId && nodeId < fingerTable.firstEntry().getKey())
+			return fingerTable.firstEntry()
 
-		return 
+		/*Checks to see if the id is in the local finger table and if so returns it, while keeping track
+		of the closest one to the searched for node*/
+		int closestNode = 0;
+		for (Map.Entry<Interger, String> entry : fingerTable.entrySet()) {
+			if (entry.getKey() == nodeId)
+				return entry;
+
+			if (entry.getKey() < nodeId) {
+				
+			}
+		}
+		
 	}
 
 	/*public int findClosestNodeInFinger(int nodeId) {
