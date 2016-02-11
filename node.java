@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class node {
 	/*
 	Okay so this is the basic skeleton of the node class.
@@ -18,6 +20,32 @@ public class node {
 	public void findClosest() {
 		//
 	}
+	//wasn't sure what find closest was, so wrote this instead
+	//sorry if this is what findClosest() should do
+	public int findClosestNodeInFinger(int nodeId) {
+		int check = 10;
+        int count = 0;
+
+        Set set = m1.entrySet();
+        Iterator i = set.iterator();
+        int shortestDist;
+        int closestNode;
+        while(i.hasNext()) {
+            Map.Entry me = (Map.Entry)i.next();
+            int dist = Math.abs(check - (int)me.getKey());
+            if (count == 0 ) {
+                shortestDist = dist;
+                closestNode = me.getKey();
+            } else {
+                if (dist < shortestDist) {
+                    shortestDist = dist;
+                    closestNode = me.getKey();
+                }
+            }
+        }
+
+        return closestNode;
+	}
 	public String getNodeIP(nodeID) {
 		//Geoff
 		//Based on the assumption fingerTable is a HashMap
@@ -25,6 +53,7 @@ public class node {
 			return fingerTable.get(nodeID);
 		} else {
 			//find closest node in finger table then return that IP
+			fingerTable.get(findClosestNodeInFinger(nodeID));
 		}
 	}
 	public boolean sendMessage(String message, int destNode) {
