@@ -102,10 +102,10 @@ public class Node {
 
 	public boolean sendMessage(String message, int destNode) {
 		//Geoff
-		String ip = getNodeIP(node);
+		String ip = findNodeIP(node);
 		//Sending message using networking class
 		//This is a guess and will need editing
-		sendMessage(ip, new Message(MessageType.recieveMessage,message));
+		Network.sendMessage(ip, new Message(MessageType.recieveMessage,message));
 	}
 
 	public boolean recieveMessage(String message) {
