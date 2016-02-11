@@ -2,7 +2,10 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		new Thread(new Server()).start();
-		new Thread(new Client()).start();
+		Server server = new Server();
+		Client client = new Client();
+
+		new Thread(server).start();
+		new Thread(client).start();
 	}
 }

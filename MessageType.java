@@ -1,4 +1,7 @@
 public enum MessageType
 {
-	Plain
+	Plain,
+	RequestFingerTable,
+	ReceiveFingerTable,
+	FindNodeIp
 }
