@@ -101,8 +101,12 @@ public class Node {
 		potentialId = potentialId % 5;
 
 		nodeWithId = findNode(potentialId);
+		int nodeCount = 0;
 		while (nodeWithId.value() == potentialId) {
 			potentialId = (potentialId + 1) % 5;
+			nodeCount++;
+			if (nodeCount >= 5)
+				throw new Exception("Chord network is full");
 		}
 
 		id = potentialId;
@@ -119,7 +123,7 @@ public class Node {
 		}
 
 		//Get direct by getting the current predecessor of the first node in the finger table
-		predecessor = fingerTable[i].getPredecessor();
+		predecessor = requestPredecessor(fingerTable.firstEntry());
 
 		//Tell first finger to update its finger table
 		updateOthers(fingerTable.firstEntry().getValue(), 1, id, ip);
@@ -138,6 +142,10 @@ public class Node {
 		//Uses Jacks code to call the getFingerTable method of the connecting Node
 	}
 
+	public HashMap requestPredecessor(String targetIp) {
+		//This uses Jacks code and calls the getPredecessor method of the target Node
+	}
+
 	public void updateOthers(String targetIp, int fingerNum, HashMap node) {
 		/*Uses jacks code to contact a node that needs to update its finger table and tells
 		  It which finger the node should replace and gives it the nodes Ip and ID for the table
@@ -153,6 +161,7 @@ public class Node {
 		 * 	The key k stored in the leaving node should be passed to the next node, which is the successor(k) in new system
 		 * 	Then notify the other nodes in the system to update their finger tables
 		 * */
+	
 
 		
 		// Set successor to predecessor
@@ -180,9 +189,28 @@ public class Node {
 		
 	}
 	*/
-	}
 	
-	public int findClosestNodeInFinger(int nodeId) {
+	public HashMap findNode (int nodeId, String direction) {
+		/*Checks to see if the current node is the predecessor of where the node should be
+		  and if so returns the first successor of where the node should be*/
+		if (id < nodeId && nodeId < fingerTable.firstEntry().getKey())
+			return fingerTable.firstEntry()
+
+		/*Checks to see if the id is in the local finger table and if so returns it, while keeping track
+		of the closest one to the searched for node*/
+		int closestNode = 0;
+		for (Map.Entry<Interger, String> entry : fingerTable.entrySet()) {
+			if (entry.getKey() == nodeId)
+				return entry;
+
+			if (entry.getKey() < nodeId) {
+
+			}
+		}
+		
+	}
+
+	/*public int findClosestNodeInFinger(int nodeId) {
 
 		int check = 10;
         int count = 0;
