@@ -172,6 +172,12 @@ public class Node {
 			//update each finger table by remove the reference to this.id
 			int prevNode = ( id -(int)Math.pow((double)2, (double)(i-1))) mod 5; //FIVE IS THE NUMBER OF NODES IN THE SYSTEM.
 			System.out.println(prevNode);
+			/*
+			Go to that node and ... 
+
+			*/
+			Map targetNode = getPredecessor(prevNode);
+			updateOthers(targetNode.getValue(), i, fingerTable.firstEntry());
 		}
 
 		//close terminal
