@@ -44,21 +44,21 @@ public class Node {
 		*/
 
 		//Get finger table of given IP
+
+		//Get direct Predecessor
+
+		//Calculate ideal finger table
+
+		//Get IPs of Nodes in ideal finger table, or closest to
+		for (int i = 0; i < /*However long the finger table is*/; i++) {
+			fingerTable[i] = findClosest(i);
+		}
+
+		//
 	}
 
 	public void leave() {
 		//Jammy and Chris
-	}
-
-	public Map findClosest(int nodeId) {
-		/* Find Closest works to find the node with the given GUID or if such a node does not exist it finds
-		   the closest node past the searched for GUID. It finds this by walking through the the chord using
-		   its finger table and the finger table of the other nodes.
-		   The Node will iterate through its finger table to find the target GUID, if not found it will contact
-		   the node in its finger table with the highest GUID that is smaller than the target GUID, until either
-		   the target GUID is found or the first finger in a node's look up table is greater than the target GUID
-		   in this case this finger is taken as the closest
-		*/
 	}
 	
 	public int findClosestNodeInFinger(int nodeId) {
