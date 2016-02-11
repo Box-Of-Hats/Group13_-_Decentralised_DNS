@@ -54,7 +54,9 @@ public class node {
 			return fingerTable.get(nodeID);
 		} else {
 			//find closest node in finger table then return that IP
-			fingerTable.get(findClosestNodeInFinger(nodeID));
+			String nearestNodeIP = fingerTable.get(findClosestNodeInFinger(nodeID));
+			//Use networking class to coonect call NodeIP function on another node
+			return sendGetNodeIP(nearestNodeIP,nodeIP);
 		}
 	}
 	public boolean sendMessage(String message, int destNode) {
