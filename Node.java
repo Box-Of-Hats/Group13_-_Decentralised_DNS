@@ -26,7 +26,7 @@ public class Node {
 		id = newId;
 	}
 
-	public void join() {
+	public void join(String bootstrapNodeId) {
 		//Jake and Jamie
 		/* The new Node, n, given the IP of an arbitray existing node, p, gained my some outside mechanism
 		   first copies the existing finger table of p, and then calculates the nodes to which it should point
@@ -42,16 +42,22 @@ public class Node {
 		   The node must also inform its direct succesor (i.e. the first finger in its table) that it has
 		   joined so that it can update its predecessor.
 		*/
+
+		//Get finger table of given IP
 	}
 
 	public void leave() {
 		//Jammy and Chris
 	}
 
-	public void findClosest() {
+	public Map findClosest(int nodeId) {
 		/* Find Closest works to find the node with the given GUID or if such a node does not exist it finds
 		   the closest node past the searched for GUID. It finds this by walking through the the chord using
 		   its finger table and the finger table of the other nodes.
+		   The Node will iterate through its finger table to find the target GUID, if not found it will contact
+		   the node in its finger table with the highest GUID that is smaller than the target GUID, until either
+		   the target GUID is found or the first finger in a node's look up table is greater than the target GUID
+		   in this case this finger is taken as the closest
 		*/
 	}
 	
