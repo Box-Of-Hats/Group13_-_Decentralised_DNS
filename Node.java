@@ -15,6 +15,10 @@ public class Node {
 	private Client nodeClient;
 	private String ip;
 
+	public Node () {
+		//Get the ip address
+		
+	}
 
 	public Map getFingerTable() {
 		//Jake and Jamie
