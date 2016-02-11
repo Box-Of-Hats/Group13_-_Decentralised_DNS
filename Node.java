@@ -12,6 +12,11 @@ public class Node {
 	private int id;
 	private String ip;
 
+	public Node () {
+		//Get the ip address
+		
+	}
+
 	public Map getFingerTable() {
 		//Jake and Jamie
 		//Accessor for fingerTable
