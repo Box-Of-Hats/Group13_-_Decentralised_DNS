@@ -127,8 +127,10 @@ public class Node {
 		//Tell nodes that should point to this node where they should point
 		for (int i = 0; i < 3; i++) {
 			targetGUID = id - Math.pow(2, (i - 1));
-			Map targetNode = findPredecessor(targetGUID);
-			updateOthers(targetNode.getValue(), i, id, ip);
+			HashMap targetNode = findPredecessor(targetGUID);
+			HashMap thisNode = new HashMap();
+			thisNode.put(id, ip);
+			updateOthers(targetNode.getValue(), i, thisNode);
 		}
 	}
 
@@ -136,9 +138,11 @@ public class Node {
 		//Uses Jacks code to call the getFingerTable method of the connecting Node
 	}
 
-	public void updateOthers(String targetIp, int fingerNum, int nodeId, String nodeIp) {
+	public void updateOthers(String targetIp, int fingerNum, HashMap node) {
 		/*Uses jacks code to contact a node that needs to update its finger table and tells
-		  It which finger the node should replace and gives it the nodes 
+		  It which finger the node should replace and gives it the nodes Ip and ID for the table
+		  from this node it then walks backwards and checks which nodes should contain the nodes
+		  ip in there finger table as it is the new closest id to one of there ideal nodes
 		*/
 	}
 
