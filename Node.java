@@ -158,10 +158,11 @@ public class Node {
 		// Set successor to predecessor
 		setPredecessor(this.successor);
 		
-		
 		//loop through all finger tables
 		for(int i = 0; i < fingerTable.size(); i++) {
 			//update each finger table by remove the reference to this.id
+			int prevNode = ( id -(int)Math.pow((double)2, (double)(i-1))) mod 5; //FIVE IS THE NUMBER OF NODES IN THE SYSTEM.
+			System.out.println(prevNode);
 		}
 
 		//close terminal
