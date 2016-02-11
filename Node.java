@@ -161,7 +161,7 @@ public class Node {
 		 * 	The key k stored in the leaving node should be passed to the next node, which is the successor(k) in new system
 		 * 	Then notify the other nodes in the system to update their finger tables
 		 * */
-	}
+	
 
 		
 		// Set successor to predecessor
@@ -203,7 +203,7 @@ public class Node {
 				return entry;
 
 			if (entry.getKey() < nodeId) {
-				
+
 			}
 		}
 		
