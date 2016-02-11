@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class node {
+public class Node {
 	/*
 	Okay so this is the basic skeleton of the node class.
 	It's not 100% accuarte yet, for example not all of the return
