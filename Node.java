@@ -9,7 +9,10 @@ public class Node {
 	*/
 	private TreeMap fingerTable = new TreeMap();
 	private Map predecessor;
+	private Map successor;
 	private int id;
+	private Server nodeServer;
+	private Client nodeClient;
 	private String ip;
 
 	public Node () {
@@ -102,6 +105,7 @@ public class Node {
 	*/
 	
 	public int findClosestNodeInFinger(int nodeId) {
+
 		int check = 10;
         int count = 0;
 
