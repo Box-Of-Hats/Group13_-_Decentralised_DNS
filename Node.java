@@ -9,7 +9,10 @@ public class Node {
 	*/
 	private Map fingerTable;
 	private Map predecessor;
+	private Map successor;
 	private int id;
+	private Server nodeServer;
+	private Client nodeClient;
 
 	public Map getFingerTable() {
 		//Jake and Jamie
@@ -65,6 +68,7 @@ public class Node {
 
 	
 	public int findClosestNodeInFinger(int nodeId) {
+
 		int check = 10;
         int count = 0;
 
