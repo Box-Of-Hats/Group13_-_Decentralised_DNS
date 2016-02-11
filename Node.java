@@ -102,6 +102,11 @@ public class Node {
 
 	public void leave() {
 		//Jammy and Chris
+		
+		/*	Before an existed node leave the network
+		 * 	The key k stored in the leaving node should be passed to the next node, which is the successor(k) in new system
+		 * 	Then notify the other nodes in the syetem to update their finger tables
+		 * */
 
 	/*
 	public Map findClosest(int nodeId) {
