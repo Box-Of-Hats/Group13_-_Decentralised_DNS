@@ -1,4 +1,8 @@
 import java.util.*;
+//For aquiring IP address:
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+//
 
 public class Node {
 	/*
@@ -17,7 +21,23 @@ public class Node {
 
 	public Node () {
 		//Get the ip address
-		ip = //Get ip address here;
+		ip = loadIPAddress();
+	}
+
+	public String loadIPAddress(){
+		//Load the IP address from the computer
+		try{
+			InetAddress ip;
+			ip = InetAddress.getLocalHost();
+			String ipString = ip.toString();
+			return ipString;
+		} catch (UnknownHostException e){
+			System.out.println("Could not get IP address.");
+		}
+	}
+
+	public String getIPAddress(){
+		return ip;
 	}
 
 	public Map getFingerTable() {
@@ -36,7 +56,7 @@ public class Node {
 	}
 
 	public Map getPredecessor() {
-		return predecessor
+		return predecessor;
 	}
 
 	public void setPredecessor(Map precedingNode) {
