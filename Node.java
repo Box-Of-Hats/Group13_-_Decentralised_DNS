@@ -7,7 +7,7 @@ public class Node {
 	types are correct and I couldn't remember what the finger table
 	type will be so please change and update them. :)
 	*/
-	private Map fingerTable;
+	private TreeMap fingerTable;
 	private Map predecessor;
 	private int id;
 
@@ -17,13 +17,21 @@ public class Node {
 		return fingerTable;
 	}
 
-	public int getID (){
+	public int getId(){
 		//Accessor method for id
 		return id;
 	}
 
-	public int setID(int newId){
+	public void setId(int newId){
 		id = newId;
+	}
+
+	public Map getPredecessor() {
+		return predecessor
+	}
+
+	public void setPredecessor(Map precedingNode) {
+		predecessor = precedingNode;
 	}
 
 	public void join(String bootstrapNodeId) {
@@ -45,16 +53,23 @@ public class Node {
 
 		//Get finger table of given IP
 
-		//Get direct Predecessor
-
 		//Calculate ideal finger table
 
 		//Get IPs of Nodes in ideal finger table, or closest to
-		for (int i = 0; i < /*However long the finger table is*/; i++) {
-			fingerTable[i] = findClosest(i);
+		for (int i = 0; i < 3; i++) {
+			fingerTable[i] = findNodeIp(i);
 		}
 
-		//
+		//Get direct by getting the current predecessor of the first node in the finger table
+		predecessor = fingerTable[i].getPredecessor
+
+		//Tell first finger to update its finger table
+
+		//Tell nodes that should point to this node where they should point
+		for (int i = 0; i < 3; i++) {
+			targetGUID = id - Math.pow(2, (i - 1));
+			findPredecessor(targetGUID);
+		}
 	}
 
 	public void leave() {
