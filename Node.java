@@ -8,6 +8,7 @@ public class Node {
 	type will be so please change and update them. :)
 	*/
 	private Map fingerTable;
+	private Map predecessor;
 	private int id;
 
 	public Map getFingerTable() {
@@ -48,8 +49,10 @@ public class Node {
 	}
 
 	public void findClosest() {
-		//Geoff: wasn't sure what find closest was, so wrote this instead
-		//Geoff: sorry if this is what findClosest() should do
+		/* Find Closest works to find the node with the given GUID or if such a node does not exist it finds
+		   the closest node past the searched for GUID. It finds this by walking through the the chord using
+		   its finger table and the finger table of the other nodes.
+		*/
 	}
 	
 	public int findClosestNodeInFinger(int nodeId) {
