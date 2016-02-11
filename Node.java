@@ -36,6 +36,14 @@ public class Node {
         }
 	}
 
+	private void getSendID(int functionID) {
+		Long ts = new Date().getTime();
+		String timestamp = Long.toString(ts);
+		String nID = Integer.toString(id);
+		String fID = Integer.toString(functionID);
+		System.out.println(nID + fID + timestamp);
+	}
+
 	public String getIPAddress(){
 		//Accessor for node ip address
 		return ip;

@@ -118,8 +118,12 @@ public class Server implements Runnable
 				case ReceiveFingerTable:
 					HashMap table = (HashMap)message.getData(); // Here is where the finger table will be stored so that you can do what you need with it
 					break;
-				case FindNodeIp:
-
+				case RequestNodeIp:
+					//String ip = node.getIPAddress();
+					//sendNodeIp(message.getSenderIp(), ip);
+					break;
+				case ReceiveNodeIp:
+					String ip = message.getData();
 					break;
 				}
 			}

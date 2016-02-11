@@ -129,9 +129,13 @@ public class Client implements Runnable
 		sendMessage(receiverIp, MessageType.ReceiveFingerTable, table);
 	}
 
-	public String findNodeIP(String ip, int nodeID)
+	public void requestNodeIp(String receiverIp, int nodeId)
 	{
-		//Go to the destination node, call the Node.findNodeIP function and pass it the nodeID, return the result.
-		return "";
+		sendMessage(receiverIp, MessageType.RequestNodeIp);
+	}
+
+	public void sendNodeIp(String receiverIp, String ip);
+	{
+		sendMessage(receiverIp, MessageType.ReceiveNodeIp, ip);
 	}
 }
