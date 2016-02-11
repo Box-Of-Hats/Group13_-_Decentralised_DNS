@@ -27,9 +27,9 @@ class Hashing{
 		{
 		}
 		synchronized(Hashing.class) {
-		md.reset();
-		md.update(key);
-		return md.digest();
+			md.reset();
+			md.update(key);
+			return md.digest();
 		}
 	}
 }

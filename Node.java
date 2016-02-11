@@ -17,7 +17,7 @@ public class Node {
 
 	public Node () {
 		//Get the ip address
-		
+		ip = //Get ip address here;
 	}
 
 	public Map getFingerTable() {
@@ -62,6 +62,18 @@ public class Node {
 
 		//Get finger table of given IP
 		TreeMap copiedFingerTable = requestFingerTable(bootstrapNodeId);
+
+		//Hash ip to get potential GUID
+		byte[] byteIP = ip.getBytes();
+		int potentialId = new BigInteger(Hashing.hash(byteIP)).intValue();
+		potentialId = potentialId % 5;
+
+		nodeWithId = findNode(potentialId);
+		while (nodeWithId.value() == potentialId) {
+			potentialId = (potentialId + 1) % 5;
+		}
+
+		id = potentialId;
 
 		//Calculate ideal finger table
 		idealFingers = new int[3];
