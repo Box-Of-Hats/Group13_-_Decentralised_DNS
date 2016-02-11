@@ -155,14 +155,27 @@ public class Node {
 	}
 
 	public void leave() {
-		//Jammy and Chris
+		// Jammy and Chris
 		
 		/*	Before an existed node leave the network
 		 * 	The key k stored in the leaving node should be passed to the next node, which is the successor(k) in new system
-		 * 	Then notify the other nodes in the syetem to update their finger tables
+		 * 	Then notify the other nodes in the system to update their finger tables
 		 * */
 	}
 
+		
+		// Set successor to predecessor
+		setPredecessor(this.successor);
+		
+		
+		//loop through all finger tables
+		for(int i = 0; i < fingerTable.size(); i++) {
+			//update each finger table by remove the reference to this.id
+		}
+
+		//close terminal
+		System.exit();
+	}
 	/*
 	public Map findClosest(int nodeId) {
 		/* Find Closest works to find the node with the given GUID or if such a node does not exist it finds
