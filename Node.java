@@ -7,12 +7,14 @@ public class Node {
 	types are correct and I couldn't remember what the finger table
 	type will be so please change and update them. :)
 	*/
-	private Map fingerTable;
+	private TreeMap fingerTable = new TreeMap();
 	private Map predecessor;
 	private Map successor;
 	private int id;
 	private Server nodeServer;
 	private Client nodeClient;
+	private String ip;
+
 
 	public Map getFingerTable() {
 		//Jake and Jamie
@@ -20,13 +22,21 @@ public class Node {
 		return fingerTable;
 	}
 
-	public int getID (){
+	public int getId(){
 		//Accessor method for id
 		return id;
 	}
 
-	public void setID(int newId){
+	public void setId(int newId){
 		id = newId;
+	}
+
+	public Map getPredecessor() {
+		return predecessor
+	}
+
+	public void setPredecessor(Map precedingNode) {
+		predecessor = precedingNode;
 	}
 
 	public void join(String bootstrapNodeId) {
@@ -47,11 +57,35 @@ public class Node {
 		*/
 
 		//Get finger table of given IP
+		TreeMap copiedFingerTable = requestFingerTable(bootstrapNodeId);
+
+		//Calculate ideal finger table
+		idealFingers = new int[3];
+		for (int i = 0; i < 3; i++) {
+			idealFingers[i] = (id + Math.pow(2, i));
+		}
+
+		//Get IPs of Nodes in ideal finger table, or closest to
+		for (int i = 0; i < 3; i++) {
+			fingerTable.put(findNode(idealFingers[i]));
+		}
+
+		//Get direct by getting the current predecessor of the first node in the finger table
+		predecessor = fingerTable[i].getPredecessor();
+
+		//Tell first finger to update its finger table
+		updateOthers(fingerTable.firstEntry().getValue(), 1, id, ip);
+
+		//Tell nodes that should point to this node where they should point
+		for (int i = 0; i < 3; i++) {
+			targetGUID = id - Math.pow(2, (i - 1));
+			Map targetNode = findPredecessor(targetGUID);
+			updateOthers(targetNode.getValue(), i, id, ip);
+		}
 	}
 
 	public void leave() {
 		//Jammy and Chris
-	}
 
 	/*
 	public Map findClosest(int nodeId) {
@@ -65,7 +99,6 @@ public class Node {
 		
 	}
 	*/
-
 	
 	public int findClosestNodeInFinger(int nodeId) {
 
