@@ -1,7 +1,6 @@
 import java.util.*;
 //For aquiring IP address:
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.*;
 //
 
 public class Node {
@@ -24,16 +23,17 @@ public class Node {
 		ip = loadIPAddress();
 	}
 
-	public String loadIPAddress(){
+	public String loadIPAddress() throws SocketException{
 		//Load the IP address from the computer
-		try{
-			InetAddress ip;
-			ip = InetAddress.getLocalHost();
-			String ipString = ip.toString();
-			return ipString;
-		} catch (UnknownHostException e){
-			System.out.println("Could not get IP address.");
-		}
+		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+        for (NetworkInterface netint : Collections.list(nets)) {
+            Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+        	for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+	        	if (!inetAddress.isAnyLocalAddress() && !inetAddress.isLinkLocalAddress() && !inetAddress.isLoopbackAddress() && !inetAddress.isMulticastAddress()) {
+	        		return inetAddress.toString();
+	        	}
+	        }
+        }
 	}
 
 	public String getIPAddress(){
