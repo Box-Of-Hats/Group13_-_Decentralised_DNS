@@ -10,6 +10,7 @@ public class Node {
 	private TreeMap fingerTable;
 	private Map predecessor;
 	private int id;
+	private String ip;
 
 	public Map getFingerTable() {
 		//Jake and Jamie
@@ -57,13 +58,14 @@ public class Node {
 
 		//Get IPs of Nodes in ideal finger table, or closest to
 		for (int i = 0; i < 3; i++) {
-			fingerTable[i] = findNodeIp(i);
+			fingerTable[i] = findNode(i);
 		}
 
 		//Get direct by getting the current predecessor of the first node in the finger table
-		predecessor = fingerTable[i].getPredecessor
+		predecessor = fingerTable[i].getPredecessor();
 
 		//Tell first finger to update its finger table
+		updateOthers(fingerTable.firstEntry().getValue(), 1, id, ip);
 
 		//Tell nodes that should point to this node where they should point
 		for (int i = 0; i < 3; i++) {
