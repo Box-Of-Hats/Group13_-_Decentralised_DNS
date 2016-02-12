@@ -37,6 +37,7 @@ public class Node {
 	}
 
 	private void getSendID(int functionID) {
+		//Calculate a unique message identifier
 		Long ts = new Date().getTime();
 		String timestamp = Long.toString(ts);
 		String nID = Integer.toString(id);
@@ -161,7 +162,6 @@ public class Node {
 		 * 	The key k stored in the leaving node should be passed to the next node, which is the successor(k) in new system
 		 * 	Then notify the other nodes in the system to update their finger tables
 		 * */
-	
 
 		
 		// Set successor to predecessor
@@ -172,6 +172,8 @@ public class Node {
 			//update each finger table by remove the reference to this.id
 			int prevNode = ( id -(int)Math.pow((double)2, (double)(i-1))) mod 5; //FIVE IS THE NUMBER OF NODES IN THE SYSTEM.
 			System.out.println(prevNode);
+			Map targetNode = getPredecessor(prevNode);
+			updateOthers(targetNode.getValue(), i, fingerTable.firstEntry());
 		}
 
 		//close terminal
@@ -193,8 +195,9 @@ public class Node {
 	public HashMap findSuccesor(int nodeId) {
 		/*Checks to see if the current node is the predecessor of where the node should be
 		  and if so returns the first successor of where the node should be*/
-		if (id < nodeId && nodeId < fingerTable.firstEntry().getKey())
+		if (id < nodeId && nodeId < fingerTable.firstEntry().getKey()){
 			return fingerTable.firstEntry()
+		}
 
 		/*Checks to see if the id is in the local finger table and if so returns it, while keeping track
 		of the closest one to the searched for node*/
@@ -240,7 +243,7 @@ public class Node {
 		//This is a guess and will need editing
 		Network.sendMessage(ip, new Message(MessageType.recieveMessage,message));
 	}
-	*/
+	
 	public boolean recieveMessage(String message) {
 		//Geoff
 		System.out.println(message);
