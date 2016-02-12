@@ -10,7 +10,7 @@ public class Main
 
 		new Thread(server).start();
 		new Thread(client).start();
-<<<<<<< HEAD
+
 
 		try
 		{
@@ -20,7 +20,5 @@ public class Main
 		{
 			System.out.println(e);
 		}
-=======
->>>>>>> 92a6a5ad27b636eb30fa4801e24d5d08ff7237ae
 	}
 }
