@@ -1,7 +1,7 @@
 import java.net.*;
 import java.util.*;
 
-public class Test {
+public class GetLocalIP {
 	public static void main (String args[]) throws SocketException{
 		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
         for (NetworkInterface netint : Collections.list(nets)) {
@@ -14,3 +14,4 @@ public class Test {
 	        }
         }
 	}
+}
