@@ -1,6 +1,5 @@
 /*
- * Written by Jiaming Ke
- * File created at 15:37, 18-2-2016
+ * Contributors: Jiaming Ke
 */
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
