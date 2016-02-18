@@ -1,3 +1,7 @@
+/*
+ * Contributors: Jiaming Ke
+ * This file is used to test the Internet only
+*/
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
