@@ -1,3 +1,6 @@
+/*
+ * Contributors: Jiaming Ke
+*/
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -23,7 +26,7 @@ class Hashing{
 		{
 			md = MessageDigest.getInstance(hashMethod);
 		}
-		catch (NoSuchAlgorithmException ex)
+		catch (NoSuchAlgorithmException e)
 		{
 		}
 		synchronized(Hashing.class) {
