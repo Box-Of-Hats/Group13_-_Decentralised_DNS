@@ -1,4 +1,4 @@
-public class Node{
+public class Node implements NodeInterface{
     /*
     guid: the unique identifier of the node
     ip: the ip of the node
@@ -42,5 +42,38 @@ public class Node{
         predecessor = this;
     }
     }
+
+    public void join(String bootstrapNodeIp){
+    //This method requires network code to contact other nodes
+    }
+    
+    public void initFingerTable(String bootstrapNodeIp){
+    //This method requires a lot of network code
+    }
+    
+    public void updateOthers(){
+    //This method requires network code to update other nodes finger tables
+    }
+    
+    public void updateFingerTable(int s, int i){
+    //This method requires network code to step back along the network 
+    //!!! Im unsure of the expected types of s and i.
+    }
+    
+    public Node findSuccessor(int id){
+    //This requires network code to retrieve the sucessor of the target node
+        return this; //!! PLACEHOLDER !!
+    }
+    
+    public Node findPredecessor(int id){
+    //This requires network code
+        return this; //!! PLACEHOLDER !!
+    }
+
+    public Finger closestPrecedingFinger(int key){
+    //This requires no networking code
+        return fingerTable[0]; //!! PLACEHOLDER !!
+    }
+    
 
 }
