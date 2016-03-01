@@ -10,7 +10,7 @@ This interface works bsaed on the assumption that we would pass back the object 
 Fields:
 guid: the unique identifier of the node
 ip: the ip of the node
-Finger[]: an array of finger objects
+fingerTable: Finger[] an array of finger objects
 predecessor: the directly preceding node
 
 
