@@ -31,7 +31,16 @@ public class Node{
     }
 
     public Finger[] getFingerTable(){
-        //Accessor for Node fingertable
-        return finger;
+        //Accessor for Node fingerTable
+        return fingerTable;
     }
+
+    public void join(){
+    //This method requires no network code as it is the first node in the network.
+    for (int i=1; i == fingerTable.length; i++){
+        fingerTable[i].setNode(this);
+        predecessor = this;
+    }
+    }
+
 }
