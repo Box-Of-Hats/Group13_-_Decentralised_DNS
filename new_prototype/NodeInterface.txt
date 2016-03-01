@@ -1,0 +1,77 @@
+NODE INTERFACE
+
+Description:
+At its basic level the node only has one function, mapping a key to a node. This is done using the
+succesor(k) function where k is the key to map. To do this it must first join the network
+which is the more complicated part.
+
+This interface works bsaed on the assumption that we would pass back the object containing the node's id and ip.
+
+Fields:
+guid: the unique identifier of the node
+ip: the ip of the node
+Finger[]: an array of finger objects
+predecessor: the directly preceding node
+
+
+METHODS:
+All the methods are in psuedocode but any network code that is needed will be explained.
+
+join():
+//This method requires no network code as it is the first node in the network
+	for i = 1 to m: //Where m is the size of the finger table
+		finger[i].node = n // Where n is the current node
+	predecessor = n;
+
+join(String bootstrapNodeIp):
+//This method requires network code to contact other nodes
+	initFingerTable(bootstrapNodeIp)
+	updateOthers()
+
+initFingerTable(bootstrapNodeIp):
+//This method requires a lot of network code that I will try to explain throughout
+	//n' is the node represented by bootstrapNodeIp
+	n.finger[0] = n'.findSuccessor(finger[i].start)
+	// This line contacts the bootstrap node and asks it to run its findSuccessor code using the id of the current node
+	// This finds the succesor node of the current node, to do this the server would simply need to call its node's
+	// findSuccessor method
+	predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
+	successor.predecessor = n // This requires the server to have some method to set its node's predecessor
+	for i = 0 to m - 1;
+		if (finger[i + 1].start is between [n, finger[i].node]):
+			finger[i + 1].node = finger[i].node
+		else:
+			finger[i + 1].node = n'.findSucessor(finger[i + 1].start)
+
+
+updateOthers():
+//This method requires network code to update other nodes finger tables
+	for i = 1 to m:
+		p = findPredecessor(n - 2^(i - 1))
+		p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
+
+updateFingerTable(s, i):
+//This method requires network code to step back along the network
+	if (s is between [n, finger[i].node]):
+		finger[i].node = s;
+		p = n.predecessor;
+		p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
+
+findSuccessor(int id):
+//This requires network code to retrieve the sucessor of the target node
+	n' = findPredecessor(id)
+	return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
+
+findPredecessor(int id):
+//This requires network code
+	n' = n//where n is the current node
+	while (id is not between [n', n'.successor]):
+		n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
+	return n'
+
+closestPrecedingFinger(int key):
+//This requires no networking code
+	for i = m - 1 down to 1:
+		if (finger[i].node is between [n ,id]):
+			return finger[i].node;
+	return n;
