@@ -1,8 +1,8 @@
-public class Node implements NodeInterface{
+public class Node{
     /*
     guid: the unique identifier of the node
     ip: the ip of the node
-    Finger[]: an array of finger objects
+    fingerTable: Finger[] an array of finger objects
     predecessor: the directly preceding node
     */
 
@@ -12,7 +12,7 @@ public class Node implements NodeInterface{
     private Node predecessor;
 
     public Node(){
-
+        //Constructor for Node class
     }
 
     public String getIp(){
@@ -25,7 +25,7 @@ public class Node implements NodeInterface{
         return guid;
     }
 
-    public Node predecessor(){
+    public Node getPredecessor(){
         //Accessor for Node predecessor
         return predecessor;
     }
@@ -36,42 +36,42 @@ public class Node implements NodeInterface{
     }
 
     public void join(){
-    //This method requires no network code as it is the first node in the network.
-    for (int i=1; i == fingerTable.length; i++){
-        fingerTable[i].setNode(this);
-        predecessor = this;
-    }
+        //This method requires no network code as it is the first node in the network.
+        for (int i=1; i == fingerTable.length; i++){
+            fingerTable[i].setNode(this);
+            predecessor = this;
+        }
     }
 
     public void join(String bootstrapNodeIp){
-    //This method requires network code to contact other nodes
+        //This method requires network code to contact other nodes
     }
     
     public void initFingerTable(String bootstrapNodeIp){
-    //This method requires a lot of network code
+        //This method requires a lot of network code
     }
     
     public void updateOthers(){
-    //This method requires network code to update other nodes finger tables
+        //This method requires network code to update other nodes finger tables
     }
     
     public void updateFingerTable(int s, int i){
-    //This method requires network code to step back along the network 
-    //!!! Im unsure of the expected types of s and i.
+        //This method requires network code to step back along the network 
+        //!!! Im unsure of the expected types of s and i.
     }
     
     public Node findSuccessor(int id){
-    //This requires network code to retrieve the sucessor of the target node
+        //This requires network code to retrieve the sucessor of the target node
         return this; //!! PLACEHOLDER !!
     }
     
     public Node findPredecessor(int id){
-    //This requires network code
+        //This requires network code
         return this; //!! PLACEHOLDER !!
     }
 
     public Finger closestPrecedingFinger(int key){
-    //This requires no networking code
+        //This requires no networking code
         return fingerTable[0]; //!! PLACEHOLDER !!
     }
     
