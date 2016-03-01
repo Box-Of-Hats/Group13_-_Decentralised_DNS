@@ -6,7 +6,7 @@ public class Node{
     predecessor: the directly preceding node
     */
 
-    private int guid;
+    private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable;
     private Node predecessor;
@@ -28,6 +28,10 @@ public class Node{
     public Node getPredecessor(){
         //Accessor for Node predecessor
         return predecessor;
+    }
+
+    public void setGuid(int newGuid){
+        guid = newGuid;
     }
 
     public Finger[] getFingerTable(){
