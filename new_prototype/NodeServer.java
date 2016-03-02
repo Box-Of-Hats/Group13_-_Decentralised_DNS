@@ -1,7 +1,7 @@
 public abstract class NodeServer{
     
     private ServerSocket serverSocket;
-	private Socket clientSocket;
+    private Socket clientSocket;
 	    
     public Socket acceptConnectionRequest();
     
