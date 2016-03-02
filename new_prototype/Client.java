@@ -17,17 +17,11 @@ public class Client extends NodeClient{
 	
 	public Client()
 	{
-		try
-		{
-			
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
+	
 	}
 	
-	public boolean connectToServer(String ip)
+	//connect to the server and return whether it is connected
+	public boolean connectToServer(Inet4Address ip)
 	{
 		try
 		{
@@ -42,24 +36,7 @@ public class Client extends NodeClient{
 		return socket.isConnected();
 	}
 	
-	public void pushMessage(String string){
-		try{
-			out.println(string);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	public String pullMessage(){
-		String string = null;
-		try{
-			string = in.readLine();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return string;
-	}
-	
+	//disconnect with the server
 	public void disconnect()
 	{
 		try
@@ -74,4 +51,25 @@ public class Client extends NodeClient{
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	//Send message to the server
+	public void pushMessage(String string){
+		try{
+			out.println(string);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	//Receive message from the server
+	public String pullMessage(){
+		String string = null;
+		try{
+			string = in.readLine();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return string;
+	}
+	
 }
