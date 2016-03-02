@@ -25,7 +25,7 @@ public class Server extends NodeServer implements Runnable{
 		}
 	}
 	
-	//Connect client and set IO up there is any connection request
+	//Connect client and set IO up if there is any connection request
 	public boolean acceptConnectionRequest(){
 		
 		try{
