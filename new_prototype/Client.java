@@ -8,7 +8,7 @@ import java.net.Inet4Address;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
+public class Client extends NodeClient{
 	private final int PORT = 3333;
 	private String ip;
 	private Socket socket;
