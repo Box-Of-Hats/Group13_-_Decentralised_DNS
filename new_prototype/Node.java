@@ -51,6 +51,7 @@ public class Node{
     }
 
     public Client getClient(){
+        //Accessor for Node's Client
         return client;
     }
 
