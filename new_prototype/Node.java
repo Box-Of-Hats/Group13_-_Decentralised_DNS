@@ -17,6 +17,8 @@ public class Node{
 
     public Node(){
         //Constructor for Node class
+        setIp(findIpFromMachine().toString());
+
     }
 
     public String getIp(){
@@ -34,14 +36,19 @@ public class Node{
         return predecessor;
     }
 
+    public Finger[] getFingerTable(){
+        //Accessor for Node fingerTable
+        return fingerTable;
+    }
+
     public void setGuid(int newGuid){
         //Mutator for node guid
         guid = newGuid;
     }
 
-    public Finger[] getFingerTable(){
-        //Accessor for Node fingerTable
-        return fingerTable;
+    public void setIp(String newIp){
+        //Mutator for node ip
+        ip = newIp;
     }
 
     public void join(){
@@ -124,7 +131,6 @@ public class Node{
     public Finger closestPrecedingFinger(int key){
         /*
         This requires no networking code
-        closestPrecedingFinger(int key):
         for i = m - 1 down to 1:
             if (finger[i].node is between [n ,id]):
                 return finger[i].node;
@@ -135,7 +141,6 @@ public class Node{
 
     public static InetAddress findIpFromMachine(){
         //Gets the local IP address of the computers Node
-        //Do we want this to return a string instead of an InetAddress, since the Node's ip is stored as a String?
         InetAddress ip = null;
         try{
             Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
