@@ -42,7 +42,7 @@ public class Node{
         return fingerTable;
     }
 
-    public void setGuid(int newGuid){
+    private void setGuid(int newGuid){
         //Mutator for node guid
         guid = newGuid;
     }
