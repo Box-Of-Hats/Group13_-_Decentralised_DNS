@@ -22,6 +22,14 @@ public class Node{
         join();
     }
 
+    public Node(Client nodeClient){
+        //Constructor for Node class, when a client is passed
+        setClient(nodeClient);
+        setIp(findIpFromMachine());
+        int id = 5;//Hash of the the ip;
+        join();
+    }
+
     public InetAddress getIp(){
         //Accessor for Node ip
         return ip;
@@ -50,6 +58,11 @@ public class Node{
     private void setIp(InetAddress newIp){
         //Mutator for node ip
         ip = newIp;
+    }
+
+    private void setClient(Client newClient){
+        //Mutator for Node client
+        client = newClient;
     }
 
     public void join(){
