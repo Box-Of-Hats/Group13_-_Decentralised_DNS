@@ -1,20 +1,17 @@
-import java.util.*;
+import java.net.*;
 
-public class Finger extends HashMap{
+public class Finger {
     /*
     Represents a single finger of a Node's hashtable. (a one-way link between 2 nodes)
     Not 100% sure whats going on here.
     I think the class is supposed to extend HashMap but I could be completely wrong. Please check!
     */
 
-    private Node node;
+    private FingeredNode node;
+    private int start;
 
-    public Finger(){
-
+    public Finger(InetAddress ip, int id, int inStart){
+        node = new FingeredNode(ip, id);
+        start = inStart;
     }
-
-    public void setNode(Node newNode){
-        node = newNode;
-    }
-
 }
