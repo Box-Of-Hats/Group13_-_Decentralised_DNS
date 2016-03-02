@@ -1,6 +1,6 @@
 public abstract class NodeServer{
 	    
-    public abstract Socket acceptConnectionRequest();
+    public abstract boolean acceptConnectionRequest();
     
     public abstract void disconnect();
 
