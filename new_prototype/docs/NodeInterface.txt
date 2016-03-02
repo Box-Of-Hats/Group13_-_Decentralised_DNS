@@ -75,4 +75,3 @@ closestPrecedingFinger(int key):
 		if (finger[i].node is between [n ,id]):
 			return finger[i].node;
 	return n;
-	👌

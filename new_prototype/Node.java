@@ -10,6 +10,7 @@ public class Node{
     private String ip;
     private Finger[] fingerTable;
     private Node predecessor;
+    private NodeClient client;
 
     public Node(){
         //Constructor for Node class
@@ -31,6 +32,7 @@ public class Node{
     }
 
     public void setGuid(int newGuid){
+        //Mutator for node guid
         guid = newGuid;
     }
 
@@ -40,6 +42,8 @@ public class Node{
     }
 
     public void join(){
+        //When called without a bootstrapIP, the Node is assumed to be the first in the network.
+        //Untested but based on Jamie's pseudocode so it should work.
         //This method requires no network code as it is the first node in the network.
         for (int i=1; i == fingerTable.length; i++){
             fingerTable[i].setNode(this);
@@ -75,8 +79,17 @@ public class Node{
     }
 
     public Finger closestPrecedingFinger(int key){
-        //This requires no networking code
+        /*
+        This requires no networking code
+        closestPrecedingFinger(int key):
+        for i = m - 1 down to 1:
+            if (finger[i].node is between [n ,id]):
+                return finger[i].node;
+        return n;
+        */
         return fingerTable[0]; //!! PLACEHOLDER !!
     }
 
 }
+
+
