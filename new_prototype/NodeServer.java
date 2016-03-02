@@ -1,4 +1,4 @@
-public class NodeServer{
+public abstract class NodeServer{
 
     public NodeServer(){
 
