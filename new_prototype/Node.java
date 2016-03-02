@@ -11,14 +11,15 @@ public class Node{
 
     private int guid; //Globally Unique Identifier
     private InetAddress ip;
-    private Finger[] fingerTable;
+    private Finger[] fingerTable = new Finger[8];
     private Node predecessor;
     private Client client;
 
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
-
+        int id = 5;//Hash of the the ip;
+        join();
     }
 
     public InetAddress getIp(){
@@ -55,13 +56,13 @@ public class Node{
         //When called without a bootstrapIP, the Node is assumed to be the first in the network.
         //Untested but based on Jamie's pseudocode so it should work.
         //This method requires no network code as it is the first node in the network.
-        for (int i=1; i == fingerTable.length; i++){
-            fingerTable[i].setNode(this);
-            predecessor = this;
+        for (int i = 0; i < 8; i++) {
+            int start = (int)Math.pow(2, i);
+            Finger f = new Finger(ip, guid, start);
         }
     }
 
-    public void join(String bootstrapNodeIp){
+    public void join(InetAddress bootstrapNodeIp){
         //This method requires network code to contact other nodes
         /*
         initFingerTable(bootstrapNodeIp)
