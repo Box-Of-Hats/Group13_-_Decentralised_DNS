@@ -1,10 +1,7 @@
 public abstract class NodeServer{
-    
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
 	    
-    public Socket acceptConnectionRequest();
+    public abstract Socket acceptConnectionRequest();
     
-    public void closeIOStream();
+    public abstract void disconnect();
 
 }
