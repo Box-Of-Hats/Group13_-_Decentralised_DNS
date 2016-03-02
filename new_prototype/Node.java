@@ -10,18 +10,18 @@ public class Node{
     */
 
     private int guid; //Globally Unique Identifier
-    private String ip;
+    private InetAddress ip;
     private Finger[] fingerTable;
     private Node predecessor;
     private Client client;
 
     public Node(){
         //Constructor for Node class
-        setIp(findIpFromMachine().toString());
+        setIp(findIpFromMachine());
 
     }
 
-    public String getIp(){
+    public InetAddress getIp(){
         //Accessor for Node ip
         return ip;
     }
@@ -46,7 +46,7 @@ public class Node{
         guid = newGuid;
     }
 
-    public void setIp(String newIp){
+    private void setIp(InetAddress newIp){
         //Mutator for node ip
         ip = newIp;
     }
@@ -153,7 +153,8 @@ public class Node{
                         }
                     }
                 }   
-        }catch(Exception e){
+        }
+        catch(Exception e){
         }
         return ip;
     }

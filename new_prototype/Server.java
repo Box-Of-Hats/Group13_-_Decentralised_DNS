@@ -20,7 +20,7 @@ public class Server extends NodeServer implements Runnable{
 	{
 		try{
 			serverSocket = new ServerSocket(PORT);
-
+			node = new Node();
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
