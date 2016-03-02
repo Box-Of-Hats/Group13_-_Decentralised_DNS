@@ -15,11 +15,11 @@ public class Server extends NodeServer implements Runnable{
 	private Node node;
 
 	//Initialise the server, set up the serverSocket
-	public Server()
+	public Server(Node node)
 	{
 		try{
 			serverSocket = new ServerSocket(PORT);
-			node = new Node();
+			this.node = node;
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
