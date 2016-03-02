@@ -85,4 +85,51 @@ public class Server extends NodeServer implements Runnable{
 		}
 		
 	}
+
+	/*
+	quu..__
+	 $$$b  `---.__
+	  "$$b        `--.                          ___.---uuudP
+	   `$$b           `.__.------.__     __.---'      $$$$"              .
+	     "$b          -'            `-.-'            $$$"              .'|
+	       ".                                       d$"             _.'  |
+	         `.   /                              ..."             .'     |
+	           `./                           ..::-'            _.'       |
+	            /                         .:::-'            .-'         .'
+	           :                          ::''\          _.'            |
+	          .' .-.             .-.           `.      .'               |
+	          : /'$$|           .@"$\           `.   .'              _.-'
+	         .'|$u$$|          |$$,$$|           |  <            _.-'
+	         | `:$$:'          :$$$$$:           `.  `.       .-'
+	         :                  `"--'             |    `-.     \
+	        :##.       ==             .###.       `.      `.    `\
+	        |##:                      :###:        |        >     >
+	        |#'     `..'`..'          `###'        x:      /     /
+	         \                                   xXX|     /    ./
+	          \                                xXXX'|    /   ./
+	          /`-.                                  `.  /   /
+	         :    `-  ...........,                   | /  .'
+	         |         ``:::::::'       .            |<    `.
+	         |             ```          |           x| \ `.:``.
+	         |                         .'    /'   xXX|  `:`M`M':.
+	         |    |                    ;    /:' xXXX'|  -'MMMMM:'
+	         `.  .'                   :    /:'       |-'MMMM.-'
+	          |  |                   .'   /'        .'MMM.-'
+	          `'`'                   :  ,'          |MMM<
+	            |                     `'            |tbap\
+	             \                                  :MM.-'
+	              \                 |              .''
+	               \.               `.            /
+	                /     .:::::::.. :           /
+	               |     .:::::::::::`.         /
+	               |   .:::------------\       /
+	              /   .''               >::'  /
+	              `',:                 :    .'
+	                                    
+	Now, that I have your attention:
+		When adding the getter methods for the Server's Node, be sure to make them syncronised since the Server utilises multithreading.
+		Thanks! :)
+
+	*/
+
 }
