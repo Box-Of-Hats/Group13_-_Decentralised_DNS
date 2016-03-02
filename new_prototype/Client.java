@@ -27,7 +27,7 @@ public class Client extends NodeClient{
 		}
 	}
 	
-	public boolean connectToServer(String ip)
+	public boolean connectToServer(Inet4Address ip)
 	{
 		try
 		{
@@ -40,6 +40,21 @@ public class Client extends NodeClient{
 			System.out.println(e.getMessage());
 		}
 		return socket.isConnected();
+	}
+	
+	public void disconnect()
+	{
+		try
+		{
+			in.close();
+			out.close();
+			socket.close();
+			System.out.println("Socket is closed.");
+		}
+		catch (IOException e)
+		{
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void pushMessage(String string){
@@ -60,18 +75,4 @@ public class Client extends NodeClient{
 		return string;
 	}
 	
-	public void disconnect()
-	{
-		try
-		{
-			in.close();
-			out.close();
-			socket.close();
-			System.out.println("Socket is closed.");
-		}
-		catch (IOException e)
-		{
-			System.out.println(e.getMessage());
-		}
-	}
 }
