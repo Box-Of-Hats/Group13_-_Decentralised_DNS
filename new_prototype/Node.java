@@ -50,6 +50,10 @@ public class Node{
         return fingerTable;
     }
 
+    public Client getClient(){
+        return client;
+    }
+
     private void setGuid(int newGuid){
         //Mutator for node guid
         guid = newGuid;
