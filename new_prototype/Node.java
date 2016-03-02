@@ -1,3 +1,6 @@
+import java.net.*;
+import java.util.*;
+
 public class Node{
     /*
     guid: the unique identifier of the node
@@ -10,7 +13,7 @@ public class Node{
     private String ip;
     private Finger[] fingerTable;
     private Node predecessor;
-    private NodeClient client;
+    private Client client;
 
     public Node(){
         //Constructor for Node class
@@ -129,5 +132,26 @@ public class Node{
         */
         return fingerTable[0]; //!! PLACEHOLDER !!
     }
+
+    public static InetAddress findIpFromMachine(){
+        //Gets the local IP address of the computers Node
+        //Do we want this to return a string instead of an InetAddress, since the Node's ip is stored as a String?
+        InetAddress ip = null;
+        try{
+            Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+            for (NetworkInterface netint : Collections.list(nets)) {
+                    Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+                    for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+                        if (!inetAddress.isAnyLocalAddress() && !inetAddress.isLinkLocalAddress() && !inetAddress.isLoopbackAddress() && !inetAddress.isMulticastAddress()) {
+                            ip = inetAddress;
+                            break;
+                        }
+                    }
+                }   
+        }catch(Exception e){
+        }
+        return ip;
+    }
+
 
 }
