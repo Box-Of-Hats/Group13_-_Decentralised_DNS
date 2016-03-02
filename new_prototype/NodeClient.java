@@ -1,7 +1,4 @@
-public class NodeClient{
-
-    public NodeClient(){
-
-    }
-
+public abstract class NodeClient{
+    
+   public  abstract boolean connectToServer(String ip);
 }
