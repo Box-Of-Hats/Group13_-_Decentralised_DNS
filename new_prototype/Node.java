@@ -74,7 +74,7 @@ public class Node{
         //When called without a bootstrapIP, the Node is assumed to be the first in the network.
         //Untested but based on Jamie's pseudocode so it should work.
         //This method requires no network code as it is the first node in the network.
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < fingerTable.length; i++) {
             int start = (int)Math.pow(2, i);
             Finger f = new Finger(ip, guid, start);
         }
