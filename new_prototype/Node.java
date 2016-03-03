@@ -178,6 +178,17 @@ public class Node{
         return ip.toString().substring(1);
     }
 
+    private int computeId(){
+        int value = 0;
+        byte[] ipBytes = ip.getBytes();
+    	byte[] resultOfHashing = new Hashing().hash(ipBytes);
+        for(int i = 0 ; i < resultOfHashing.length ; i++){
+            value = value * 64;
+            value += resultOfHashing[i] & 0xFF;
+        }
+        return value;
+    }
+    
     public synchronized void recieveString(String message){
         //Called by the Server of the node, whenever a message is recieved.
         //Structure for messages will be "AAA,DATA"
