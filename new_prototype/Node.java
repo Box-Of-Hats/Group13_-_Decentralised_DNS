@@ -193,13 +193,23 @@ public class Node{
         }
         return value;
     }
-    
-    public synchronized void recieveString(String message){
+
+
+    public void recieveString(String message){
         //Called by the Server of the node, whenever a message is recieved.
         //Structure for messages will be "AAA,DATA"
         //'AAA' is the method code that will be used
         //'DATA' is the data that will be passed to the relevant method
         System.out.println("Node Recieved Message: " + message);
+        //parseMessage(message);
+        if (message != null){
+            String[] parts = message.split(",");
+            String part1 = parts[0];
+            String part2 = parts[1];
+            System.out.println("\tPart1: " + part1);
+            System.out.println("\tPart2: " + part2);
+        }
+
     }
 
 }

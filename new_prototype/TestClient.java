@@ -3,8 +3,8 @@ class TestClient{
     Used to send a testing string to listening Node Server.
     */
     public static void main(String[] args){
-        String ip = ""; //Set IP of open server here
-        String message = "This is a testing string."; //Set test message here.
+        String ip = "2001:0:5ef5:79fb:34d7:215c:adf6:9260"; //Set IP of open server here
+        String message = "META,Actual Data Here"; //Set test message
         Client aClient = new Client();
         aClient.connectToServer(ip);
         aClient.pushMessage(message);
