@@ -3,7 +3,6 @@ class Testing{
 		//Node aNode = new Node();
         NodeFactory testFactory = new NodeFactory();
         Node thisNode = testFactory.makeNode();
-        System.out.println(thisNode.getIp());
-        System.out.println(thisNode.getClient());
+        System.out.println("This Node IP: " + thisNode.getIp());
 	}
 }

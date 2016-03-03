@@ -200,14 +200,21 @@ public class Node{
         //Structure for messages will be "AAA,DATA"
         //'AAA' is the method code that will be used
         //'DATA' is the data that will be passed to the relevant method
-        System.out.println("Node Recieved Message: " + message);
-        //parseMessage(message);
-        if (message != null){
+        if (message != null){ 
+            System.out.println("Node Recieved Message: " + message);
             String[] parts = message.split(",");
             String part1 = parts[0];
             String part2 = parts[1];
             System.out.println("\tPart1: " + part1);
             System.out.println("\tPart2: " + part2);
+
+            switch (part1){
+                //Add cases here for the different requests that a Node should be able to recieve:
+                case "cip": System.out.println("Node ID: " + computeId());
+                            break;
+                case "mem": System.out.println("MEMES");
+                            break;
+            }
         }
 
     }
