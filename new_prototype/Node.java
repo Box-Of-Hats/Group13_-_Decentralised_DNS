@@ -179,6 +179,10 @@ public class Node{
     }
 
     public synchronized void recieveString(String message){
+        //Called by the Server of the node, whenever a message is recieved.
+        //Structure for messages will be "AAA,DATA"
+        //'AAA' is the method code that will be used
+        //'DATA' is the data that will be passed to the relevant method
         System.out.println("Node Recieved Message: " + message);
     }
 
