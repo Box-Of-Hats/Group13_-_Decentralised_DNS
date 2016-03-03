@@ -178,5 +178,8 @@ public class Node{
         return ip.toString().substring(1);
     }
 
+    public synchronized void recieveString(String message){
+        System.out.println("Node Recieved Message: " + message);
+    }
 
 }

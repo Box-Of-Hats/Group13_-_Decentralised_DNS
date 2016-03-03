@@ -79,8 +79,9 @@ public class Server extends NodeServer implements Runnable{
 
 		while(true){
 			str_in = this.pullMessage();
-			str_out = "New Message Received: " + str_in;
-			System.out.println(str_out);
+			//str_out = "New Message Received: " + str_in;
+			node.recieveString(str_in);
+			//System.out.println(str_out);
 			if (str_in==null) break;
 		}
 		
