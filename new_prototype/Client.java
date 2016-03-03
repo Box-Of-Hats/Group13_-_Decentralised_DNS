@@ -21,7 +21,7 @@ public class Client extends NodeClient{
 	}
 	
 	//connect to the server and return whether it is connected
-	public boolean connectToServer(InetAddress ip)
+	public boolean connectToServer(String ip)
 	{
 		try
 		{
