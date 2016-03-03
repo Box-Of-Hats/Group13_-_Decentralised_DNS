@@ -179,6 +179,11 @@ public class Node{
     }
 
     private int computeId(){
+        /*
+         *convert the ip type: String to byte[]
+         *hash the ip
+         *convert the hash result to int
+        */
         int value = 0;
         byte[] ipBytes = ip.getBytes();
     	byte[] resultOfHashing = new Hashing().hash(ipBytes);
