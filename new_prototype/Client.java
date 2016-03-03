@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -21,7 +21,7 @@ public class Client extends NodeClient{
 	}
 	
 	//connect to the server and return whether it is connected
-	public boolean connectToServer(Inet4Address ip)
+	public boolean connectToServer(String ip)
 	{
 		try
 		{

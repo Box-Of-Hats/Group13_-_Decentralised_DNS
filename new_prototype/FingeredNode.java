@@ -1,15 +1,15 @@
 import java.net.*;
 
 public class FingeredNode {
-	private InetAddress ip;
+	private String ip;
 	private int id;
 
-	public FingeredNode (InetAddress inIp, int inId) {
+	public FingeredNode (String inIp, int inId) {
 		ip = inIp;
 		id = inId;
 	}
 
-	public InetAddress getIp () {
+	public String getIp () {
 		return ip;
 	}
 

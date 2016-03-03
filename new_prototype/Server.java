@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,17 +15,17 @@ public class Server extends NodeServer implements Runnable{
 	private Node node;
 
 	//Initialise the server, set up the serverSocket
-	public Server()
+	public Server(Node node)
 	{
 		try{
 			serverSocket = new ServerSocket(PORT);
-			node = new Node();
+			this.node = node;
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	//Connect client and set IO up there is any connection request
+	//Connect client and set IO up if there is any connection request
 	public boolean acceptConnectionRequest(){
 		
 		try{
@@ -86,4 +85,51 @@ public class Server extends NodeServer implements Runnable{
 		}
 		
 	}
+
+	/*
+	quu..__
+	 $$$b  `---.__
+	  "$$b        `--.                          ___.---uuudP
+	   `$$b           `.__.------.__     __.---'      $$$$"              .
+	     "$b          -'            `-.-'            $$$"              .'|
+	       ".                                       d$"             _.'  |
+	         `.   /                              ..."             .'     |
+	           `./                           ..::-'            _.'       |
+	            /                         .:::-'            .-'         .'
+	           :                          ::''\          _.'            |
+	          .' .-.             .-.           `.      .'               |
+	          : /'$$|           .@"$\           `.   .'              _.-'
+	         .'|$u$$|          |$$,$$|           |  <            _.-'
+	         | `:$$:'          :$$$$$:           `.  `.       .-'
+	         :                  `"--'             |    `-.     \
+	        :##.       ==             .###.       `.      `.    `\
+	        |##:                      :###:        |        >     >
+	        |#'     `..'`..'          `###'        x:      /     /
+	         \                                   xXX|     /    ./
+	          \                                xXXX'|    /   ./
+	          /`-.                                  `.  /   /
+	         :    `-  ...........,                   | /  .'
+	         |         ``:::::::'       .            |<    `.
+	         |             ```          |           x| \ `.:``.
+	         |                         .'    /'   xXX|  `:`M`M':.
+	         |    |                    ;    /:' xXXX'|  -'MMMMM:'
+	         `.  .'                   :    /:'       |-'MMMM.-'
+	          |  |                   .'   /'        .'MMM.-'
+	          `'`'                   :  ,'          |MMM<
+	            |                     `'            |tbap\
+	             \                                  :MM.-'
+	              \                 |              .''
+	               \.               `.            /
+	                /     .:::::::.. :           /
+	               |     .:::::::::::`.         /
+	               |   .:::------------\       /
+	              /   .''               >::'  /
+	              `',:                 :    .'
+	                                    
+	Now, that I have your attention:
+		When adding the getter methods for the Server's Node, be sure to make them syncronised since the Server utilises multithreading.
+		Thanks! :)
+
+	*/
+
 }

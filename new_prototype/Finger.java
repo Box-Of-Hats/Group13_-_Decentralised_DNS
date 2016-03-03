@@ -10,7 +10,7 @@ public class Finger {
     private FingeredNode node;
     private int start;
 
-    public Finger(InetAddress ip, int id, int inStart){
+    public Finger(String ip, int id, int inStart){
         node = new FingeredNode(ip, id);
         start = inStart;
     }

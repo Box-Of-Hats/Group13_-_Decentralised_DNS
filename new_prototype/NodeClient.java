@@ -1,8 +1,8 @@
-import java.net.Inet4Address;
+import java.net.InetAddress;
 
 public abstract class NodeClient{
     
-   public abstract boolean connectToServer(Inet4Address ip);
+   public abstract boolean connectToServer(String ip);
    
    public abstract void disconnect();
    

@@ -10,7 +10,7 @@ public class Node{
     */
 
     private int guid; //Globally Unique Identifier
-    private InetAddress ip;
+    private String ip;
     private Finger[] fingerTable = new Finger[8];
     private Node predecessor;
     private Client client;
@@ -22,7 +22,15 @@ public class Node{
         join();
     }
 
-    public InetAddress getIp(){
+    public Node(Client nodeClient){
+        //Constructor for Node class, when a client is passed
+        setClient(nodeClient);
+        setIp(findIpFromMachine());
+        int id = 5;//Hash of the the ip;
+        join();
+    }
+
+    public String getIp(){
         //Accessor for Node ip
         return ip;
     }
@@ -42,14 +50,24 @@ public class Node{
         return fingerTable;
     }
 
+    public Client getClient(){
+        //Accessor for Node's Client
+        return client;
+    }
+
     private void setGuid(int newGuid){
         //Mutator for node guid
         guid = newGuid;
     }
 
-    private void setIp(InetAddress newIp){
+    private void setIp(String newIp){
         //Mutator for node ip
         ip = newIp;
+    }
+
+    private void setClient(Client newClient){
+        //Mutator for Node client
+        client = newClient;
     }
 
     public void join(){
@@ -62,7 +80,7 @@ public class Node{
         }
     }
 
-    public void join(InetAddress bootstrapNodeIp){
+    public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
         /*
         initFingerTable(bootstrapNodeIp)
@@ -140,7 +158,7 @@ public class Node{
         return fingerTable[0]; //!! PLACEHOLDER !!
     }
 
-    public static InetAddress findIpFromMachine(){
+    public static String findIpFromMachine(){
         //Gets the local IP address of the computers Node
         InetAddress ip = null;
         try{
@@ -157,7 +175,7 @@ public class Node{
         }
         catch(Exception e){
         }
-        return ip;
+        return ip.toString().substring(1);
     }
 
 
