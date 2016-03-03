@@ -175,7 +175,7 @@ public class Node{
         }
         catch(Exception e){
         }
-        return ip;
+        return ip.toString().substring(1);
     }
 
 
