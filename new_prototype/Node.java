@@ -10,7 +10,7 @@ public class Node{
     */
 
     private int guid; //Globally Unique Identifier
-    private InetAddress ip;
+    private String ip;
     private Finger[] fingerTable = new Finger[8];
     private Node predecessor;
     private Client client;
