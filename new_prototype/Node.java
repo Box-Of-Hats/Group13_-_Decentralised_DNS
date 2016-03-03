@@ -60,7 +60,7 @@ public class Node{
         guid = newGuid;
     }
 
-    private void setIp(InetAddress newIp){
+    private void setIp(String newIp){
         //Mutator for node ip
         ip = newIp;
     }
@@ -80,7 +80,7 @@ public class Node{
         }
     }
 
-    public void join(InetAddress bootstrapNodeIp){
+    public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
         /*
         initFingerTable(bootstrapNodeIp)
