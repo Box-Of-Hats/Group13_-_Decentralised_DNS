@@ -30,7 +30,7 @@ public class Node{
         join();
     }
 
-    public InetAddress getIp(){
+    public String getIp(){
         //Accessor for Node ip
         return ip;
     }
