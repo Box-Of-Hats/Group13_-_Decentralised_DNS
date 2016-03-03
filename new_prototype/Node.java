@@ -158,7 +158,7 @@ public class Node{
         return fingerTable[0]; //!! PLACEHOLDER !!
     }
 
-    public static InetAddress findIpFromMachine(){
+    public static String findIpFromMachine(){
         //Gets the local IP address of the computers Node
         InetAddress ip = null;
         try{
@@ -175,7 +175,7 @@ public class Node{
         }
         catch(Exception e){
         }
-        return ip;
+        return ip.toString().substring(1);
     }
 
 
