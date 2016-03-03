@@ -66,12 +66,6 @@ public class Server extends NodeServer implements Runnable{
 			out.println(string);
 	}
 
-	
-	//Handle the message from client
-	public void messageHandler(String message){
-
-	}
-
 	public void run()
 	{
 		String str_in,str_out;
