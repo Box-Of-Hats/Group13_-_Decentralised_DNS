@@ -188,7 +188,7 @@ public class Node{
         byte[] ipBytes = ip.getBytes();
     	byte[] resultOfHashing = new Hashing().hash(ipBytes);
         for(int i = 0 ; i < resultOfHashing.length ; i++){
-            value = value * 64;
+            value = value * 32;
             value += resultOfHashing[i] & 0xFF;
         }
         return value;
