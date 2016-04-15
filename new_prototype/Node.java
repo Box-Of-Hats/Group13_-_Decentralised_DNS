@@ -18,7 +18,7 @@ public class Node{
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
-        int id = 5;//Hash of the the ip;
+        guid = computeId();
         join();
     }
 
@@ -26,7 +26,7 @@ public class Node{
         //Constructor for Node class, when a client is passed
         setClient(nodeClient);
         setIp(findIpFromMachine());
-        int id = 5;//Hash of the the ip;
+        guid = computeId();
         join();
     }
 
@@ -37,6 +37,7 @@ public class Node{
 
     public int getGuid(){
         //Accessor for Node guid
+
         return guid;
     }
 
@@ -194,29 +195,5 @@ public class Node{
         return value;
     }
 
-
-    public void recieveString(String message){
-        //Called by the Server of the node, whenever a message is recieved.
-        //Structure for messages will be "AAA,DATA"
-        //'AAA' is the method code that will be used
-        //'DATA' is the data that will be passed to the relevant method
-        if (message != null){ 
-            System.out.println("Node Recieved Message: " + message);
-            String[] parts = message.split(",");
-            String part1 = parts[0];
-            String part2 = parts[1];
-            System.out.println("\tPart1: " + part1);
-            System.out.println("\tPart2: " + part2);
-
-            switch (part1){
-                //Add cases here for the different requests that a Node should be able to recieve:
-                case "cip": System.out.println("Node ID: " + computeId());
-                            break;
-                case "mem": System.out.println("MEMES");
-                            break;
-            }
-        }
-
-    }
 
 }

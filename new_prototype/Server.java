@@ -49,6 +49,32 @@ public class Server extends NodeServer implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
+	public void recieveString(String message){
+        //Called by the Server of the node, whenever a message is recieved.
+        //Structure for messages will be "AAA,DATA"
+        //'AAA' is the method code that will be used
+        //'DATA' is the data that will be passed to the relevant method
+        if (message != null){ 
+            System.out.println("Node Recieved Message: " + message);
+            String[] parts = message.split(",");
+            String part1 = parts[0];
+            String part2 = parts[1];
+            System.out.println("\tPart1: " + part1);
+            System.out.println("\tPart2: " + part2);
+
+            switch (part1){
+                //Add cases here for the different requests that a Node should be able to recieve:
+                //part2 is the data to be processed for the function.
+                case "cip": System.out.println("Node ID: " + node.getGuid());
+                            break;
+                case "mem": System.out.println("MEMES");
+                            break;
+                case "ack": break;
+            }
+        }
+
+    }
 	
 	//Receive message from client
 	public String pullMessage(){
@@ -61,7 +87,7 @@ public class Server extends NodeServer implements Runnable{
 		return string;
 	}
 
-	//Send message to client
+	//Send message to remotely-connected client
 	public void pushMessage(String string){
 			out.println(string);
 	}
@@ -74,7 +100,7 @@ public class Server extends NodeServer implements Runnable{
 		while(true){
 			str_in = this.pullMessage();
 			//str_out = "New Message Received: " + str_in;
-			node.recieveString(str_in);
+			recieveString(str_in);
 			//System.out.println(str_out);
 			if (str_in==null) break;
 		}
@@ -82,44 +108,6 @@ public class Server extends NodeServer implements Runnable{
 	}
 
 	/*
-	quu..__
-	 $$$b  `---.__
-	  "$$b        `--.                          ___.---uuudP
-	   `$$b           `.__.------.__     __.---'      $$$$"              .
-	     "$b          -'            `-.-'            $$$"              .'|
-	       ".                                       d$"             _.'  |
-	         `.   /                              ..."             .'     |
-	           `./                           ..::-'            _.'       |
-	            /                         .:::-'            .-'         .'
-	           :                          ::''\          _.'            |
-	          .' .-.             .-.           `.      .'               |
-	          : /'$$|           .@"$\           `.   .'              _.-'
-	         .'|$u$$|          |$$,$$|           |  <            _.-'
-	         | `:$$:'          :$$$$$:           `.  `.       .-'
-	         :                  `"--'             |    `-.     \
-	        :##.       ==             .###.       `.      `.    `\
-	        |##:                      :###:        |        >     >
-	        |#'     `..'`..'          `###'        x:      /     /
-	         \                                   xXX|     /    ./
-	          \                                xXXX'|    /   ./
-	          /`-.                                  `.  /   /
-	         :    `-  ...........,                   | /  .'
-	         |         ``:::::::'       .            |<    `.
-	         |             ```          |           x| \ `.:``.
-	         |                         .'    /'   xXX|  `:`M`M':.
-	         |    |                    ;    /:' xXXX'|  -'MMMMM:'
-	         `.  .'                   :    /:'       |-'MMMM.-'
-	          |  |                   .'   /'        .'MMM.-'
-	          `'`'                   :  ,'          |MMM<
-	            |                     `'            |tbap\
-	             \                                  :MM.-'
-	              \                 |              .''
-	               \.               `.            /
-	                /     .:::::::.. :           /
-	               |     .:::::::::::`.         /
-	               |   .:::------------\       /
-	              /   .''               >::'  /
-	              `',:                 :    .'
 	                                    
 	Now, that I have your attention:
 		When adding the getter methods for the Server's Node, be sure to make them syncronised since the Server utilises multithreading.
