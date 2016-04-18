@@ -159,6 +159,10 @@ public class Node{
         m = len finger table
         id = guid?
         n = key?
+
+
+        !!!!!! This code is correct *but* the m, id and n variables may be assigned to the wrong variables. This will need testing/checking but should be easy to fix if need be
+
         */
         
         for (int i = fingerTable.length; i == 1 ; i--){
