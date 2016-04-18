@@ -12,7 +12,7 @@ public class Node{
     private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable = new Finger[8];
-    private Node predecessor;
+    private Finger predecessor;
     private Client client;
 
     public Node(){
