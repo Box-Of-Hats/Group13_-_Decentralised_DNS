@@ -152,15 +152,31 @@ public class Node{
 
     }
 
-    public Finger closestPrecedingFinger(int key){
+    public FingeredNode closestPrecedingFinger(int key){
         /*
         This requires no networking code
         for i = m - 1 down to 1:
             if (finger[i].node is between [n ,id]):
                 return finger[i].node;
         return n;
+
+        m = len finger table
+        id = guid?
+        n = key?
+
+
+        !!!!!! This code is correct *but* the m, id and n variables may be assigned to the wrong variables. This will need testing/checking but should be easy to fix if need be
+
         */
-        return fingerTable[0]; //!! PLACEHOLDER !!
+        
+        for (int i = fingerTable.length; i == 1 ; i--){
+            if ((fingerTable[i].getNode().getId() > key) && (fingerTable[i].getNode().getId() < guid) ){
+                return fingerTable[i].getNode();
+            }
+        }
+        //If closest preceding finger is not found, return null:
+        return null;
+        
     }
 
     public static String findIpFromMachine(){

@@ -74,6 +74,8 @@ public class Server extends NodeServer implements Runnable{
 					FingeredNode predecessor = new FingeredNode(preIP, preID);
 					node.setPredecessor(predecessor);
 					break;
+                case "UFT": 
+                	break;
             }
         }
 

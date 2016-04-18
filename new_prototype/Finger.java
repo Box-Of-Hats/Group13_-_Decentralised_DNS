@@ -14,4 +14,8 @@ public class Finger {
         node = new FingeredNode(ip, id);
         start = inStart;
     }
+
+    public FingeredNode getNode(){
+        return node;
+    }
 }
