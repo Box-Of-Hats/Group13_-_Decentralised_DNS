@@ -1,0 +1,8 @@
+Syntax for commands sent via the network. First 3 characters of a message string indicate the command to be called, and are listed below. 
+
+spd: setPredecessor
+uft: updateFingerTable(s, i)
+cpf: closestPreceedingFinger(int key)
+
+// fpd: findPredecessor(int id)
+// fsu: findSuccessor(int id)

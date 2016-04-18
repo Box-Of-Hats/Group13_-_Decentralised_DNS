@@ -1,4 +1,4 @@
-class Testing{
+class TestServer{
 	public static void main(String[] args){
 		//Node aNode = new Node();
         NodeFactory testFactory = new NodeFactory();

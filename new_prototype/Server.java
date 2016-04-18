@@ -66,11 +66,10 @@ public class Server extends NodeServer implements Runnable{
             switch (part1){
                 //Add cases here for the different requests that a Node should be able to recieve:
                 //part2 is the data to be processed for the function.
-                case "cip": System.out.println("Node ID: " + node.getGuid());
-                            break;
-                case "mem": System.out.println("MEMES");
-                            break;
-                case "ack": break;
+                case "SPD": 
+                			break;
+                case "UFT": 
+                			break;
             }
         }
 
