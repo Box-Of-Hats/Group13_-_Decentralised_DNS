@@ -6,7 +6,7 @@ class TestClient{
     */
     public static void main(String[] args){
         String ip = args[0]; //Set IP of open server here
-        String message = "ack,This request will print the node's calculated id"; //Set test message
+        String message = "SPD,192.168.0.1;1"; //Set test message
         Client aClient = new Client();
         aClient.connectToServer(ip);
         aClient.pushMessage(message);

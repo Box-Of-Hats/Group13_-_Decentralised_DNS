@@ -12,7 +12,7 @@ public class Node{
     private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable = new Finger[8];
-    private Finger predecessor;
+    private FingeredNode predecessor;
     private Client client;
 
     public Node(){
@@ -41,7 +41,7 @@ public class Node{
         return guid;
     }
 
-    public Node getPredecessor(){
+    public FingeredNode getPredecessor(){
         //Accessor for Node predecessor
         return predecessor;
     }
@@ -59,6 +59,10 @@ public class Node{
     private void setGuid(int newGuid){
         //Mutator for node guid
         guid = newGuid;
+    }
+
+    public void setPredecessor(FingeredNode newPredecessor) {
+        predecessor = newPredecessor;
     }
 
     private void setIp(String newIp){
