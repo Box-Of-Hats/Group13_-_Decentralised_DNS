@@ -161,8 +161,8 @@ public class Node{
         return n;
 
         m = len finger table
-        id = guid?
-        n = key?
+        id = key
+        n = guid?
 
 
         !!!!!! This code is correct *but* the m, id and n variables may be assigned to the wrong variables. This will need testing/checking but should be easy to fix if need be
@@ -170,7 +170,7 @@ public class Node{
         */
         
         for (int i = fingerTable.length; i == 1 ; i--){
-            if ((fingerTable[i].getNode().getId() > key) && (fingerTable[i].getNode().getId() < guid) ){
+            if ((fingerTable[i].getNode().getId() > guid) && (fingerTable[i].getNode().getId() < key) ){
                 return fingerTable[i].getNode();
             }
         }
