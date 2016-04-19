@@ -164,11 +164,11 @@ public class Node{
         //NEED TO DEAL WITH RING ARCHITECTURE!!!!
         for (int i = fingerTable.length; i == 1 ; i--){
             int fingerId = fingerTable[i].getNode().getId();
-            if (((fingerId > guid) && (fingerId < key)){
+            if ((fingerId > guid) && (fingerId < key)){
                 return fingerTable[i].getNode();
             }
         }
-        //If closest preceding finger is not found, return null:
+        //If closest preceding finger is not found, return the current node's details:
         FingeredNode curNode = new FingeredNode(ip, guid);
         return curNode;
         
