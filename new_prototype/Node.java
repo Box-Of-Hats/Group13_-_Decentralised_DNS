@@ -97,7 +97,7 @@ public class Node{
         //This method requires a lot of network code
         /*
         //n' is the node represented by bootstrapNodeIp
-        n.finger[0] = n'.findSuccessor(finger[i].start)
+        n.finger[0] = n'.findSuccessor(finger[0].start)
         // This line contacts the bootstrap node and asks it to run its findSuccessor code using the id of the current node
         // This finds the succesor node of the current node, to do this the server would simply need to call its node's
         // findSuccessor method
