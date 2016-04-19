@@ -135,9 +135,12 @@ public class Node{
         //This requires network code to retrieve the sucessor of the target node
         /*
         n' = findPredecessor(id)
-        return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its nod
+        return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
-        return null; //!! PLACEHOLDER !!
+        FingeredNode node = findPredecessor(id);
+        FingeredNode successor = //Call get Successor across network
+        
+        return successor; //!! PLACEHOLDER !!
     }
 
     public FingeredNode findPredecessor(int id){
@@ -148,7 +151,21 @@ public class Node{
             n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
         return n'
         */
-        return null; //!! PLACEHOLDER !!
+        Boolean currentNode = true;
+        FingeredNode node = new FingeredNode(ip, guid);
+        FingeredNode successor = fingerTable[0];
+        while ((id > node.getid()) && id < successor.getId()){
+            if (currentNode == true){
+                node = closestPrecedingFinger(id);
+                successor = //Get succesor of node across network
+                currentNode = false;
+            } else {
+                node = //Call Closest Preceding Finger across network
+                successor = //Call get Successor across network
+            }
+        }
+                
+        return node; //!! PLACEHOLDER !!
 
     }
 
@@ -164,7 +181,7 @@ public class Node{
         //NEED TO DEAL WITH RING ARCHITECTURE!!!!
         for (int i = fingerTable.length; i == 1 ; i--){
             int fingerId = fingerTable[i].getNode().getId();
-            if ((fingerId > guid) && (fingerId < key)){
+            if (((fingerId > guid) && (fingerId < key)) || ((fingerId > key) && (fingerId < guid))){
                 return fingerTable[i].getNode();
             }
         }
