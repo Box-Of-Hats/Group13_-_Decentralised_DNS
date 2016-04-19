@@ -161,8 +161,10 @@ public class Node{
         return n;
         */
         
+        //NEED TO DEAL WITH RING ARCHITECTURE!!!!
         for (int i = fingerTable.length; i == 1 ; i--){
-            if ((fingerTable[i].getNode().getId() > guid) && (fingerTable[i].getNode().getId() < key) ){
+            int fingerId = fingerTable[i].getNode().getId();
+            if (((fingerId > guid) && (fingerId < key)){
                 return fingerTable[i].getNode();
             }
         }
