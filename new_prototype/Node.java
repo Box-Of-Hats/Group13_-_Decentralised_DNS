@@ -131,16 +131,16 @@ public class Node{
         */
     }
 
-    public Node findSuccessor(int id){
+    public FingeredNode findSuccessor(int id){
         //This requires network code to retrieve the sucessor of the target node
         /*
         n' = findPredecessor(id)
         return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its nod
         */
-        return this; //!! PLACEHOLDER !!
+        return null; //!! PLACEHOLDER !!
     }
 
-    public Node findPredecessor(int id){
+    public FingeredNode findPredecessor(int id){
         //This requires network code
         /*
         n' = n//where n is the current node
@@ -148,7 +148,7 @@ public class Node{
             n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
         return n'
         */
-        return this; //!! PLACEHOLDER !!
+        return null; //!! PLACEHOLDER !!
 
     }
 
@@ -159,14 +159,6 @@ public class Node{
             if (finger[i].node is between [n ,id]):
                 return finger[i].node;
         return n;
-
-        m = len finger table
-        id = key
-        n = guid?
-
-
-        !!!!!! This code is correct *but* the m, id and n variables may be assigned to the wrong variables. This will need testing/checking but should be easy to fix if need be
-
         */
         
         for (int i = fingerTable.length; i == 1 ; i--){
@@ -175,7 +167,8 @@ public class Node{
             }
         }
         //If closest preceding finger is not found, return null:
-        return null;
+        FingeredNode curNode = new FingeredNode(ip, guid);
+        return curNode;
         
     }
 
