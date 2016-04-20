@@ -5,4 +5,4 @@ uft: updateFingerTable(s, i)
 cpf: closestPreceedingFinger(int key)
 
 // fpd: findPredecessor(int id)
-// fsu: findSuccessor(int id)
+// fsu: findSuccessor(int id);

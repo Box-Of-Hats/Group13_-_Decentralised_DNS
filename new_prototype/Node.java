@@ -12,6 +12,7 @@ public class Node{
     private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable = new Finger[8];
+    private int[] idealFingertable = new int[8];
     private FingeredNode predecessor;
     private Client client;
 
@@ -20,6 +21,16 @@ public class Node{
         setIp(findIpFromMachine());
         guid = computeId();
         join();
+    }
+
+    public void calculateIdealFingertable(){
+        //Calculate the ideal fingertable for the current node
+        int m = fingerTable.length;
+        int n = guid;
+        
+        for (int i = 0; i < m; i++){
+            idealFingertable[i] = (n + (Math.pow(2, i)));
+        }
     }
 
     public Node(Client nodeClient){
@@ -37,7 +48,6 @@ public class Node{
 
     public int getGuid(){
         //Accessor for Node guid
-
         return guid;
     }
 
@@ -54,6 +64,11 @@ public class Node{
     public Client getClient(){
         //Accessor for Node's Client
         return client;
+    }
+
+    public FingeredNode getSuccessor(){
+        //Accessor for successor 
+        return fingerTable[0];
     }
 
     private void setGuid(int newGuid){
@@ -95,20 +110,23 @@ public class Node{
 
     public void initFingerTable(String bootstrapNodeIp){
         //This method requires a lot of network code
-        /*
+        //m is the length of the finger table
         //n' is the node represented by bootstrapNodeIp
-        n.finger[0] = n'.findSuccessor(finger[0].start)
-        // This line contacts the bootstrap node and asks it to run its findSuccessor code using the id of the current node
-        // This finds the succesor node of the current node, to do this the server would simply need to call its node's
-        // findSuccessor method
-        predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
-        successor.predecessor = n // This requires the server to have some method to set its node's predecessor
+        //Connect to bootstrap node
+        client.connectToServer(bootstrapNodeIp);
+        //Call Get Succesor on bootstrap node with start of first finger
+        n.fingerTable[0] = client.sendMessage("FSU," + Integer.toString(guid + 1));
+
+        /*
         for i = 0 to m - 1;
             if (finger[i + 1].start is between [n, finger[i].node]):
                 finger[i + 1].node = finger[i].node
             else:
                 finger[i + 1].node = n'.findSucessor(finger[i + 1].start)
-            */
+
+        predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
+        successor.predecessor = n // This requires the server to have some method to set its node's predecessor
+        */
     }
 
     public void updateOthers(){
@@ -138,7 +156,7 @@ public class Node{
         return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
         FingeredNode node = findPredecessor(id);
-        FingeredNode successor = //Call get Successor across network
+        FingeredNode successor = ;//Call get Successor across network
         
         return successor; //!! PLACEHOLDER !!
     }
@@ -177,8 +195,7 @@ public class Node{
                 return finger[i].node;
         return n;
         */
-        
-        //NEED TO DEAL WITH RING ARCHITECTURE!!!!
+
         for (int i = fingerTable.length; i == 1 ; i--){
             int fingerId = fingerTable[i].getNode().getId();
             if (((fingerId > guid) && (fingerId < key)) || ((fingerId > key) && (fingerId < guid))){
