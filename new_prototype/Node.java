@@ -20,17 +20,8 @@ public class Node{
         //Constructor for Node class
         setIp(findIpFromMachine());
         guid = computeId();
+        calculateIdealFingerTable();
         join();
-    }
-
-    public void calculateIdealFingertable(){
-        //Calculate the ideal fingertable for the current node
-        int m = fingerTable.length;
-        int n = guid;
-        
-        for (int i = 0; i < m; i++){
-            idealFingertable[i] = (n + (Math.pow(2, i)));
-        }
     }
 
     public Node(Client nodeClient){
@@ -38,6 +29,7 @@ public class Node{
         setClient(nodeClient);
         setIp(findIpFromMachine());
         guid = computeId();
+        calculateIdealFingerTable();
         join();
     }
 
@@ -90,6 +82,17 @@ public class Node{
         client = newClient;
     }
 
+    public void calculateIdealFingertable(){
+        //Calculate the ideal fingertable for the current node
+        int m = fingerTable.length;
+        int n = guid;
+        
+        for (int i = 0; i < m; i++){
+            idealFingertable[i] = (n + (Math.pow(2, i))) % 8;
+        }
+    }
+
+
     public void join(){
         //When called without a bootstrapIP, the Node is assumed to be the first in the network.
         //Untested but based on Jamie's pseudocode so it should work.
@@ -103,6 +106,7 @@ public class Node{
     public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
         /*
+        //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
         initFingerTable(bootstrapNodeIp)
         updateOthers()
         */
@@ -122,7 +126,11 @@ public class Node{
             if (finger[i + 1].start is between [n, finger[i].node]):
                 finger[i + 1].node = finger[i].node
             else:
-                finger[i + 1].node = n'.findSucessor(finger[i + 1].start)
+                finger[i + 1].node = n'.findSucessor(finger[i + 1].start)'
+
+        for (int i = 1; i < fingerTable.length; i++){
+            fingerTable[i].node = client.sendMessage("FSU", Integer.toString(idealFingerTable[i]));
+        }
 
         predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
         successor.predecessor = n // This requires the server to have some method to set its node's predecessor
