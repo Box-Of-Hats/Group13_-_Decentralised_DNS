@@ -75,10 +75,16 @@ public class Server extends NodeServer implements Runnable{
 					int preID = Integer.parseInt(predecessorDetails[1]);
 					FingeredNode predecessor = new FingeredNode(preIP, preID);
 					node.setPredecessor(predecessor);
+					pushMessage("1");
+				//Get Predecessor:
+				case "GPD":
+					break;
 				//Update Finger Table:
                 case "UFT":
-					
                 	break;
+				//Closest Preceding Finger
+				case "CPS":
+					break;
             }
         }
 

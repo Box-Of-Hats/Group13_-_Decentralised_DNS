@@ -182,16 +182,19 @@ public class Node{
         int nodeId = node.getId();
         int successorId = fingerTable[0].getId();
         
+        //If finger table only contains current node, just return the current node
         if (nodeId == succesorId) {
             return node;
         }
         
+        //Deals with ring architecture
         if (id < nodeId) {
             id = id + 8;
         }
         if (successorId <= nodeId)
             successorId = succesorId + 8;
         
+        //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId < id) && (id < successorId)) {
             if (currentNode) {
                 if (id > 8)
