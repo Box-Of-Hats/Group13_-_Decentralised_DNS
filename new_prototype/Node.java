@@ -228,14 +228,15 @@ public class Node{
 
                 node = //Call Closest Preceding Finger across network
                 successor = //Call get Successor across network
-            }*/
-        }
+            }
+        }*/
                 
-        return null; //!! PLACEHOLDER !!
+        return node; //!! PLACEHOLDER !!
 
     }
 
-    public FingeredNode closestPrecedingFinger(int key){
+    public FingeredNode closestPrecedingFinger(int id){
+        //DONE
         //This appears to be working!
         /*
         This requires no networking code
@@ -244,7 +245,26 @@ public class Node{
                 return finger[i].node;
         return n;
         */
-
+        
+        //Deals with Ring Architecture
+        if (id < guid)
+            id = id + 8;
+        
+       //iterates backwards through the finger table checking each finger against the requested ID
+        for (int i = fingerTable.length - 1; i >= 0; i--) {
+            int fingerId = fingerTable[i].getId();
+            if (fingerId < guid)
+                fingerId = fingerId + 8;
+            if ((fingerId > guid) && (fingerId < id)) {
+                return finger[i].node;
+            }
+        }
+        
+        curNode = new Fingerednode(ip, guid);
+        return curNode
+        
+        
+        /*
         for (int i = fingerTable.length; i == 1 ; i--){
             int fingerId = fingerTable[i].getNode().getId();
             if (((fingerId > guid) && (fingerId < key)) || ((fingerId > key) && (fingerId < guid))){
