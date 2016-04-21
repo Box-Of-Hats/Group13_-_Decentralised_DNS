@@ -1,4 +1,8 @@
-Syntax for commands sent via the network. First 3 characters of a message string indicate the command to be called, and are listed below. 
+Syntax for commands sent via the network. First 3 characters of a message string indicate the command to be called,
+and are listed below. 
+Typical syntax of messages is as follows:
+	"COD,arg1;arg2"
+	where "COD" is the function code, and the following string after the comma is a semicolon-delimited list of args for that function.
 
 spd: setPredecessor
 uft: updateFingerTable(s, i)
