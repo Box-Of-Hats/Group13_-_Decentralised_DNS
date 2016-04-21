@@ -118,8 +118,8 @@ public class Node{
         //n' is the node represented by bootstrapNodeIp
         //Connect to bootstrap node
         client.connectToServer(bootstrapNodeIp);
-        //Call Get Succesor on bootstrap node with start of first finger
-        n.fingerTable[0] = client.sendMessage("FSU," + Integer.toString(guid + 1));
+        //Call Get Succesor on bootstrap node with start of first finger. FSU = Find Successor
+        n.fingerTable[0] = client.pushMessage("FSU," + Integer.toString(guid + 1)); //THIS WONT WORK BECAUSE pushMessage returns VOID???
 
         /*
         for i = 0 to m - 1;
@@ -180,22 +180,32 @@ public class Node{
         Boolean currentNode = true;
         FingeredNode node = new FingeredNode(ip, guid);
         FingeredNode successor = fingerTable[0];
-        while ((id > node.getid()) && id < successor.getId()){
+        while ((id > node.getId()) && id < successor.getId()){
             if (currentNode == true){
                 node = closestPrecedingFinger(id);
                 successor = //Get succesor of node across network
                 currentNode = false;
             } else {
+                //JAKE WROTE THIS BIT, SHOULD CHECK IT:
+                client.connectToServer(node.getIp());
+                node = client.pushMessage("CPF,", Integer.toString(node.getId()));
+                //Although a message is pushed to the server, I am unsure as to how to access the response.
+                //Im thinking I might have to call pullMessage. pushMessage returns void by the looks of it but I need
+                //to check with someone else.
+                //JAKE FINISH
+
+
                 node = //Call Closest Preceding Finger across network
                 successor = //Call get Successor across network
             }
         }
                 
-        return node; //!! PLACEHOLDER !!
+        return null; //!! PLACEHOLDER !!
 
     }
 
     public FingeredNode closestPrecedingFinger(int key){
+        //This appears to be working!
         /*
         This requires no networking code
         for i = m - 1 down to 1:

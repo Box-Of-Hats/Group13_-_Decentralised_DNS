@@ -6,3 +6,4 @@ cpf: closestPreceedingFinger(int key)
 
 // fpd: findPredecessor(int id)
 // fsu: findSuccessor(int id);
+	Takes the guid of the node to find the successor of and returns the FingeredNode.
