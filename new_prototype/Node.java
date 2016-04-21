@@ -179,6 +179,37 @@ public class Node{
         */
         Boolean currentNode = true;
         FingeredNode node = new FingeredNode(ip, guid);
+        int nodeId = node.getId();
+        int successorId = fingerTable[0].getId();
+        
+        if (nodeId == succesorId) {
+            return node;
+        }
+        
+        if (id < nodeId) {
+            id = id + 8;
+        }
+        if (successorId <= nodeId)
+            successorId = succesorId + 8;
+        
+        while (!((nodeId < id) && (id < successorId)) {
+            if (currentNode) {
+                if (id > 8)
+                    id = id - 8;
+                node = closestPrecedingFinger(id);
+                currentNode = false;
+            } else {
+                if (id > 8)
+                    id = id - 8;
+                client.connectToServer(node.getIp());
+                node = client.pushMessage("CPF", Interger.toString(node.getId()));
+            }
+        }
+        
+        
+        
+        /*Boolean currentNode = true;
+        FingeredNode node = new FingeredNode(ip, guid);
         FingeredNode successor = fingerTable[0];
         while ((id > node.getId()) && id < successor.getId()){
             if (currentNode == true){
@@ -197,7 +228,7 @@ public class Node{
 
                 node = //Call Closest Preceding Finger across network
                 successor = //Call get Successor across network
-            }
+            }*/
         }
                 
         return null; //!! PLACEHOLDER !!
