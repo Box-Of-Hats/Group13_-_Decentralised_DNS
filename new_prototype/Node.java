@@ -11,15 +11,15 @@ public class Node{
 
     private int guid; //Globally Unique Identifier
     private String ip;
-    private Finger[] fingerTable = new Finger[8];
-    private int[] idealFingertable = new int[8];
+    private Finger[] fingerTable = new Finger[3];
+    private int[] idealFingertable = new int[3];
     private FingeredNode predecessor;
     private Client client;
 
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
-        guid = computeId();
+        guid = computeId() % 8;
         calculateIdealFingerTable();
         join();
     }
@@ -28,7 +28,7 @@ public class Node{
         //Constructor for Node class, when a client is passed
         setClient(nodeClient);
         setIp(findIpFromMachine());
-        guid = computeId();
+        guid = computeId() % 8;
         calculateIdealFingerTable();
         join();
     }
