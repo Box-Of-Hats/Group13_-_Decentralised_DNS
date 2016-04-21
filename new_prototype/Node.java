@@ -192,7 +192,7 @@ public class Node{
         if (nodeId == successorId) {
             return node;
         }
-        /*
+        
         //Deals with ring architecture
         if (id < nodeId) {
             id = id + 8;
@@ -201,7 +201,7 @@ public class Node{
             successorId = successorId + 8;
         
         //Repeats until it finds a node that should have the ID as its successor
-        while (!((nodeId < id) && (id < successorId)) {
+        while (!((nodeId < id) && (id < successorId))) {
             if (currentNode) {
                 if (id > 8)
                     id = id - 8;
@@ -211,35 +211,13 @@ public class Node{
                 if (id > 8)
                     id = id - 8;
                 client.connectToServer(node.getIp());
-                node = client.pushMessage("CPF", Interger.toString(node.getId()));
+                String response = client.pushMessage("CPF", Integer.toString(node.getId()));
+                String[] parts = response.split(",");
+                String[] responseNode = parts[1].split(";");
+                node = new FingeredNode(responseNode[0], responseNode[1]);
             }
         }
-        
-        
-        
-        /*Boolean currentNode = true;
-        FingeredNode node = new FingeredNode(ip, guid);
-        FingeredNode successor = fingerTable[0];
-        while ((id > node.getId()) && id < successor.getId()){
-            if (currentNode == true){
-                node = closestPrecedingFinger(id);
-                successor = //Get successor of node across network
-                currentNode = false;
-            } else {
-                //JAKE WROTE THIS BIT, SHOULD CHECK IT:
-                client.connectToServer(node.getIp());
-                node = client.pushMessage("CPF,", Integer.toString(node.getId()));
-                //Although a message is pushed to the server, I am unsure as to how to access the response.
-                //Im thinking I might have to call pullMessage. pushMessage returns void by the looks of it but I need
-                //to check with someone else.
-                //JAKE FINISH
-
-
-                node = //Call Closest Preceding Finger across network
-                successor = //Call get Successor across network
-            }
-        }*/
-                
+            
         return node; //!! PLACEHOLDER !!
 
     }
@@ -271,20 +249,6 @@ public class Node{
         
         FingeredNode curNode = new FingeredNode(ip, guid);
         return curNode;
-        
-        
-        /*
-        for (int i = fingerTable.length; i == 1 ; i--){
-            int fingerId = fingerTable[i].getNode().getId();
-            if (((fingerId > guid) && (fingerId < key)) || ((fingerId > key) && (fingerId < guid))){
-                return fingerTable[i].getNode();
-            }
-        }
-        //If closest preceding finger is not found, return the current node's details:
-        FingeredNode curNode = new FingeredNode(ip, guid);
-        return curNode;
-        */
-        
     }
 
     public static String findIpFromMachine(){

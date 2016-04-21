@@ -11,6 +11,8 @@ class TestClient{
         Client aClient = new Client();
         aClient.connectToServer(ip);
         aClient.pushMessage(message);
+        String returnMessage = aClient.pullMessage();
+        System.out.println(returnMessage);
         aClient.disconnect();
     }
 }
