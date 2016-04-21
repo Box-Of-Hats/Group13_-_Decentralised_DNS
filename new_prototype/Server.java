@@ -84,6 +84,11 @@ public class Server extends NodeServer implements Runnable{
                 	break;
 				//Closest Preceding Finger
 				case "CPS":
+					System.out.println("CPS Request found");
+					int id = Integer.parseInt(part2);
+					FingeredNode closestPredecessor = node.closestPrecedingFinger(id);
+					String returnMessage = "1," + closestPredecessor.getIp() + ";" + Integer.toString(closestPredecessor.getId());
+					System.out.println(returnMessage);
 					break;
             }
         }

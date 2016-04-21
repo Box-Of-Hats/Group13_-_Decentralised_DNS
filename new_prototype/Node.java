@@ -19,8 +19,8 @@ public class Node{
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
-        guid = computeId() % 8;
-        calculateIdealFingerTable();
+        guid = Math.abs(computeId() % 8);
+        calculateIdealFingertable();
         join();
     }
 
@@ -28,9 +28,10 @@ public class Node{
         //Constructor for Node class, when a client is passed
         setClient(nodeClient);
         setIp(findIpFromMachine());
-        guid = computeId() % 8;
-        calculateIdealFingerTable();
+        guid = Math.abs(computeId() % 8);
+        calculateIdealFingertable();
         join();
+        System.out.println("Joined Network");
     }
 
     public String getIp(){
@@ -60,7 +61,7 @@ public class Node{
 
     public FingeredNode getSuccessor(){
         //Accessor for successor 
-        return fingerTable[0];
+        return fingerTable[0].getNode();
     }
 
     private void setGuid(int newGuid){
@@ -88,7 +89,7 @@ public class Node{
         int n = guid;
         
         for (int i = 0; i < m; i++){
-            idealFingertable[i] = (n + (Math.pow(2, i))) % 8;
+            idealFingertable[i] = (n + ((int)Math.pow(2, i))) % 8;
         }
     }
 
@@ -100,6 +101,7 @@ public class Node{
         for (int i = 0; i < fingerTable.length; i++) {
             int start = (int)Math.pow(2, i);
             Finger f = new Finger(ip, guid, start);
+            fingerTable[i] = f;
         }
     }
 
@@ -117,9 +119,9 @@ public class Node{
         //m is the length of the finger table
         //n' is the node represented by bootstrapNodeIp
         //Connect to bootstrap node
-        client.connectToServer(bootstrapNodeIp);
-        //Call Get Succesor on bootstrap node with start of first finger. FSU = Find Successor
-        n.fingerTable[0] = client.pushMessage("FSU," + Integer.toString(guid + 1)); //THIS WONT WORK BECAUSE pushMessage returns VOID???
+        //client.connectToServer(bootstrapNodeIp);
+        //Call Get successor on bootstrap node with start of first finger. FSU = Find Successor
+        //n.fingerTable[0] = client.pushMessage("FSU," + Integer.toString(guid + 1));
 
         /*
         for i = 0 to m - 1;
@@ -163,10 +165,13 @@ public class Node{
         n' = findPredecessor(id)
         return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
+        /*
         FingeredNode node = findPredecessor(id);
         FingeredNode successor = ;//Call get Successor across network
         
         return successor; //!! PLACEHOLDER !!
+        */
+        return null;
     }
 
     public FingeredNode findPredecessor(int id){
@@ -177,22 +182,23 @@ public class Node{
             n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
         return n'
         */
+        
         Boolean currentNode = true;
         FingeredNode node = new FingeredNode(ip, guid);
         int nodeId = node.getId();
-        int successorId = fingerTable[0].getId();
+        int successorId = fingerTable[0].getNode().getId();
         
         //If finger table only contains current node, just return the current node
-        if (nodeId == succesorId) {
+        if (nodeId == successorId) {
             return node;
         }
-        
+        /*
         //Deals with ring architecture
         if (id < nodeId) {
             id = id + 8;
         }
         if (successorId <= nodeId)
-            successorId = succesorId + 8;
+            successorId = successorId + 8;
         
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId < id) && (id < successorId)) {
@@ -217,7 +223,7 @@ public class Node{
         while ((id > node.getId()) && id < successor.getId()){
             if (currentNode == true){
                 node = closestPrecedingFinger(id);
-                successor = //Get succesor of node across network
+                successor = //Get successor of node across network
                 currentNode = false;
             } else {
                 //JAKE WROTE THIS BIT, SHOULD CHECK IT:
@@ -248,23 +254,23 @@ public class Node{
                 return finger[i].node;
         return n;
         */
-        
+        System.out.println("THIS");
         //Deals with Ring Architecture
         if (id < guid)
             id = id + 8;
         
        //iterates backwards through the finger table checking each finger against the requested ID
         for (int i = fingerTable.length - 1; i >= 0; i--) {
-            int fingerId = fingerTable[i].getId();
+            int fingerId = fingerTable[i].getNode().getId();
             if (fingerId < guid)
                 fingerId = fingerId + 8;
             if ((fingerId > guid) && (fingerId < id)) {
-                return finger[i].node;
+                return fingerTable[i].getNode();
             }
         }
         
-        curNode = new Fingerednode(ip, guid);
-        return curNode
+        FingeredNode curNode = new FingeredNode(ip, guid);
+        return curNode;
         
         
         /*
@@ -277,6 +283,7 @@ public class Node{
         //If closest preceding finger is not found, return the current node's details:
         FingeredNode curNode = new FingeredNode(ip, guid);
         return curNode;
+        */
         
     }
 

@@ -4,5 +4,6 @@ class TestServer{
         NodeFactory testFactory = new NodeFactory();
         Node thisNode = testFactory.makeNode();
         System.out.println("This Node IP: " + thisNode.getIp());
+        System.out.println("This Node ID: " + thisNode.getGuid());
 	}
 }
