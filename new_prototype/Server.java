@@ -79,12 +79,14 @@ public class Server extends NodeServer implements Runnable{
 				//Get Predecessor:
 				case "GPD":
 					break;
+				case "GSU":
+					break;
 				//Update Finger Table:
                 case "UFT":
                 	break;
-				//Get Successor
+				//Find Successor
 				case "FSU":
-					System.out.println("GSU Request Found");
+					System.out.println("FSU Request Found");
 					int id = Integer.parseInt(part2);
 					FingeredNode successor = node.findSuccessor(id);
 					break;
