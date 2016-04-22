@@ -14,3 +14,7 @@ cpf: closestPreceedingFinger(int key)
 FSU: findSuccessor(int id);
 	IN: Takes the guid of the node to find the successor of 
 	OUT: Successor Node as FingeredNode
+
+UFT: updateFingerTable(s, i);
+	IN: Honestly, we dont know
+	Out: Nothing
