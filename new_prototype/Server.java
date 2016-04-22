@@ -73,13 +73,15 @@ public class Server extends NodeServer implements Runnable{
 					String[] predecessorDetails = part2.split(";");
 					String preIP = predecessorDetails[0];
 					int preID = Integer.parseInt(predecessorDetails[1]);
-					FingeredNode predecessor = new FingeredNode(preIP, preID);
-					node.setPredecessor(predecessor);
+					FingeredNode spdPredecessor = new FingeredNode(preIP, preID);
+					node.setPredecessor(spdPredecessor);
 					pushMessage("1");
 				//Get Predecessor:
 				case "GPD":
-					break;
-				case "GSU":
+					System.out.println("GPD Request Found");
+					FingeredNode gpdPredecessor = node.getPredecessor();
+					String gpdResponseMessage = "1," + gpdPredecessor.getIp() + ";" + Integer.toString(gpdPredecessor.getId());
+					pushMessage(gpdResponseMessage);
 					break;
 				//Update Finger Table:
                 case "UFT":

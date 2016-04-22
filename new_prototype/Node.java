@@ -133,16 +133,33 @@ public class Node{
                 finger[i + 1].node = finger[i].node
             else:
                 finger[i + 1].node = n'.findSucessor(finger[i + 1].start)'
+        */
 
-        for (int i = 1; i < fingerTable.length; i++){
-            fingerTable[i].node = client.sendMessage("FSU", Integer.toString(idealFingerTable[i]));
+        for (int i = 1; i < fingerTable.length; i++) {
+            client.connectToServer(bootstrapNodeIp);
+            message = "FSU," + Integer.toString(idealFingertable[i]);
+            client.pushMessage(message);
+            response = client.pullMessage();
+            parts = response.split(",");
+            responseNode = parts[1].split(";");
+            fingerTable[i] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[i]);
         }
-        */
 
-        /*
-        predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
-        successor.predecessor = n // This requires the server to have some method to set its node's predecessor
-        */
+        
+        //predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
+        client.connectToServer(fingerTable[0].getNode().getIp());
+        message = "GPD";
+        client.pushMessage(message);
+        response = client.pullMessage();
+        parts = response.split(",");
+        responseNode = parts[1].split(";");
+        predecessor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
+
+        //successor.predecessor = n // This requires the server to have some method to set its node's predecessor
+        client.connectToServer(fingerTable[0].getNode().getIp());
+        message = "SPD," + ip + ";" + Integer.toString(guid); 
+        client.pushMessage(message);
+        response = client.pullMessage();
     }
 
     public void updateOthers(){
@@ -152,6 +169,7 @@ public class Node{
             p = findPredecessor(n - 2^(i - 1))
             p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
+        /*
         for (i=0; i < fingerTable.length; i ++){
             FingeredNode p = findPredecessor(guid - (int)Math.pow(2,i-1));
 
@@ -160,6 +178,7 @@ public class Node{
             client.pushMessage("UFT,"+ "s" + "i" ); //Not sure what S and I are, they should be substituted accordingly
 
         }
+        */
     }
 
     public void updateFingerTable(int s, int i){
