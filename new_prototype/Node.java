@@ -118,13 +118,14 @@ public class Node{
         //This method requires a lot of network code
         //m is the length of the finger table
         //n' is the node represented by bootstrapNodeIp
-        //client.connectToServer(bootstrapNodeIp);
-        //Call Get successor on bootstrap node with start of first finger. FSU = Find Successor
-        //String message = "FSU," + Integer.toString(guid + 1);
-        //client.pushMessage(message);
-        //String response = client.pullMessage;
-
-        //n.fingerTable[0] = client.pushMessage("FSU," + Integer.toString(guid + 1));
+        client.connectToServer(bootstrapNodeIp);
+        //Call Find successor on bootstrap node with start of first finger. FSU = Find Successor
+        String message = "FSU," + Integer.toString(idealFingertable[0]);
+        client.pushMessage(message);
+        String response = client.pullMessage();
+        String[] parts = response.split(",");
+        String[] responseNode = parts[1].split(";");
+        fingerTable[0] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[0]);
 
         /*
         for i = 0 to m - 1;
@@ -136,7 +137,9 @@ public class Node{
         for (int i = 1; i < fingerTable.length; i++){
             fingerTable[i].node = client.sendMessage("FSU", Integer.toString(idealFingerTable[i]));
         }
+        */
 
+        /*
         predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
         successor.predecessor = n // This requires the server to have some method to set its node's predecessor
         */
