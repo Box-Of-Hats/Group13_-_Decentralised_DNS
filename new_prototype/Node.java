@@ -211,10 +211,12 @@ public class Node{
                 if (id > 8)
                     id = id - 8;
                 client.connectToServer(node.getIp());
-                String response = client.pushMessage("CPF", Integer.toString(node.getId()));
+                String message = "CPF," + Integer.toString(node.getId());
+                client.pushMessage(message);
+                String response = client.pullMessage();
                 String[] parts = response.split(",");
                 String[] responseNode = parts[1].split(";");
-                node = new FingeredNode(responseNode[0], responseNode[1]);
+                node = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
             }
         }
             
