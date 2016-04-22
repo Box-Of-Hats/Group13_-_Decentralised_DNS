@@ -158,7 +158,7 @@ public class Node{
             p.updateFingerTable(guid, i);
             client.connectToServer(p.getIp());
             client.pushMessage("UFT,"+ "s" + "i" ); //Not sure what S and I are, they should be substituted accordingly
-
+            //Could pull message here to check if the update was successful but we can skip this.
         }
     }
 
