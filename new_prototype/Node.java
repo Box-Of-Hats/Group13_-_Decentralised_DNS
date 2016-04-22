@@ -149,6 +149,14 @@ public class Node{
             p = findPredecessor(n - 2^(i - 1))
             p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
+        for (i=0; i < fingerTable.length; i ++){
+            FingeredNode p = findPredecessor(guid - (int)Math.pow(2,i-1));
+
+            p.updateFingerTable(guid, i);
+            client.connectToServer(p.getIp());
+            client.pushMessage("UFT,"+ "s" + "i" ); //Not sure what S and I are, they should be substituted accordingly
+
+        }
     }
 
     public void updateFingerTable(int s, int i){
@@ -156,9 +164,9 @@ public class Node{
         //!!! Im unsure of the expected types of s and i. Using int for now, as a placeholder.
         /*
         if (s is between [n, finger[i].node]):
-        finger[i].node = s;
-        p = n.predecessor;
-        p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
+            finger[i].node = s;
+            p = n.predecessor;
+            p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
     }
 
