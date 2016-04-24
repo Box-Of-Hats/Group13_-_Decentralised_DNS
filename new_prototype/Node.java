@@ -107,11 +107,9 @@ public class Node{
 
     public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
-        /*
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
-        initFingerTable(bootstrapNodeIp)
-        updateOthers()
-        */
+        initFingerTable(bootstrapNodeIp);
+        updateOthers();
     }
 
     public void initFingerTable(String bootstrapNodeIp){
@@ -169,6 +167,16 @@ public class Node{
             p = findPredecessor(n - 2^(i - 1))
             p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
+        
+        for (int i = 0; i <= fingerTable.length; i++){
+            int updateId = guid - (int)Math.pow(2, i);
+            FingeredNode p = findPredecessor(updateId);
+            client.connectToServer(p.getIp());
+            String message = "UFT," + i + ";" + ip + ";" + Integer.toString(guid);
+            client.pushMessage(message);
+            String response = client.pullMessage();
+        }
+        
         /*
         for (i=0; i < fingerTable.length; i ++){
             FingeredNode p = findPredecessor(guid - (int)Math.pow(2,i-1));
@@ -181,7 +189,7 @@ public class Node{
         */
     }
 
-    public void updateFingerTable(int s, int i){
+    public void updateFingerTable(FingeredNode s, int i){
         //This method requires network code to step back along the network 
         //!!! Im unsure of the expected types of s and i. Using int for now, as a placeholder.
         /*
@@ -190,6 +198,23 @@ public class Node{
             p = n.predecessor;
             p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
+        int nodeId = s.getId();
+        //Deals with Ring Architecture
+        if (nodeId < guid)
+            nodeId = nodeId + 8;
+            
+       int fingerId = fingerTable[i].getNode().getId();
+       if (fingerId < guid)
+            fingerId = fingerId + 8;
+            
+        if ((guid < s.getId()) && (s.getId() < fingerId)){
+            fingerTable[i].setNode(s);
+            String message = "UFT," + i + ";" + s.getIp() + ";" + Integer.toString(s.getId());
+            client.connectToServer(predecessor.getIp());
+            client.pushMessage(message);
+            String response = client.pullMessage();
+        }
+        
     }
 
     public FingeredNode findSuccessor(int id){

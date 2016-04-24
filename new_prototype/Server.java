@@ -85,12 +85,20 @@ public class Server extends NodeServer implements Runnable{
 					break;
 				//Update Finger Table:
                 case "UFT":
+					System.out.println("UFT Request Found");
+					String[] fingerDetails = part2.split(";");
+					int i = Integer.parseInt(fingerDetails[0]);
+					String fingerIp = fingerDetails[1];
+					int fingerId = Integer.parseInt(fingerDetails[2]);
+					FingeredNode newFingerNode = new FingeredNode(fingerIp, fingerId);
+					node.updateFingerTable(newFingerNode, i);
                 	break;
 				//Find Successor
 				case "FSU":
 					System.out.println("FSU Request Found");
 					int id = Integer.parseInt(part2);
 					FingeredNode successor = node.findSuccessor(id);
+					pushMessage("1");
 					break;
 				//Closest Preceding Finger
 				case "CPS":

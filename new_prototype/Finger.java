@@ -18,4 +18,8 @@ public class Finger {
     public FingeredNode getNode(){
         return node;
     }
+    
+    public void setNode(FingeredNode newNode){
+        node = newNode;
+    }
 }

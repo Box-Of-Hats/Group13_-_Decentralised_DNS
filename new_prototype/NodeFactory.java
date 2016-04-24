@@ -12,5 +12,4 @@ public class NodeFactory {
         new Thread(new Server(tempNode)).start();
         return tempNode;
     }
-
 }
