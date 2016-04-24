@@ -110,17 +110,19 @@ public class Node{
         //This method requires network code to contact other nodes
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
         int id = guid;
-        while(guid == id) {
+        Boolean idInNetwork = true;
+        while(idInNetwork) {
             client.connectToServer(bootstrapNodeIp);
             String request = "FPD," + Integer.toString(guid);
             String response = client.pullMessage();
+            client.disconnect();
             String[] parts = response.split(",");
             String[] responseNode = parts[1].split(";");
             id = Integer.parseInt(responseNode[1]);
-            if (id == guid) {
-                guid = guid + 1;
-            }
-            client.disconnect();
+            if (id != guid)
+                idInNetwork = false;
+            else
+                guid = (guid + 1) % MAXSIZE;
         }
         //Set up FInger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
