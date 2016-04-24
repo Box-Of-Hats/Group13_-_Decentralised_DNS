@@ -265,7 +265,7 @@ public class Node{
         //Deals with ring architecture
         if (id < nodeId) {
             id = id + MAXSIZE;
-            //successorId = successorId + MAXSIZE;
+            successorId = successorId + MAXSIZE;
         }
         if (successorId <= nodeId)
             successorId = successorId + MAXSIZE;
