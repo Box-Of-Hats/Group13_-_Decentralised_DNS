@@ -265,27 +265,21 @@ public class Node{
         //Deals with ring architecture
         if (id < nodeId) {
             id = id + MAXSIZE;
+            //successorId = successorId + MAXSIZE;
         }
         if (successorId <= nodeId)
             successorId = successorId + MAXSIZE;
         
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId <= id) && (id <= successorId))) {
-            System.out.println("id: " + id);
-            System.out.println("nodeId: " + nodeId);
-            System.out.println("successorId: " + successorId);
             if (currentNode) {
-                if (id > MAXSIZE)
-                    id = id - MAXSIZE;
-                node = closestPrecedingFinger(id);
+                node = closestPrecedingFinger(id % MAXSIZE);
                 currentNode = false;
             } else if (nodeId == id) {
                 node = new FingeredNode(ip ,guid);
             } else {
-                if (id > MAXSIZE)
-                    id = id - MAXSIZE;
                 client.connectToServer(node.getIp());
-                String message = "CPS," + Integer.toString(node.getId());
+                String message = "CPS," + Integer.toString(id % MAXSIZE);     
                 client.pushMessage(message);
                 String response = client.pullMessage();
                 String[] parts = response.split(",");
