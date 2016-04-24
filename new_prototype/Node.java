@@ -270,12 +270,14 @@ public class Node{
             successorId = successorId + MAXSIZE;
         
         //Repeats until it finds a node that should have the ID as its successor
-        while (!((nodeId < id) && (id < successorId))) {
+        while (!((nodeId <= id) && (id < successorId))) {
             if (currentNode) {
                 if (id > MAXSIZE)
                     id = id - MAXSIZE;
                 node = closestPrecedingFinger(id);
                 currentNode = false;
+            } else if (nodeId == id) {
+                return node;
             } else {
                 if (id > MAXSIZE)
                     id = id - MAXSIZE;
