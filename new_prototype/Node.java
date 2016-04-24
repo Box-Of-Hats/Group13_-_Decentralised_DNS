@@ -8,7 +8,9 @@ public class Node{
     fingerTable: Finger[] an array of finger objects
     predecessor: the directly preceding node
     */
-
+    
+    public static final int MAXSIZE = 8;
+    
     private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable = new Finger[3];
@@ -20,7 +22,7 @@ public class Node{
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
-        guid = Math.abs(computeId() % 8);
+        guid = Math.abs(computeId() % MAXSIZE);
         calculateIdealFingertable();
         data = new HashMap<String,String>();
     }
@@ -87,7 +89,7 @@ public class Node{
         int n = guid;
         
         for (int i = 0; i < m; i++){
-            idealFingertable[i] = (n + ((int)Math.pow(2, i))) % 8;
+            idealFingertable[i] = (n + ((int)Math.pow(2, i))) % MAXSIZE;
         }
     }
 
@@ -201,11 +203,11 @@ public class Node{
         int nodeId = s.getId();
         //Deals with Ring Architecture
         if (nodeId < guid)
-            nodeId = nodeId + 8;
+            nodeId = nodeId + MAXSIZE;
             
        int fingerId = fingerTable[i].getNode().getId();
        if (fingerId < guid)
-            fingerId = fingerId + 8;
+            fingerId = fingerId + MAXSIZE;
             
         if ((guid < s.getId()) && (s.getId() < fingerId)){
             fingerTable[i].setNode(s);
@@ -256,21 +258,21 @@ public class Node{
         
         //Deals with ring architecture
         if (id < nodeId) {
-            id = id + 8;
+            id = id + MAXSIZE;
         }
         if (successorId <= nodeId)
-            successorId = successorId + 8;
+            successorId = successorId + MAXSIZE;
         
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId < id) && (id < successorId))) {
             if (currentNode) {
-                if (id > 8)
-                    id = id - 8;
+                if (id > MAXSIZE)
+                    id = id - MAXSIZE;
                 node = closestPrecedingFinger(id);
                 currentNode = false;
             } else {
-                if (id > 8)
-                    id = id - 8;
+                if (id > MAXSIZE)
+                    id = id - MAXSIZE;
                 client.connectToServer(node.getIp());
                 String message = "CPF," + Integer.toString(node.getId());
                 client.pushMessage(message);
@@ -298,13 +300,13 @@ public class Node{
         System.out.println("THIS");
         //Deals with Ring Architecture
         if (id < guid)
-            id = id + 8;
+            id = id + MAXSIZE;
         
        //iterates backwards through the finger table checking each finger against the requested ID
         for (int i = fingerTable.length - 1; i >= 0; i--) {
             int fingerId = fingerTable[i].getNode().getId();
             if (fingerId < guid)
-                fingerId = fingerId + 8;
+                fingerId = fingerId + MAXSIZE;
             if ((fingerId > guid) && (fingerId < id)) {
                 return fingerTable[i].getNode();
             }
