@@ -226,14 +226,18 @@ public class Node{
         */
         
         FingeredNode node = findPredecessor(id);
-        client.connectToServer(node.getIp());
-        String message = "FSU";
-        client.pushMessage(message);
-        String response = client.pullMessage();
-        String parts[] = response.split(",");
-        String[] responseNode = parts[1].split(";");
-        FingeredNode successor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
-        return successor;
+        if (node.getId() == guid) {
+            return fingerTable[0].getNode();
+        } else {
+            client.connectToServer(node.getIp());
+            String message = "FSU";
+            client.pushMessage(message);
+            String response = client.pullMessage();
+            String parts[] = response.split(",");
+            String[] responseNode = parts[1].split(";");
+            FingeredNode successor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
+            return successor;
+        }
     }
 
     public FingeredNode findPredecessor(int id){
