@@ -109,12 +109,17 @@ public class Server extends NodeServer implements Runnable{
 					String returnMessage = "1," + closestPredecessor.getIp() + ";" + Integer.toString(closestPredecessor.getId());
 					pushMessage(returnMessage);
 					break;
-				//URL
-				case "URL":
-					System.out.println("URL Request found");
+				//Get URL data
+				case "GUD":
+					System.out.println("GUD Request found");
 					String returnMessage = "1," + node.getData(part2);
 					pushMessage(returnMessage);
 					node.getData(part2);
+					break;
+				//Add URL DAta
+				case "AUD":
+					System.out.println("AUD Request found");
+					//implementation
 					break;
             }
         }
