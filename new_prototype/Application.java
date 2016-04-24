@@ -4,13 +4,13 @@ class Application{
 
     public void listCommands(){
         // Print help text for application
-        System.out.println("Syntax: COMMAND,Arg1,Arg2 ... ,ArgN");
+        System.out.println("Syntax: COMMAND Arg1 Arg2 ... ArgN");
         System.out.println("Enter a command:\n");
         System.out.println("\thelp - Display list of commands with options");
         System.out.println("\tquit - Exit the application and close all connections.");
         System.out.println("\tjoin [BootstrapIP] - Join a network via a bootstrap node IP.");
         System.out.println("\taddurl [URL to add] [IP to add] - Add a url to store in the system.");
-        System.out.println("\tstart - Start a network as the first node.");
+        System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tlookup [URL] - Look up the IP address of a given URL.");
     }
 
@@ -27,20 +27,24 @@ class Application{
         -Look up URL: looks up the IP for the given URL from the node network
         */
 
-        //Check if arguements were supplied. If not, helpful text will be displayed containing all
-        // possible commands with arguement parameters.
+        //Output introduction text:
+        System.out.println("\nChord DNS Client ver 0.1\n");
+        Application app = new Application();
+        app.listCommands();
+
         String commandIn;
         String[] commandList;
-        Application app = new Application();;
+        
+        //Initialise node, server and client on this application.
+        NodeFactory factory = new NodeFactory();
+        Node node = factory.makeNode();
 
-        System.out.println("\nChord DNS Client ver 0.1\n");
-        app.listCommands();
 
         while (true){
             Scanner scanner = new Scanner(System.in);
             System.out.print(">");
-            commandIn = scanner.next();
-            commandList = commandIn.split(",");
+            commandIn = scanner.nextLine();
+            commandList = commandIn.split("\\s");
             String command = commandList[0];
 
             switch(command){
@@ -49,13 +53,13 @@ class Application{
                     break;
 
                 case "join":
-                    System.out.println(commandList.length);
                     if (commandList.length != 2){
-                        System.out.println("Bad arguements passed to 'join'. 1 argument required: BootstrapIP");
+                        System.out.println("Error:\tBad arguements passed to 'join'.");
+                        System.out.println("\t1 argument required: Bootstrap IP");
                         break;
                     }
                     else{
-                        System.out.println("Joining network via BootstrapIP: " + commandList[1]);
+                        System.out.println("Joining network via Bootstrap IP: " + commandList[1]);
                         break;
                     }
         
@@ -80,6 +84,8 @@ class Application{
                     break;
 
                 default:
+                    System.out.println("Command not found: '" + command + "'");
+                    System.out.println("Type 'help' for a list of commands.");
                     break;
             }    
         }
