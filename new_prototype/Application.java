@@ -12,6 +12,7 @@ class Application{
         System.out.println("\taddurl [URL to add] [IP to add] - Add a url to store in the system.");
         System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tlookup [URL] - Look up the IP address of a given URL.");
+        System.out.println("\tinfo - Print information about the current node");
     }
 
 
@@ -56,23 +57,45 @@ class Application{
                     if (commandList.length != 2){
                         System.out.println("Error:\tBad arguements passed to 'join'.");
                         System.out.println("\t1 argument required: Bootstrap IP");
+                        System.out.println("\tTo start a new network without a bootstrap IP, use command 'start'");
                         break;
                     }
                     else{
-                        System.out.println("Joining network via Bootstrap IP: " + commandList[1]);
+                        String ipToConnectTo = commandList[1];
+                        System.out.println("Joining existing network via Bootstrap IP: " + ipToConnectTo);
+                        node.join(ipToConnectTo);
                         break;
                     }
         
                 case "start":
-                    System.out.println("Starting...");
+                    System.out.println("Initialising...");
+                    node.join();
                     break;
 
                 case "addurl":
-                    System.out.println("Adding url...");
+                    if (commandList.length != 3){
+                        System.out.println("Error:\tBad arguements passed to 'addurl'.");
+                        System.out.println("\t2 arguments required: URL, IP");
+                    }
+                    else {
+                        System.out.println("Adding URL to system...");
+                    }
                     break;
 
                 case "lookup":
-                    System.out.println("Looking up url...");
+                    if (commandList.length != 2){
+                        System.out.println("Error:\tBad arguements passed to 'lookup'.");
+                        System.out.println("\t1 argument required: URL");
+                    }
+                    else {
+                        String urlToLookup = commandList[1];
+                        System.out.println("Looking up URL: " + urlToLookup);
+                    }
+                    break;
+
+                case "info":
+                    System.out.println("Node IP: " + node.getIp());
+                    System.out.println("Current GUID: " + node.getGuid());
                     break;
 
                 case "quit":
