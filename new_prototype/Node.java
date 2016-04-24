@@ -251,7 +251,7 @@ public class Node{
             return fingerTable[0].getNode();
         } else {
             client.connectToServer(node.getIp());
-            String message = "FSU";
+            String message = "FSU," + Integer.toString(id);
             client.pushMessage(message);
             String response = client.pullMessage();
             String parts[] = response.split(",");
