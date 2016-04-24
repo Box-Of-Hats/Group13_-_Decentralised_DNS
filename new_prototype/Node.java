@@ -303,7 +303,10 @@ public class Node{
                 String response = client.pullMessage();
                 String[] parts = response.split(",");
                 String[] responseNode = parts[1].split(";");
+                FingeredNode prevNode = node;
                 node = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
+                if (node.getId() == prevNode.getId())
+                    break;
             }
         }
             
