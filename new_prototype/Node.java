@@ -172,7 +172,7 @@ public class Node{
             p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
         
-        for (int i = 0; i <= fingerTable.length; i++){
+        for (int i = 0; i < fingerTable.length; i++){
             int updateId = guid - (int)Math.pow(2, i);
             FingeredNode p = findPredecessor(updateId);
             client.connectToServer(p.getIp());
