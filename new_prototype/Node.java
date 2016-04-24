@@ -15,20 +15,21 @@ public class Node{
     private int[] idealFingertable = new int[3];
     private FingeredNode predecessor;
     private Client client;
+    private Map<String,String> data;
 
     public Node(){
         //Constructor for Node class
         setIp(findIpFromMachine());
         guid = Math.abs(computeId() % 8);
         calculateIdealFingertable();
+        data = new HashMap<String,String>();
     }
 
     public Node(Client nodeClient){
         //Constructor for Node class, when a client is passed
         setClient(nodeClient);
-        setIp(findIpFromMachine());
-        guid = Math.abs(computeId() % 8);
-        calculateIdealFingertable();
+        this();
+        
     }
 
     public String getIp(){
@@ -348,6 +349,15 @@ public class Node{
         }
         return value;
     }
-
-
+    
+    private void addData(String url, String ip){
+        // Add data to URL-> IP hashmap
+        data.put(url,ip);
+    }
+    
+    private void getData(String url){
+        // Return the ip referred by the given url 
+        // Null would be returned if the url does not exist
+        return data.get(url);
+    }
 }
