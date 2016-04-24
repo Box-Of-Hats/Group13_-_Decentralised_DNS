@@ -112,6 +112,7 @@ public class Node{
         int id = guid;
         Boolean idInNetwork = true;
         while(idInNetwork) {
+            System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
             String request = "FPD," + Integer.toString(guid);
             String response = client.pullMessage();
