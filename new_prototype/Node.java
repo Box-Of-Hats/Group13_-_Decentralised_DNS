@@ -290,6 +290,7 @@ public class Node{
         
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId <= id) && (id <= successorId))) {
+            System.out.println("nodeId: " + nodeId + " id: " + id + " successorId: " + successorId);
             if (currentNode) {
                 node = closestPrecedingFinger(id % MAXSIZE);
                 currentNode = false;
