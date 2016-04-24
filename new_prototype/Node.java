@@ -149,7 +149,7 @@ public class Node{
         
         //predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
         client.connectToServer(fingerTable[0].getNode().getIp());
-        message = "GPD,";
+        message = "GPD,0";
         client.pushMessage(message);
         response = client.pullMessage();
         parts = response.split(",");
