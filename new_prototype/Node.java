@@ -109,9 +109,19 @@ public class Node{
     public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
-        client.connectToServer(bootstrapNodeIp);
-        String request = "FPD," + Integer.toString(guid);
-        client.disconnect();
+        int id = guid;
+        while(guid == id) {
+            client.connectToServer(bootstrapNodeIp);
+            String request = "FPD," + Integer.toString(guid);
+            String response = client.pullMessage();
+            String[] parts = response.split(",");
+            String[] responseNode = parts[1].split(";");
+            id = Integer.parseInt(responseNode[1]);
+            if (id == guid) {
+                guid = guid + 1;
+            }
+            client.disconnect();
+        }
         //Set up FInger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
