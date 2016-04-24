@@ -122,6 +122,7 @@ public class Node{
         String message = "FSU," + Integer.toString(idealFingertable[0]);
         client.pushMessage(message);
         String response = client.pullMessage();
+        client.disconnect();
         String[] parts = response.split(",");
         String[] responseNode = parts[1].split(";");
         fingerTable[0] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[0]);
