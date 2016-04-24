@@ -114,7 +114,7 @@ public class Node{
         while(idInNetwork) {
             System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
-            String request = "FPD," + Integer.toString(guid);
+            String request = "FSU," + Integer.toString(Math.abs((guid - 1) % 8));
             client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();
