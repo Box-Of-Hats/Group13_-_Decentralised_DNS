@@ -29,9 +29,8 @@ public class Node{
 
     public Node(Client nodeClient){
         //Constructor for Node class, when a client is passed
-        setClient(nodeClient);
         this();
-        
+        setClient(nodeClient);       
     }
 
     public String getIp(){
@@ -357,7 +356,7 @@ public class Node{
         data.put(url,ip);
     }
     
-    private void getData(String url){
+    private String getData(String url){
         // Return the ip referred by the given url 
         // Null would be returned if the url does not exist
         return data.get(url);
