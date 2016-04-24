@@ -133,13 +133,14 @@ public class Server extends NodeServer implements Runnable{
 
 	public void run()
 	{
-		String str_in,str_out;
-		this.acceptConnectionRequest();
 
 		while(true){
+			String str_in,str_out;
+			this.acceptConnectionRequest();
 			str_in = this.pullMessage();
 			//str_out = "New Message Received: " + str_in;
 			recieveString(str_in);
+			disconnect();
 			//System.out.println(str_out);
 			//if (str_in==null) break;
 		}

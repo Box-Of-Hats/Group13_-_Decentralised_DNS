@@ -137,7 +137,6 @@ public class Node{
         */
 
         for (int i = 1; i < fingerTable.length; i++) {
-            System.out.println("Setting up FInger Table");
             client.connectToServer(bootstrapNodeIp);
             message = "FSU," + Integer.toString(idealFingertable[i]);
             client.pushMessage(message);
