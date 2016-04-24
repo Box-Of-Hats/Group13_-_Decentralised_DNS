@@ -101,14 +101,6 @@ public class Server extends NodeServer implements Runnable{
 					String fsuResponse = "1," + successor.getIp() + ";" + Integer.toString(successor.getId());
 					pushMessage(fsuResponse);
 					break;
-				//Find PRedecessor
-				case "FPD":
-					System.out.println("FPD Request Found");
-					int fpdId = Integer.parseInt(part2);
-					FingeredNode foundNode = node.findPredecessor(fpdId);
-					String fpdResponse = "1," + foundNode.getIp() + ";" + Integer.toString(foundNode.getId());
-					pushMessage(fpdResponse);
-					break;
 				//Closest Preceding Finger
 				case "CPS":
 					System.out.println("CPS Request found");
