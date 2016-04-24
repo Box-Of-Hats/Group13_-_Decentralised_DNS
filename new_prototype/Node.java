@@ -111,6 +111,7 @@ public class Node{
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
         client.connectToServer(bootstrapNodeIp);
         String request = "FPD," + Integer.toString(guid);
+        client.disconnect();
         //Set up FInger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
