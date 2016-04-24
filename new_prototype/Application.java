@@ -11,6 +11,12 @@ class Application{
         }
         else{
             String action = args[0];
+            switch(action){
+                case "join":
+                            System.out.println("Joining network via BootstrapIP: " + args[1]);
+                            break;
+                        }
+            
         }
 
     }
