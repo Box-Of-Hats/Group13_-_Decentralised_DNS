@@ -109,6 +109,9 @@ public class Node{
     public void join(String bootstrapNodeIp){
         //This method requires network code to contact other nodes
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
+        client.connectToServer(bootstrapNodeIp);
+        String request = "FPD," + Integer.toString(guid);
+        //Set up FInger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
         System.out.println("Joined Specified Network");
