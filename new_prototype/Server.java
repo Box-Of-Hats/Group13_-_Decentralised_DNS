@@ -98,7 +98,8 @@ public class Server extends NodeServer implements Runnable{
 					System.out.println("FSU Request Found");
 					int id = Integer.parseInt(part2);
 					FingeredNode successor = node.findSuccessor(id);
-					pushMessage("1");
+					String fsuResponse = "1," + successor.getIp() + ";" + Integer.toString(successor.getId());
+					pushMessage(fsuResponse);
 					break;
 				//Closest Preceding Finger
 				case "CPS":
