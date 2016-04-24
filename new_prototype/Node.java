@@ -379,6 +379,25 @@ public class Node{
         return value;
     }
     
+    private String fetchData(String url){
+        int url_value = 0;
+        int id;
+        FingeredNode node;
+        byte[] resultOfHashing = new Hashing().hash(url.getBytes());
+        for(int i = 0 ; i < resultOfHashing.length ; i++){
+            url_value = url_value * 32;
+            url_value += resultOfHashing[i] & 0xFF;
+        }
+        id = Math.abs(url_value % MAXSIZE);
+        node = this.findSuccessor(id);
+        client.connectToServer(node.getIp);
+        String message = "URL," + url;     
+        client.pushMessage(message);
+        String response = client.pullMessage();
+        String[] parts = response.split(",");
+        return parts[1];
+    }
+    
     private void addData(String url, String ip){
         // Add data to URL-> IP hashmap
         data.put(url,ip);
