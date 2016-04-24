@@ -2,6 +2,8 @@ class Application{
 
     public static void main(String[] args){
 
+        //JAY: I DONT THINK THIS IS HOW WE SHOULD DO IT
+
         //Check if arguements were supplied. If not, helpful text will be displayed containing all
         // possible commands with arguement parameters.
         if (args.length == 0){
