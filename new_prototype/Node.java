@@ -271,6 +271,9 @@ public class Node{
         
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId <= id) && (id <= successorId))) {
+            System.out.println("id: " + id);
+            System.out.println("nodeId: " + nodeId);
+            System.out.println("successorId: " + successorId);
             if (currentNode) {
                 if (id > MAXSIZE)
                     id = id - MAXSIZE;
