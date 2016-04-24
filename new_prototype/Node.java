@@ -280,7 +280,7 @@ public class Node{
                 if (id > MAXSIZE)
                     id = id - MAXSIZE;
                 client.connectToServer(node.getIp());
-                String message = "CPF," + Integer.toString(node.getId());
+                String message = "CPS," + Integer.toString(node.getId());
                 client.pushMessage(message);
                 String response = client.pullMessage();
                 String[] parts = response.split(",");
