@@ -141,7 +141,7 @@ public class Server extends NodeServer implements Runnable{
 			//str_out = "New Message Received: " + str_in;
 			recieveString(str_in);
 			//System.out.println(str_out);
-			if (str_in==null) break;
+			//if (str_in==null) break;
 		}
 		
 	}
