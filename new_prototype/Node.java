@@ -115,6 +115,7 @@ public class Node{
             System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
             String request = "FPD," + Integer.toString(guid);
+            client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();
             String[] parts = response.split(",");
@@ -125,7 +126,7 @@ public class Node{
             else
                 guid = (guid + 1) % MAXSIZE;
         }
-        //Set up FInger Table and announces exsistance to network
+        //Set up Finger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
         System.out.println("Joined Specified Network");
