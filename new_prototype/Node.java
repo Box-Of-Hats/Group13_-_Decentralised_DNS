@@ -379,19 +379,32 @@ public class Node{
         return value;
     }
     
+    private int computeUrl(String url){
+        /*
+         *convert the url type: String to byte[]
+         *hash the url
+         *convert the hash result to int
+        */
+        int value = 0;
+    	byte[] resultOfHashing = new Hashing().hash(url.getBytes());
+        for(int i = 0 ; i < resultOfHashing.length ; i++){
+            value = value * 32;
+            value += resultOfHashing[i] & 0xFF;
+        }
+        return value;
+    }
+    
+    private void passData(String url, String ip){
+        
+    }
+    
     private String fetchData(String url){
-        int url_value = 0;
         int id;
         FingeredNode node;
-        byte[] resultOfHashing = new Hashing().hash(url.getBytes());
-        for(int i = 0 ; i < resultOfHashing.length ; i++){
-            url_value = url_value * 32;
-            url_value += resultOfHashing[i] & 0xFF;
-        }
-        id = Math.abs(url_value % MAXSIZE);
+        id = Math.abs(this.computeUrl(url) % MAXSIZE);
         node = this.findSuccessor(id);
         client.connectToServer(node.getIp);
-        String message = "URL," + url;     
+        String message = "GUD," + url;     
         client.pushMessage(message);
         String response = client.pullMessage();
         String[] parts = response.split(",");
