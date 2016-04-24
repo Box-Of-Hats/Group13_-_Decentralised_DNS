@@ -21,7 +21,6 @@ public class Node{
         setIp(findIpFromMachine());
         guid = Math.abs(computeId() % 8);
         calculateIdealFingertable();
-        join();
     }
 
     public Node(Client nodeClient){
@@ -30,8 +29,6 @@ public class Node{
         setIp(findIpFromMachine());
         guid = Math.abs(computeId() % 8);
         calculateIdealFingertable();
-        join();
-        System.out.println("Joined Network");
     }
 
     public String getIp(){
@@ -103,6 +100,7 @@ public class Node{
             Finger f = new Finger(ip, guid, start);
             fingerTable[i] = f;
         }
+        System.out.println("Started new network");
     }
 
     public void join(String bootstrapNodeIp){
@@ -110,6 +108,7 @@ public class Node{
         //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
         initFingerTable(bootstrapNodeIp);
         updateOthers();
+        System.out.println("Joined Specified Network");
     }
 
     public void initFingerTable(String bootstrapNodeIp){
