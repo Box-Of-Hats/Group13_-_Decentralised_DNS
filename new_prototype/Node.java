@@ -122,6 +122,7 @@ public class Node{
         String message = "FSU," + Integer.toString(idealFingertable[0]);
         client.pushMessage(message);
         String response = client.pullMessage();
+        System.out.println(response);
         client.disconnect();
         String[] parts = response.split(",");
         String[] responseNode = parts[1].split(";");
