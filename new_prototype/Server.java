@@ -116,10 +116,11 @@ public class Server extends NodeServer implements Runnable{
 					pushMessage(returnMessage);
 					node.getData(part2);
 					break;
-				//Add URL DAta
+				//Add URL Data
 				case "AUD":
 					System.out.println("AUD Request found");
-					//implementation
+					String[] messages = parts[1].split(";");
+					node.addData(messages[0],messages[1]);
 					break;
             }
         }
