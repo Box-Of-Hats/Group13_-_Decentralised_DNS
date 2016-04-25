@@ -399,7 +399,7 @@ public class Node{
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
         node = this.findSuccessor(id);
-        client.connectToServer(node.getIp);
+        client.connectToServer(node.getIp());
         String message = "AUD," + url + ";" + ip;
          client.pushMessage(message);
     }
@@ -411,7 +411,7 @@ public class Node{
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
         node = this.findSuccessor(id);
-        client.connectToServer(node.getIp);
+        client.connectToServer(node.getIp());
         String message = "GUD," + url;     
         client.pushMessage(message);
         String response = client.pullMessage();

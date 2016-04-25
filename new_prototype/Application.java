@@ -29,7 +29,7 @@ class Application{
         */
 
         //Output introduction text:
-        System.out.println("\nChord DNS Client ver 0.1\n");
+        System.out.println("\nChord DNS Client ver 0.1337\n");
         Application app = new Application();
         app.listCommands();
 
@@ -62,13 +62,19 @@ class Application{
                     }
                     else{
                         String ipToConnectTo = commandList[1];
-                        System.out.println("Joining existing network via Bootstrap IP: " + ipToConnectTo);
-                        node.join(ipToConnectTo);
+                        System.out.println("Attempting to join existing network via Bootstrap IP: " + ipToConnectTo);
+                        try{
+                            node.join(ipToConnectTo);
+                        } catch (NullPointerException e){ //Catch error if the IP was incorrect.
+                            System.out.println("Error:\tCould not find existing node with IP: " + ipToConnectTo);
+                            System.out.println("\tPlease check that the IP you entered is correct.");
+                            System.out.println("\tA network was not joined.");
+                        }
                         break;
                     }
         
                 case "start":
-                    System.out.println("Initialising...");
+                    System.out.println("Initialising new chord network...");
                     node.join();
                     break;
 
@@ -78,7 +84,7 @@ class Application{
                         System.out.println("\t2 arguments required: URL, IP");
                     }
                     else {
-                        System.out.println("Adding URL to system...");
+                        System.out.println("Attempting to add URL/IP pair to the system...");
                     }
                     break;
 
