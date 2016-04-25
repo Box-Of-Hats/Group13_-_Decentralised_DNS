@@ -441,6 +441,8 @@ public class Node{
     public String getData(String url){
         // Return the ip referred by the given url 
         // Null would be returned if the url does not exist
+        if(data.remove(url)==null)
+            return new String("null");
         return data.get(url);
     }
 }

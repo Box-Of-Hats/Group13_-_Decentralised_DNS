@@ -124,7 +124,13 @@ class Application{
                     else {
                         String urlToLookup = commandList[1];
                         System.out.println("Looking up URL: " + urlToLookup);
-                        System.out.println("IP found: " + node.fetchData(urlToLookup));
+                        String ipFound = node.fetchData(urlToLookup);
+                        if (ipFound.equals("null")){
+                            System.out.println("Could not find URL: " + urlToLookup);
+                        }
+                        else{
+                            System.out.println("IP found: " + ipFound);
+                        }
                     }
                     break;
 
