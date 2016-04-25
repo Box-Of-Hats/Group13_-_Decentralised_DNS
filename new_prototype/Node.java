@@ -395,7 +395,13 @@ public class Node{
     }
     
     private void passData(String url, String ip){
-        
+        int id;
+        FingeredNode node;
+        id = Math.abs(this.computeUrl(url) % MAXSIZE);
+        node = this.findSuccessor(id);
+        client.connectToServer(node.getIp);
+        String message = "AUD," + url + ";" + ip;
+         client.pushMessage(message);
     }
     
     private String fetchData(String url){
