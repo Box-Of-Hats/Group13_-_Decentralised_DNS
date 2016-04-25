@@ -404,6 +404,16 @@ public class Node{
          client.pushMessage(message);
     }
     
+    public void deleteData(String url){
+        int id;
+        FingeredNode node;
+        id = Math.abs(this.computeUrl(url) % MAXSIZE);
+        node = this.findSuccessor(id);
+        client.connectToServer(node.getIp());
+        String message = "DUD," + url;
+        client.pushMessage(message);
+    }
+    
     public String fetchData(String url){
         //compute the hashing result of the url
         //connect to that node for the ip address of the url
@@ -422,6 +432,10 @@ public class Node{
     public void addData(String url, String ip){
         // Add data to URL-> IP hashmap
         data.put(url,ip);
+    }
+    
+    public void removeData(String url){
+        data.remove(url);
     }
     
     public String getData(String url){
