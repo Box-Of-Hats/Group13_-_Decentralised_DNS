@@ -13,7 +13,7 @@ public class Server extends NodeServer implements Runnable{
 	private BufferedReader in;
 	private PrintWriter out;
 	private Node node;
-
+	private String returnMessage;
 	//Initialise the server, set up the serverSocket
 	public Server(Node node)
 	{
@@ -106,13 +106,13 @@ public class Server extends NodeServer implements Runnable{
 					System.out.println("CPS Request found");
 					int cpsId = Integer.parseInt(part2);
 					FingeredNode closestPredecessor = node.closestPrecedingFinger(cpsId);
-					String returnMessage = "1," + closestPredecessor.getIp() + ";" + Integer.toString(closestPredecessor.getId());
+					returnMessage = "1," + closestPredecessor.getIp() + ";" + Integer.toString(closestPredecessor.getId());
 					pushMessage(returnMessage);
 					break;
 				//Get URL data
 				case "GUD":
 					System.out.println("GUD Request found");
-					String returnMessage = "1," + node.getData(part2);
+					returnMessage = "1," + node.getData(part2);
 					pushMessage(returnMessage);
 					node.getData(part2);
 					break;

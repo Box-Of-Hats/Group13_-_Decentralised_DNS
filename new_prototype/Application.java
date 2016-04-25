@@ -4,15 +4,16 @@ class Application{
 
     public void listCommands(){
         // Print help text for application
-        System.out.println("Syntax: COMMAND Arg1 Arg2 ... ArgN");
-        System.out.println("Enter a command:\n");
+        System.out.println();
+        System.out.println("Syntax:\tCOMMAND Arg1 Arg2 ... ArgN");
+        System.out.println("Commands:");
         System.out.println("\thelp - Display list of commands with options");
-        System.out.println("\tquit - Exit the application and close all connections.");
+        System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tjoin [BootstrapIP] - Join a network via a bootstrap node IP.");
         System.out.println("\taddurl [URL to add] [IP to add] - Add a url to store in the system.");
-        System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tlookup [URL] - Look up the IP address of a given URL.");
         System.out.println("\tinfo - Print information about the current node");
+        System.out.println("\tquit - Exit the application and close all connections.");
     }
 
 
@@ -29,17 +30,16 @@ class Application{
         */
 
         //Output introduction text:
-        System.out.println("\nChord DNS Client ver 0.1337\n");
+        System.out.println("\nChord DNS Client ver 0.1337");
         Application app = new Application();
         app.listCommands();
 
-        String commandIn;
-        String[] commandList;
+        String commandIn; //The current input command string
+        String[] commandList; //The current input command string, split into its components
         
         //Initialise node, server and client on this application.
         NodeFactory factory = new NodeFactory();
         Node node = factory.makeNode();
-
 
         while (true){
             Scanner scanner = new Scanner(System.in);
@@ -50,10 +50,12 @@ class Application{
 
             switch(command){
                 case "help":
+                case "h":
                     app.listCommands();
                     break;
 
                 case "join":
+                case "j":
                     if (commandList.length != 2){
                         System.out.println("Error:\tBad arguements passed to 'join'.");
                         System.out.println("\t1 argument required: Bootstrap IP");
@@ -74,11 +76,13 @@ class Application{
                     }
         
                 case "start":
+                case "s":
                     System.out.println("Initialising new chord network...");
                     node.join();
                     break;
 
                 case "addurl":
+                case "a":
                     if (commandList.length != 3){
                         System.out.println("Error:\tBad arguements passed to 'addurl'.");
                         System.out.println("\t2 arguments required: URL, IP");
@@ -89,6 +93,7 @@ class Application{
                     break;
 
                 case "lookup":
+                case "l":
                     if (commandList.length != 2){
                         System.out.println("Error:\tBad arguements passed to 'lookup'.");
                         System.out.println("\t1 argument required: URL");
@@ -100,15 +105,17 @@ class Application{
                     break;
 
                 case "info":
+                case "i":
                     System.out.println("Node IP: " + node.getIp());
                     System.out.println("Current GUID: " + node.getGuid());
                     break;
 
                 case "quit":
-                    System.exit(0);
-                    break;
-                
+                case "q":
                 case "exit":
+                    System.out.println("Closing Connections & Reallocating Data...");
+                    node.quit();
+                    System.out.println("Exiting System");
                     System.exit(0);
                     break;
 

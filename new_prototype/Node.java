@@ -419,12 +419,12 @@ public class Node{
         return parts[1];
     }
     
-    private void addData(String url, String ip){
+    public void addData(String url, String ip){
         // Add data to URL-> IP hashmap
         data.put(url,ip);
     }
     
-    private String getData(String url){
+    public String getData(String url){
         // Return the ip referred by the given url 
         // Null would be returned if the url does not exist
         return data.get(url);
