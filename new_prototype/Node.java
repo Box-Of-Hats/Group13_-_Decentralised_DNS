@@ -370,38 +370,31 @@ public class Node{
         return ip.toString().substring(1);
     }
 
-    private int computeId(){
+    private int computeHashingValue(String s){
         /*
-         *convert the ip type: String to byte[]
-         *hash the ip
+         *convert the type: String to byte[]
+         *hash the string
          *convert the hash result to int
         */
         int value = 0;
-        byte[] ipBytes = ip.getBytes();
-    	byte[] resultOfHashing = new Hashing().hash(ipBytes);
+    	byte[] resultOfHashing = new Hashing().hash(s.getBytes());
         for(int i = 0 ; i < resultOfHashing.length ; i++){
             value = value * 32;
             value += resultOfHashing[i] & 0xFF;
         }
         return value;
+    }
+    private int computeId(){
+        return computeHashingValue(ip);
     }
     
     private int computeUrl(String url){
-        /*
-         *convert the url type: String to byte[]
-         *hash the url
-         *convert the hash result to int
-        */
-        int value = 0;
-    	byte[] resultOfHashing = new Hashing().hash(url.getBytes());
-        for(int i = 0 ; i < resultOfHashing.length ; i++){
-            value = value * 32;
-            value += resultOfHashing[i] & 0xFF;
-        }
-        return value;
+        return computeHashingValue(url);
     }
     
     public void passData(String url, String ip){
+        //compute the hashing result of the url
+        //connect to that node for storing urp-ip pair
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
@@ -412,6 +405,8 @@ public class Node{
     }
     
     public String fetchData(String url){
+        //compute the hashing result of the url
+        //connect to that node for the ip address of the url
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
