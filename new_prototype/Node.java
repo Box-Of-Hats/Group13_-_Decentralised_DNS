@@ -131,6 +131,13 @@ public class Node{
         updateOthers();
         System.out.println("Joined Specified Network");
     }
+    
+    public void quit(){
+        //assume the node is not exiseed, update all the fingertables in other nodes
+        //pass the data to the new node
+        //if it is the last node, probably we should store all the data to a file???
+        //terminate the programme
+    }
 
     public void initFingerTable(String bootstrapNodeIp){
         //This method requires a lot of network code
