@@ -122,6 +122,11 @@ public class Server extends NodeServer implements Runnable{
 					String[] messages = parts[1].split(";");
 					node.addData(messages[0],messages[1]);
 					break;
+				//Delete URL Data
+				case "DUD":
+					System.out.println("DUD Request found");
+					node.removeData(parts[1]);
+					break;
             }
         }
 
