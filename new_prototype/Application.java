@@ -124,6 +124,7 @@ class Application{
                     else {
                         String urlToLookup = commandList[1];
                         System.out.println("Looking up URL: " + urlToLookup);
+                        System.out.println("IP found: " + node.fetchData(urlToLookup));
                     }
                     break;
 
