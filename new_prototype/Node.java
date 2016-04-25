@@ -394,7 +394,7 @@ public class Node{
         return value;
     }
     
-    private void passData(String url, String ip){
+    public void passData(String url, String ip){
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
@@ -404,7 +404,7 @@ public class Node{
          client.pushMessage(message);
     }
     
-    private String fetchData(String url){
+    public String fetchData(String url){
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
