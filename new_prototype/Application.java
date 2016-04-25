@@ -11,6 +11,7 @@ class Application{
         System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tjoin [BootstrapIP] - Join a network via a bootstrap node IP.");
         System.out.println("\taddurl [URL to add] [IP to add] - Add a url to store in the system.");
+        System.out.println("\tdelurl [URL to delete] - Delete a url from the system.");
         System.out.println("\tlookup [URL] - Look up the IP address of a given URL.");
         System.out.println("\tinfo - Print information about the current node");
         System.out.println("\tquit - Exit the application and close all connections.");
@@ -27,6 +28,9 @@ class Application{
         -Join Network: Joins a network from an inputted IP address
         -Add URL: gives the URL to the node to hash and assign to the correct node in the network
         -Look up URL: looks up the IP for the given URL from the node network
+
+        -Delete a url?:
+            del url:
         */
 
         //Output introduction text:
@@ -88,9 +92,28 @@ class Application{
                         System.out.println("\t2 arguments required: URL, IP");
                     }
                     else {
+                        String urlToAdd = commandList[1];
+                        String ipToAdd = commandList[2];
                         System.out.println("Attempting to add URL/IP pair to the system...");
+                        node.passData(urlToAdd, ipToAdd);
                     }
                     break;
+
+                case "delurl":
+                case "d":
+                    if (commandList.length != 2){
+                        System.out.println("Error:\tBad arguements passed to 'delurl'.");
+                        System.out.println("\t1 argument1 required: URL");
+                        break;
+                    }
+                    else {
+                        String urlToDelete = commandList[1];
+                        System.out.println("Deleting URL from system: " + urlToDelete);
+                        node.deleteData(urlToDelete);
+                        break;
+
+                    }
+
 
                 case "lookup":
                 case "l":
