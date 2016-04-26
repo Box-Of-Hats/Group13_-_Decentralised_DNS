@@ -433,7 +433,7 @@ public class Node{
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
         //node = this.findSuccessor(id); 
-        node = this.findSuccessor((Math.abs((id - 1) % 8)));
+        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
         client.connectToServer(node.getIp());
         String message = "AUD," + url + ";" + ip;
          client.pushMessage(message);
@@ -443,7 +443,7 @@ public class Node{
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.findSuccessor((Math.abs((id - 1) % 8)));
+        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
         client.connectToServer(node.getIp());
         String message = "DUD," + url;
         client.pushMessage(message);
@@ -456,7 +456,7 @@ public class Node{
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
         //node = this.findSuccessor(id);
-        node = this.findSuccessor((Math.abs((id - 1) % 8)));
+        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
         client.connectToServer(node.getIp());
         String message = "GUD," + url;     
         client.pushMessage(message);
