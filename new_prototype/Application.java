@@ -30,8 +30,6 @@ class Application{
         -Look up URL: looks up the IP for the given URL from the node network
         -Delete a url
 
-
-
         */
 
         //Output introduction text:
@@ -134,25 +132,27 @@ class Application{
 
                 case "delurl":
                 case "d":
-                    if (inSystem == true){
-                        if (commandList.length != 2){
-                            System.out.println("Error:\tBad arguements passed to 'delurl'.");
-                            System.out.println("\t1 argument1 required: URL");
-                            break;
-                        }
-                        else {
-                            String urlToDelete = commandList[1];
-                            System.out.println("Deleting URL from system: " + urlToDelete);
-                            //Create exception for deletedata, if the data is not in the system!
-                            node.deleteData(urlToDelete);
-                            break;
-                        }
-                    }
-                    else {
-                        System.out.println("Error:\tCould not delete URL");
-                        System.out.println("\tNode is not currently in a network");
-                        break;
-                    }
+                    System.out.println("Error: Feature disabled in current version.");
+                    break;
+                    //if (inSystem == true){
+                    //    if (commandList.length != 2){
+                    //        System.out.println("Error:\tBad arguements passed to 'delurl'.");
+                    //        System.out.println("\t1 argument1 required: URL");
+                    //        break;
+                    //    }
+                    //    else {
+                    //        String urlToDelete = commandList[1];
+                    //        System.out.println("Deleting URL from system: " + urlToDelete);
+                    //        //Create exception for deletedata, if the data is not in the system!
+                    //        node.deleteData(urlToDelete);
+                    //        break;
+                    //    }
+                    //}
+                    //else {
+                    //    System.out.println("Error:\tCould not delete URL");
+                    //    System.out.println("\tNode is not currently in a network");
+                    //    break;
+                    //}
 
 
                 case "lookup":
