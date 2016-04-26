@@ -133,10 +133,27 @@ public class Node{
     }
     
     public void quit(){
-        //assume the node is not exiseed, update all the fingertables in other nodes
-        //pass the data to the new node
-        //if it is the last node, probably we should store all the data to a file???
-        //terminate the programme
+        String message;
+        //Pass all the data to its successor, and the successor store it temporarily
+        client.connectToServer(getSuccessor().getIp);
+        data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
+        //Ask predescessor to set its successor
+        client.connectToServer(getPredecessor().getIp);
+        //SNS: set new successor
+        message = “SNS,” + getSuccessor().getIp;
+        //updateothers
+        updateOthers();
+        //allocate the data
+        client.connectToServer(getSuccessor().getIp);
+        //ATD: allocate temporary data
+        message = “ATD,”;
+        client.pushMessage(message);
+
+    }
+    
+    private String combineUrlAndIp(String url, String ip){
+        //TSD: temporary store data
+        return new String(“TSD,” + url + “;” + ip);
     }
 
     public void initFingerTable(String bootstrapNodeIp){
