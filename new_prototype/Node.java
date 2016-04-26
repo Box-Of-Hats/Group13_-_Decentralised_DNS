@@ -133,25 +133,22 @@ public class Node{
     }
     
     public void quit(){
-
-        //Commented out because its broken and wont compile.
-        /*
+        //Doesn't seem to work, currently.
         String message;
         //Pass all the data to its successor, and the successor store it temporarily
-        client.connectToServer(getSuccessor().getIp);
+        client.connectToServer(getSuccessor().getIp());
         data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
         //Ask predescessor to set its successor
-        client.connectToServer(getPredecessor().getIp);
+        client.connectToServer(getPredecessor().getIp());
         //SNS: set new successor
-        message = "SNS," + getSuccessor().getIp;
+        message = "SNS," + getSuccessor().getIp();
         //updateothers
         updateOthers();
         //allocate the data
-        client.connectToServer(getSuccessor().getIp);
+        client.connectToServer(getSuccessor().getIp());
         //ATD: allocate temporary data
         message = "ATD,";
         client.pushMessage(message);
-        */
 
     }
     
