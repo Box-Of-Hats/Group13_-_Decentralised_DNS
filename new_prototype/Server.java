@@ -138,6 +138,7 @@ public class Server extends NodeServer implements Runnable{
 					System.out.println(ownResponse);
 					pushMessage(ownResponse);
 					break;
+				//Force FingerTable update REQUEST AND RESPONSE
             }
         }
 

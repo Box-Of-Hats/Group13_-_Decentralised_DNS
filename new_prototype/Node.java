@@ -134,6 +134,63 @@ public class Node{
     }
     
     public void quit(){
+        /*
+            QUITTING:
+            Assign all url-ip pairs to successor,
+            Update Finger Tables of other nodes,
+            point predeseccors successor to nodes successor,
+            point successors predecessor to nodes predecessor
+        */
+
+        //All URLs stored on the current node must be passed to its direct successor, and removed from node's dataStore
+        FingeredNode successor = fingerTable[0].getNode();
+        client.connectToServer(successor.getIp());
+        String request = "";
+        Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String,String> pair = (Map.Entry)it.next();
+            request = "AUD," + pair.getKey() + ";" + key.getValue;
+            client.pushMessage(request);
+            String response = client.pullMessage();
+        }
+        data.clear();
+
+        //Other nodes that may point to the current node in there finger table must now point to its successor
+
+        /*
+        //Doesn't seem to work, currently.
+        String message;
+        //Pass all the data to its successor, and the successor store it temporarily
+        client.connectToServer(getSuccessor().getIp());
+
+
+        I have taken this psuedocode(?) and created the below (what I hope to be, working) java code.
+        data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
+
+
+        //Iterate through the map and push messages to TempStoreData and push the data with code
+        // TSD to the current node's successor. This requests that the successor will temporarily
+        //store the data. TSD isnt currently a valid command however, so this will not work.
+        Iterator it = data.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            client.pushMessage("TSD," + pair.getKey() + ";" + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
+        //Ask predescessor to set its successor
+        client.connectToServer(getPredecessor().getIp());
+        //SNS: set new successor
+        message = "SNS," + getSuccessor().getIp();
+        //updateothers
+        updateOthers();
+        //allocate the data
+        client.connectToServer(getSuccessor().getIp());
+        //ATD: allocate temporary data
+        message = "ATD,";
+        client.pushMessage(message);
+        */
 
     }
     
@@ -251,7 +308,13 @@ public class Node{
             String response = client.pullMessage();
             client.disconnect();
         }
-        
+    }
+
+    public void forceUpdateFingerTable(FingeredNode s, int fId, int nId){
+        if(fingerTable[fId].getNode().getId() == nId) {
+            fingerTable[i].setNode(s);
+            //FORCE UPDATE PREDECESSOR WITH SAME CONSTRAINTS
+        }
     }
 
     public FingeredNode findSuccessor(int id){
