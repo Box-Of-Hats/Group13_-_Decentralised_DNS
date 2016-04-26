@@ -133,6 +133,9 @@ public class Node{
     }
     
     public void quit(){
+
+        //Commented out because its broken and wont compile.
+        /*
         String message;
         //Pass all the data to its successor, and the successor store it temporarily
         client.connectToServer(getSuccessor().getIp);
@@ -140,20 +143,21 @@ public class Node{
         //Ask predescessor to set its successor
         client.connectToServer(getPredecessor().getIp);
         //SNS: set new successor
-        message = “SNS,” + getSuccessor().getIp;
+        message = "SNS," + getSuccessor().getIp;
         //updateothers
         updateOthers();
         //allocate the data
         client.connectToServer(getSuccessor().getIp);
         //ATD: allocate temporary data
-        message = “ATD,”;
+        message = "ATD,";
         client.pushMessage(message);
+        */
 
     }
     
     private String combineUrlAndIp(String url, String ip){
         //TSD: temporary store data
-        return new String(“TSD,” + url + “;” + ip);
+        return new String("TSD," + url + ";" + ip);
     }
 
     public void initFingerTable(String bootstrapNodeIp){
@@ -415,7 +419,8 @@ public class Node{
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.findSuccessor(id);
+        //node = this.findSuccessor(id); 
+        node = this.findSuccessor(id-1);
         client.connectToServer(node.getIp());
         String message = "AUD," + url + ";" + ip;
          client.pushMessage(message);
@@ -425,7 +430,7 @@ public class Node{
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.findSuccessor(id);
+        node = this.findSuccessor(id-1);
         client.connectToServer(node.getIp());
         String message = "DUD," + url;
         client.pushMessage(message);
@@ -437,7 +442,8 @@ public class Node{
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.findSuccessor(id);
+        //node = this.findSuccessor(id);
+        node = this.findSuccessor(id-1);
         client.connectToServer(node.getIp());
         String message = "GUD," + url;     
         client.pushMessage(message);
