@@ -74,6 +74,10 @@ class Application{
                                 node.join(ipToConnectTo);
                                 inSystem = true;
                                 System.out.println("Successfully joined network.");
+                                int id = node.getGuid();
+                                String ip = node.getIp();
+                                System.out.println("Node ID: " + id);
+                                System.out.println("Node IP: " + ip);
                                 break;
                             } catch (NullPointerException e){ //Catch error if the IP was incorrect.
                                 System.out.println("Error:\tCould not find existing node with IP: " + ipToConnectTo);
@@ -97,6 +101,10 @@ class Application{
                         node.join();
                         inSystem = true;
                         System.out.println("Successfully created network.");
+                        int id = node.getGuid();
+                        String ip = node.getIp();
+                        System.out.println("Node ID: " + id);
+                        System.out.println("Node IP: " + ip);
                         break;
                     }
                     else {

@@ -129,42 +129,11 @@ public class Node{
         //Set up Finger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
+        takeOwnership();
         System.out.println("Joined Specified Network");
     }
     
     public void quit(){
-        //Doesn't seem to work, currently.
-        String message;
-        //Pass all the data to its successor, and the successor store it temporarily
-        client.connectToServer(getSuccessor().getIp());
-
-        /*
-        I have taken this psuedocode(?) and created the below (what I hope to be, working) java code.
-        data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
-        */
-
-        //Iterate through the map and push messages to TempStoreData and push the data with code
-        // TSD to the current node's successor. This requests that the successor will temporarily
-        //store the data. TSD isnt currently a valid command however, so this will not work.
-        Iterator it = data.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-            client.pushMessage("TSD," + pair.getKey() + ";" + pair.getValue());
-            it.remove(); // avoids a ConcurrentModificationException
-        }
-
-        //Ask predescessor to set its successor
-        client.connectToServer(getPredecessor().getIp());
-        //SNS: set new successor
-        message = "SNS," + getSuccessor().getIp();
-        //updateothers
-        updateOthers();
-        //allocate the data
-        client.connectToServer(getSuccessor().getIp());
-        //ATD: allocate temporary data
-        message = "ATD,";
-        client.pushMessage(message);
 
     }
     
@@ -201,6 +170,7 @@ public class Node{
             message = "FSU," + Integer.toString(idealFingertable[i]);
             client.pushMessage(message);
             response = client.pullMessage();
+            client.disconnect();
             parts = response.split(",");
             responseNode = parts[1].split(";");
             fingerTable[i] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[i]);
@@ -212,6 +182,7 @@ public class Node{
         message = "GPD,0";
         client.pushMessage(message);
         response = client.pullMessage();
+        client.disconnect();
         parts = response.split(",");
         responseNode = parts[1].split(";");
         predecessor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
@@ -221,6 +192,7 @@ public class Node{
         message = "SPD," + ip + ";" + Integer.toString(guid); 
         client.pushMessage(message);
         response = client.pullMessage();
+        client.disconnect();
     }
 
     public void updateOthers(){
@@ -238,6 +210,7 @@ public class Node{
             String message = "UFT," + i + ";" + ip + ";" + Integer.toString(guid);
             client.pushMessage(message);
             String response = client.pullMessage();
+            client.disconnect();
         }
         
         /*
@@ -276,6 +249,7 @@ public class Node{
             client.connectToServer(predecessor.getIp());
             client.pushMessage(message);
             String response = client.pullMessage();
+            client.disconnect();
         }
         
     }
@@ -295,6 +269,7 @@ public class Node{
             String message = "FSU," + Integer.toString(id);
             client.pushMessage(message);
             String response = client.pullMessage();
+            client.disconnect();
             String parts[] = response.split(",");
             String[] responseNode = parts[1].split(";");
             FingeredNode successor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
@@ -342,6 +317,7 @@ public class Node{
                 String message = "CPS," + Integer.toString(id % MAXSIZE);     
                 client.pushMessage(message);
                 String response = client.pullMessage();
+                client.disconnect();
                 String[] parts = response.split(",");
                 String[] responseNode = parts[1].split(";");
                 FingeredNode prevNode = node;
@@ -382,6 +358,64 @@ public class Node{
         
         FingeredNode curNode = new FingeredNode(ip, guid);
         return curNode;
+    }
+
+    public void takeOwnership(){
+        FingeredNode successor = fingerTable[0].getNode();
+        client.connectToServer(successor.getIp());
+        String request = "OWN," + Integer.toString(guid);
+        client.pushMessage(request);
+        String response = client.pullMessage();
+        client.disconnect();
+        if (!response.equals("1,")){
+            String[] parts = response.split(",");
+            String[] urlIpPairs = parts[1].split(";");
+            //i needs to be 1, I know it looks dumb
+            for (int i = 1; i < urlIpPairs.length; i++){
+                String[] urlIps = urlIpPairs[i].split(" ");
+                System.out.println("Adding data for URL: " + urlIps[0]);
+                addData(urlIps[0], urlIps[1]);
+                String temp = getData(urlIpPairs[0]);
+                System.out.println(temp);
+            }
+        }
+    }
+
+    public String transferOwnership(int rId){
+        Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
+        String response = "";
+        String delUrls = "";
+        int nodeId = guid;
+
+        if (rId > nodeId)
+            nodeId = nodeId + MAXSIZE;
+
+        while (it.hasNext()) {
+            Map.Entry<String,String> pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            int hashedId = Math.abs(computeUrl(pair.getKey()) % MAXSIZE);
+
+            if (hashedId < guid)
+                hashedId = hashedId + MAXSIZE;
+            System.out.println("RequestId: " + rId + ", hashedId: " + hashedId + ", nodeId: " + nodeId);
+
+            if ((rId <= hashedId) && (hashedId < nodeId)){
+                System.out.println("KEY TO TRANSFER FOUND");
+                String url = pair.getKey();
+                String urlIp = pair.getValue();
+                response = response + ";" + url + " " + urlIp;
+                delUrls = delUrls + ";" + url;
+            }
+        }
+
+        String[] urlsToDel = delUrls.split(";");
+        //i needs to be 1, I know it looks dumb
+        for (int i = 1; i < urlsToDel.length; i++){
+            System.out.println("Deleting local record of " + urlsToDel[1]);
+            removeData(urlsToDel[i]);
+        }
+        System.out.println(response);
+        return response;
     }
 
     public static String findIpFromMachine(){
@@ -432,21 +466,26 @@ public class Node{
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        //node = this.findSuccessor(id); 
-        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
+        System.out.println(url + " hashes to ID " + id);
+        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
+        System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
         client.connectToServer(node.getIp());
         String message = "AUD," + url + ";" + ip;
-         client.pushMessage(message);
+        client.pushMessage(message);
+        String response = client.pullMessage();
+        client.disconnect();
     }
     
     public void deleteData(String url){
         int id;
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
+        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
         client.connectToServer(node.getIp());
         String message = "DUD," + url;
         client.pushMessage(message);
+        String response = client.pullMessage();
+        client.disconnect();
     }
     
     public String fetchData(String url){
@@ -456,11 +495,14 @@ public class Node{
         FingeredNode node;
         id = Math.abs(this.computeUrl(url) % MAXSIZE);
         //node = this.findSuccessor(id);
-        node = this.findSuccessor((Math.abs((id - 1) % MAXSIZE)));
+        System.out.println("ID TO CHECK FOR " + id);
+        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
+        System.out.println("CHECKING NODE " + node.getId() + " FOR URL " + url);
         client.connectToServer(node.getIp());
         String message = "GUD," + url;     
         client.pushMessage(message);
         String response = client.pullMessage();
+        client.disconnect();
         String[] parts = response.split(",");
         return parts[1];
     }
@@ -477,8 +519,6 @@ public class Node{
     public String getData(String url){
         // Return the ip referred by the given url 
         // ""null" would be returned if the url does not exist
-        if(data.remove(url)==null)
-            return new String("null");
         return data.get(url);
     }
 }

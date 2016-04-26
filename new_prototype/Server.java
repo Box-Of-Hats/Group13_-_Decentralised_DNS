@@ -121,11 +121,22 @@ public class Server extends NodeServer implements Runnable{
 					System.out.println("AUD Request found");
 					String[] messages = parts[1].split(";");
 					node.addData(messages[0],messages[1]);
+					String audResponse = "1";
+					pushMessage(audResponse);
 					break;
 				//Delete URL Data
 				case "DUD":
 					System.out.println("DUD Request found");
 					node.removeData(parts[1]);
+					pushMessage("1");
+					break;
+				//Ownership Request
+				case "OWN":
+					System.out.println("OWN request found");
+					int requestId = Integer.parseInt(parts[1]);
+					String ownResponse = "1," + node.transferOwnership(requestId);
+					System.out.println(ownResponse);
+					pushMessage(ownResponse);
 					break;
             }
         }
