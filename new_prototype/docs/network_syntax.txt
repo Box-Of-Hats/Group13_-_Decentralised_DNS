@@ -4,17 +4,16 @@ Typical syntax of messages is as follows:
 	"COD,arg1;arg2"
 	where "COD" is the function code, and the following string after the comma is a semicolon-delimited list of args for that function.
 
-spd: setPredecessor
-uft: updateFingerTable(s, i)
-cpf: closestPreceedingFinger(int key)
 
-// fpd: findPredecessor(int id)
-
-
-FSU: findSuccessor(int id);
+FSU: Find Successor
+	findSuccessor(int id);
 	IN: Takes the guid of the node to find the successor of 
 	OUT: Successor Node as FingeredNode
 
-UFT: updateFingerTable(s, i);
+UFT: Update Finger Table 
+	updateFingerTable(s, i);
 	IN: Honestly, we dont know
 	Out: Nothing
+
+CPS: Closest Predecessor
+	closetPrecedingFinger()

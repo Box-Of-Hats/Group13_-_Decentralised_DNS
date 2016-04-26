@@ -141,7 +141,6 @@ public class Node{
         /*
         I have taken this psuedocode(?) and created the below (what I hope to be, working) java code.
         data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
-
         */
 
         //Iterate through the map and push messages to TempStoreData and push the data with code
@@ -154,7 +153,6 @@ public class Node{
             client.pushMessage("TSD," + pair.getKey() + ";" + pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
-
 
         //Ask predescessor to set its successor
         client.connectToServer(getPredecessor().getIp());
