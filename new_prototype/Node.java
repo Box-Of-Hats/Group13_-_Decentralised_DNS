@@ -149,7 +149,7 @@ public class Node{
         Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<String,String> pair = (Map.Entry)it.next();
-            request = "AUD," + pair.getKey() + ";" + key.getValue;
+            request = "AUD," + pair.getKey() + ";" + pair.getValue();
             client.pushMessage(request);
             String response = client.pullMessage();
         }
@@ -312,7 +312,7 @@ public class Node{
 
     public void forceUpdateFingerTable(FingeredNode s, int fId, int nId){
         if(fingerTable[fId].getNode().getId() == nId) {
-            fingerTable[i].setNode(s);
+            fingerTable[fId].setNode(s);
             //FORCE UPDATE PREDECESSOR WITH SAME CONSTRAINTS
         }
     }
