@@ -137,7 +137,25 @@ public class Node{
         String message;
         //Pass all the data to its successor, and the successor store it temporarily
         client.connectToServer(getSuccessor().getIp());
+
+        /*
+        I have taken this psuedocode(?) and created the below (what I hope to be, working) java code.
         data.forEach((url,ip) -> client.pushMessage(combineUrlAndIp(url,ip)));
+
+        */
+
+        //Iterate through the map and push messages to TempStoreData and push the data with code
+        // TSD to the current node's successor. This requests that the successor will temporarily
+        //store the data. TSD isnt currently a valid command however, so this will not work.
+        Iterator it = data.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            client.pushMessage("TSD," + pair.getKey() + ";" + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
+
         //Ask predescessor to set its successor
         client.connectToServer(getPredecessor().getIp());
         //SNS: set new successor
@@ -460,7 +478,7 @@ public class Node{
     
     public String getData(String url){
         // Return the ip referred by the given url 
-        // Null would be returned if the url does not exist
+        // ""null" would be returned if the url does not exist
         if(data.remove(url)==null)
             return new String("null");
         return data.get(url);
