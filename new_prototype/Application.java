@@ -11,7 +11,7 @@ class Application{
         System.out.println("\tstart - Start a new network as the first node in the system.");
         System.out.println("\tjoin [BootstrapIP] - Join a network via a bootstrap node IP.");
         System.out.println("\taddurl [URL to add] [IP to add] - Add a url to store in the system.");
-        System.out.println("\tdelurl [URL to delete] - Delete a url from the system.");
+        System.out.println("\tdelurl [URL to delete] - Delete a url from the system. (Currently Disabled)");
         System.out.println("\tlookup [URL] - Look up the IP address of a given URL.");
         System.out.println("\tinfo - Print information about the current node");
         System.out.println("\tquit - Exit the application and close all connections.");
@@ -134,6 +134,9 @@ class Application{
                 case "d":
                     System.out.println("Error: Feature disabled in current version.");
                     break;
+                    //Delete URL has been ommitted here to prevent standard users from deleting URLs.
+                    //In the future, a system may be put in place to allow admins to delete them.
+                    //Re-enable this feature here:
                     //if (inSystem == true){
                     //    if (commandList.length != 2){
                     //        System.out.println("Error:\tBad arguements passed to 'delurl'.");
