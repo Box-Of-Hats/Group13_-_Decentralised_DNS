@@ -28,9 +28,10 @@ class Application{
         -Join Network: Joins a network from an inputted IP address
         -Add URL: gives the URL to the node to hash and assign to the correct node in the network
         -Look up URL: looks up the IP for the given URL from the node network
+        -Delete a url
 
-        -Delete a url?:
-            del url:
+
+
         */
 
         //Output introduction text:
@@ -40,6 +41,7 @@ class Application{
 
         String commandIn; //The current input command string
         String[] commandList; //The current input command string, split into its components
+        Boolean inSystem = false;
         
         //Initialise node, server and client on this application.
         NodeFactory factory = new NodeFactory();
@@ -47,7 +49,7 @@ class Application{
 
         while (true){
             Scanner scanner = new Scanner(System.in);
-            System.out.print(">");
+            System.out.print("\n>");
             commandIn = scanner.nextLine();
             commandList = commandIn.split("\\s");
             String command = commandList[0];
@@ -60,84 +62,133 @@ class Application{
 
                 case "join":
                 case "j":
-                    if (commandList.length != 2){
-                        System.out.println("Error:\tBad arguements passed to 'join'.");
-                        System.out.println("\t1 argument required: Bootstrap IP");
-                        System.out.println("\tTo start a new network without a bootstrap IP, use command 'start'");
-                        break;
-                    }
-                    else{
-                        String ipToConnectTo = commandList[1];
-                        System.out.println("Attempting to join existing network via Bootstrap IP: " + ipToConnectTo);
-                        try{
-                            node.join(ipToConnectTo);
-                        } catch (NullPointerException e){ //Catch error if the IP was incorrect.
-                            System.out.println("Error:\tCould not find existing node with IP: " + ipToConnectTo);
-                            System.out.println("\tPlease check that the IP you entered is correct.");
-                            System.out.println("\tA network was not joined.");
+                    if(inSystem == false){
+                        if (commandList.length != 2){
+                            System.out.println("Error:\tBad arguements passed to 'join'.");
+                            System.out.println("\t1 argument required: Bootstrap IP");
+                            System.out.println("\tTo start a new network without a bootstrap IP, use command 'start'");
+                            break;
                         }
+                        else{
+                            String ipToConnectTo = commandList[1];
+                            System.out.println("Attempting to join existing network via Bootstrap IP: " + ipToConnectTo);
+                            try{ //Attempt to connect to system
+                                node.join(ipToConnectTo);
+                                inSystem = true;
+                                System.out.println("Successfully joined network.");
+                                break;
+                            } catch (NullPointerException e){ //Catch error if the IP was incorrect.
+                                System.out.println("Error:\tCould not find existing node with IP: " + ipToConnectTo);
+                                System.out.println("\tPlease check that the IP you entered is correct.");
+                                System.out.println("\tA network was not joined.");
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        System.out.println("Error:\tCould not join network");
+                        System.out.println("\tNode is already in a network.");
+                        System.out.println("\tA network was not joined.");
                         break;
                     }
         
                 case "start":
                 case "s":
-                    System.out.println("Initialising new chord network...");
-                    node.join();
-                    break;
+                    if(inSystem == false){
+                        System.out.println("Initialising new chord network...");
+                        node.join();
+                        inSystem = true;
+                        System.out.println("Successfully created network.");
+                        break;
+                    }
+                    else {
+                        System.out.println("Error:\tCould not start new network");
+                        System.out.println("\tNode is already in a network.");
+                        System.out.println("\tA new network was not created.");
+                        break;
+                    }
 
                 case "addurl":
                 case "a":
-                    if (commandList.length != 3){
-                        System.out.println("Error:\tBad arguements passed to 'addurl'.");
-                        System.out.println("\t2 arguments required: URL, IP");
+                    if (inSystem == true){
+                        if (commandList.length != 3){
+                            System.out.println("Error:\tBad arguements passed to 'addurl'.");
+                            System.out.println("\t2 arguments required: URL, IP");
+                            break;
+                        }
+                        else {
+                            String urlToAdd = commandList[1];
+                            String ipToAdd = commandList[2];
+                            System.out.println("Attempting to add URL/IP pair to the system...");
+                            node.passData(urlToAdd, ipToAdd);
+                            break;
+                        }
                     }
-                    else {
-                        String urlToAdd = commandList[1];
-                        String ipToAdd = commandList[2];
-                        System.out.println("Attempting to add URL/IP pair to the system...");
-                        node.passData(urlToAdd, ipToAdd);
+                    else{
+                        System.out.println("Error:\tCan not add url.") ;
+                        System.out.println("\tNode is not connected to a network");
+                        break;
                     }
-                    break;
+
+                    
 
                 case "delurl":
                 case "d":
-                    if (commandList.length != 2){
-                        System.out.println("Error:\tBad arguements passed to 'delurl'.");
-                        System.out.println("\t1 argument1 required: URL");
-                        break;
+                    if (inSystem == true){
+                        if (commandList.length != 2){
+                            System.out.println("Error:\tBad arguements passed to 'delurl'.");
+                            System.out.println("\t1 argument1 required: URL");
+                            break;
+                        }
+                        else {
+                            String urlToDelete = commandList[1];
+                            System.out.println("Deleting URL from system: " + urlToDelete);
+                            //Create exception for deletedata, if the data is not in the system!
+                            node.deleteData(urlToDelete);
+                            break;
+                        }
                     }
                     else {
-                        String urlToDelete = commandList[1];
-                        System.out.println("Deleting URL from system: " + urlToDelete);
-                        node.deleteData(urlToDelete);
+                        System.out.println("Error:\tCould not delete URL");
+                        System.out.println("\tNode is not currently in a network");
                         break;
-
                     }
 
 
                 case "lookup":
                 case "l":
-                    if (commandList.length != 2){
-                        System.out.println("Error:\tBad arguements passed to 'lookup'.");
-                        System.out.println("\t1 argument required: URL");
+                    if (inSystem == true){
+                        if (commandList.length != 2){
+                            System.out.println("Error:\tBad arguements passed to 'lookup'.");
+                            System.out.println("\t1 argument required: URL");
+                            break;
+                        }
+                        else {
+                            String urlToLookup = commandList[1];
+                            System.out.println("Looking up URL: " + urlToLookup);
+                            String ipFound = node.fetchData(urlToLookup);
+                            if (ipFound.equals("null")){
+                                System.out.println("Could not find URL: " + urlToLookup);
+                                break;
+                            }
+                            else{
+                                System.out.println("IP found: " + ipFound);
+                                break;
+                            }
+                        }
                     }
                     else {
-                        String urlToLookup = commandList[1];
-                        System.out.println("Looking up URL: " + urlToLookup);
-                        String ipFound = node.fetchData(urlToLookup);
-                        if (ipFound.equals("null")){
-                            System.out.println("Could not find URL: " + urlToLookup);
-                        }
-                        else{
-                            System.out.println("IP found: " + ipFound);
-                        }
+                        System.out.println("Error:\tCould not look up URL.");
+                        System.out.println("\tNode is not currently in a network");
+                        break;
                     }
-                    break;
+                        
 
                 case "info":
                 case "i":
                     System.out.println("Node IP: " + node.getIp());
                     System.out.println("Current GUID: " + node.getGuid());
+                    System.out.println("In a network?: " + inSystem);
                     break;
 
                 case "quit":
