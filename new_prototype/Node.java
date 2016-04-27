@@ -399,6 +399,7 @@ public class Node{
        //iterates backwards through the finger table checking each finger against the requested ID
         for (int i = fingerTable.length - 1; i >= 0; i--) {
             int fingerId = fingerTable[i].getNode().getId();
+            System.out.println("Current FingerId: " + fingerId);
             if (fingerId < guid)
                 fingerId = fingerId + MAXSIZE;
             if ((fingerId > guid) && (fingerId < id)) {
