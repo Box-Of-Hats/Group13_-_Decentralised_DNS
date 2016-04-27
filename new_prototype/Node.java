@@ -2,15 +2,8 @@ import java.net.*;
 import java.util.*;
 
 public class Node{
-    /*
-    guid: the unique identifier of the node
-    ip: the ip of the node
-    fingerTable: Finger[] an array of finger objects
-    predecessor: the directly preceding node
-    */
     
-    public static final int MAXSIZE = 8;
-    
+    public static final int MAXSIZE = 8; //The maximum number of Nodes in the system
     private int guid; //Globally Unique Identifier
     private String ip;
     private Finger[] fingerTable = new Finger[3];
@@ -399,7 +392,6 @@ public class Node{
                 return finger[i].node;
         return n;
         */
-        System.out.println("THIS");
         //Deals with Ring Architecture
         if (id < guid)
             id = id + MAXSIZE;
