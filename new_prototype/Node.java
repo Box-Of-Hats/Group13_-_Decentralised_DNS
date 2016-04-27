@@ -287,6 +287,9 @@ public class Node{
        if (fingerId < guid)
             fingerId = fingerId + MAXSIZE;
             
+        System.out.println("UFT DEBUGGING:");
+        System.out.println("guid: " + guid + " node ID: " + nodeId + " fingerId: " + fingerId);
+
         if ((guid < s.getId()) && (s.getId() < fingerId)){
             fingerTable[i].setNode(s);
             String message = "UFT," + i + ";" + s.getIp() + ";" + Integer.toString(s.getId());
