@@ -120,7 +120,7 @@ public class Server extends NodeServer implements Runnable{
 				case "AUD":
 					System.out.println("AUD Request found");
 					String[] messages = parts[1].split(";");
-					Boolean success = node.addData(messages[0],messages[1]);
+					Boolean success = node.passData(messages[0],messages[1]);
 					String audResponse;
 					if (success == true) {
 						audResponse = "1";
