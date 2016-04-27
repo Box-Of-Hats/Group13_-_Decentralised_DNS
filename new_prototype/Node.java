@@ -17,7 +17,7 @@ public class Node{
     private int[] idealFingertable = new int[3];
     private FingeredNode predecessor;
     private Client client;
-    private Map<String,String> data;
+    private HashMap<String,String> data;
 
     public Node(){
         //Constructor for Node class
@@ -141,17 +141,16 @@ public class Node{
             point predeseccors successor to nodes successor,
             point successors predecessor to nodes predecessor
         */
-
-        //All URLs stored on the current node must be passed to its direct successor, and removed from node's dataStore
         FingeredNode successor = fingerTable[0].getNode();
         client.connectToServer(successor.getIp());
-        String request = "";
 
-        
         data.forEach((url,ip) -> subQuit(url,ip));
-       
+        data.clear();
 
-
+        //All URLs stored on the current node must be passed to its direct successor, and removed from node's dataStore
+        // FingeredNode successor = fingerTable[0].getNode();
+        // client.connectToServer(successor.getIp());
+        // String request = "";
         // Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
         // while (it.hasNext()) {
         //     Map.Entry<String,String> pair = (Map.Entry)it.next();
@@ -159,7 +158,7 @@ public class Node{
         //     client.pushMessage(request);
         //     String response = client.pullMessage();
         // }
-        data.clear();
+        // data.clear();
 
         //Other nodes that may point to the current node in there finger table must now point to its successor
 
@@ -199,7 +198,11 @@ public class Node{
         */
 
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a46c41972c50ef62ce264f4b2df6b3f7dc0322c8
     private void subQuit(String url, String ip){
         client.pushMessage("AUD," + url + ";" + ip);
         String response = client.pullMessage();
@@ -543,6 +546,10 @@ public class Node{
         String message = "AUD," + url + ";" + ip;
         client.pushMessage(message);
         String response = client.pullMessage();
+        System.out.println(response);
+        if (!response.equals("1")){
+            System.out.println("Url already exists in system");
+        }
         client.disconnect();
     }
     
@@ -577,9 +584,15 @@ public class Node{
         return parts[1];
     }
     
-    public void addData(String url, String ip){
+    public Boolean addData(String url, String ip){
         // Add data to URL-> IP hashmap
-        data.put(url,ip);
+        if (data.get(url) == null){
+            data.put(url,ip); 
+            return true;    
+        }
+        else{
+            return false; 
+        }
     }
     
     public void removeData(String url){

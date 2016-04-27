@@ -120,9 +120,15 @@ public class Server extends NodeServer implements Runnable{
 				case "AUD":
 					System.out.println("AUD Request found");
 					String[] messages = parts[1].split(";");
-					node.addData(messages[0],messages[1]);
-					String audResponse = "1";
-					pushMessage(audResponse);
+					Boolean success = node.addData(messages[0],messages[1]);
+					String audResponse;
+					if (success == true) {
+						audResponse = "1";
+						pushMessage(audResponse);
+					} else {
+						audResponse = "0";
+						pushMessage(audResponse);
+					}
 					break;
 				//Delete URL Data
 				case "DUD":
