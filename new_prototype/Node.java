@@ -285,7 +285,7 @@ public class Node{
             nodeId = nodeId + MAXSIZE;
             
        int fingerId = fingerTable[i].getNode().getId();
-       if (fingerId < guid)
+       if (fingerId <= guid)
             fingerId = fingerId + MAXSIZE;
             
         System.out.println("UFT DEBUGGING:");
