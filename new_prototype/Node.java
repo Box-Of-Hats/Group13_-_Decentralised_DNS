@@ -17,7 +17,7 @@ public class Node{
     private int[] idealFingertable = new int[3];
     private FingeredNode predecessor;
     private Client client;
-    private Map<String,String> data;
+    private HashMap<String,String> data;
 
     public Node(){
         //Constructor for Node class
@@ -536,6 +536,10 @@ public class Node{
         String message = "AUD," + url + ";" + ip;
         client.pushMessage(message);
         String response = client.pullMessage();
+        System.out.println(response);
+        if (!response.equals("1")){
+            System.out.println("Url already exists in system");
+        }
         client.disconnect();
     }
     
@@ -570,9 +574,15 @@ public class Node{
         return parts[1];
     }
     
-    public void addData(String url, String ip){
+    public Boolean addData(String url, String ip){
         // Add data to URL-> IP hashmap
-        data.put(url,ip);
+        if (data.get(url) == null){
+            data.put(url,ip); 
+            return true;    
+        }
+        else{
+            return false; 
+        }
     }
     
     public void removeData(String url){

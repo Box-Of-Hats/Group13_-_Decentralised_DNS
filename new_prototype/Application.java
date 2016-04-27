@@ -205,11 +205,14 @@ class Application{
                 case "quit":
                 case "q":
                 case "exit":
-                    System.out.println("Closing Connections & Reallocating Data...");
-                    node.quit();
+                    if (inSystem == true){
+                        System.out.println("Closing Connections & Reallocating Data...");
+                        node.quit();  
+                    }
                     System.out.println("Exiting System");
                     System.exit(0);
                     break;
+
 
                 default:
                     System.out.println("Command not found: '" + command + "'");
