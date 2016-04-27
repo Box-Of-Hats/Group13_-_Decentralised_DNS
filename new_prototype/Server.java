@@ -112,7 +112,7 @@ public class Server extends NodeServer implements Runnable{
 				//Get URL data
 				case "GUD":
 					System.out.println("GUD Request found");
-					returnMessage = "1," + node.getData(part2);
+					returnMessage = "1," + node.fetchData(part2);
 					pushMessage(returnMessage);
 					node.getData(part2);
 					break;

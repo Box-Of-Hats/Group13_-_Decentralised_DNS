@@ -107,7 +107,7 @@ public class Node{
         while(idInNetwork) {
             System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
-            String request = "FSU," + Integer.toString(Math.abs((guid - 1) % MAXSIZE));
+            String request = "CPS," + Integer.toString(Math.abs((guid) % MAXSIZE));
             client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();
@@ -554,14 +554,18 @@ public class Node{
         //node = this.findSuccessor(id);
         System.out.println("ID TO CHECK FOR " + id);
         node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
-        System.out.println("CHECKING NODE " + node.getId() + " FOR URL " + url);
-        client.connectToServer(node.getIp());
-        String message = "GUD," + url;     
-        client.pushMessage(message);
-        String response = client.pullMessage();
-        client.disconnect();
-        String[] parts = response.split(",");
-        return parts[1];
+        if (node.getId() == guid){
+            return getData(url);
+        } else {
+            System.out.println("CHECKING NODE " + node.getId() + " FOR URL " + url);
+            client.connectToServer(node.getIp());
+            String message = "GUD," + url;     
+            client.pushMessage(message);
+            String response = client.pullMessage();
+            client.disconnect();
+            String[] parts = response.split(",");
+            return parts[1];
+        }
     }
     
     public Boolean addData(String url, String ip){
