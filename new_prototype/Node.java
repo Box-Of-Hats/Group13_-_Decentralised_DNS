@@ -141,19 +141,25 @@ public class Node{
             point predeseccors successor to nodes successor,
             point successors predecessor to nodes predecessor
         */
-
-        //All URLs stored on the current node must be passed to its direct successor, and removed from node's dataStore
         FingeredNode successor = fingerTable[0].getNode();
         client.connectToServer(successor.getIp());
         String request = "";
-        Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String,String> pair = (Map.Entry)it.next();
-            request = "AUD," + pair.getKey() + ";" + pair.getValue();
-            client.pushMessage(request);
-            String response = client.pullMessage();
-        }
+
+        data.forEach((url,ip) -> subQuit(url,ip));
         data.clear();
+
+        //All URLs stored on the current node must be passed to its direct successor, and removed from node's dataStore
+        // FingeredNode successor = fingerTable[0].getNode();
+        // client.connectToServer(successor.getIp());
+        // String request = "";
+        // Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
+        // while (it.hasNext()) {
+        //     Map.Entry<String,String> pair = (Map.Entry)it.next();
+        //     request = "AUD," + pair.getKey() + ";" + pair.getValue();
+        //     client.pushMessage(request);
+        //     String response = client.pullMessage();
+        // }
+        // data.clear();
 
         //Other nodes that may point to the current node in there finger table must now point to its successor
 
@@ -194,9 +200,9 @@ public class Node{
 
     }
     
-    private String combineUrlAndIp(String url, String ip){
-        //TSD: temporary store data
-        return new String("TSD," + url + ";" + ip);
+    private void subQuit(String url, String ip){
+        client.pushMessage("AUD," + url + ";" + ip);
+        String response = client.pullMessage();
     }
 
     public void initFingerTable(String bootstrapNodeIp){
