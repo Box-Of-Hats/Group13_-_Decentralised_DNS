@@ -518,9 +518,11 @@ public class Node{
         //connect to that node for storing urp-ip pair
         int id;
         FingeredNode node;
-        id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        System.out.println(url + " hashes to ID " + id);
-        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
+        id = Math.abs(this.computeUrl(url) % MAXSIZE) - 1;
+        if (id < 0)
+            id = id + MAXSIZE;
+        System.out.println("Closest Preceding Finger To " + id);
+        node = this.closestPrecedingFinger(id);
         System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
         client.connectToServer(node.getIp());
         String message = "AUD," + url + ";" + ip;
@@ -536,8 +538,10 @@ public class Node{
     public void deleteData(String url){
         int id;
         FingeredNode node;
-        id = Math.abs(this.computeUrl(url) % MAXSIZE);
-        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
+        id = Math.abs(this.computeUrl(url) % MAXSIZE) - 1;
+        if (id < 0)
+            id = id + MAXSIZE;
+        node = this.closestPrecedingFinger(id);
         client.connectToServer(node.getIp());
         String message = "DUD," + url;
         client.pushMessage(message);
@@ -550,10 +554,12 @@ public class Node{
         //connect to that node for the ip address of the url
         int id;
         FingeredNode node;
-        id = Math.abs(this.computeUrl(url) % MAXSIZE);
+        id = Math.abs(this.computeUrl(url) % MAXSIZE) - 1;
         //node = this.findSuccessor(id);
+        if (id < 0)
+            id = id + MAXSIZE;
         System.out.println("ID TO CHECK FOR " + id);
-        node = this.closestPrecedingFinger((Math.abs((id - 1) % MAXSIZE)));
+        node = this.closestPrecedingFinger(id);
         if (node.getId() == guid){
             return getData(url);
         } else {
