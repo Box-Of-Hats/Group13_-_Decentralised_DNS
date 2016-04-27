@@ -513,7 +513,7 @@ public class Node{
         return computeHashingValue(url);
     }
     
-    public void passData(String url, String ip){
+    public Boolean passData(String url, String ip){
         //compute the hashing result of the url
         //connect to that node for storing urp-ip pair
         int id;
@@ -523,16 +523,22 @@ public class Node{
             id = id + MAXSIZE;
         System.out.println("Closest Preceding Finger To " + id);
         node = this.closestPrecedingFinger(id);
-        System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
-        client.connectToServer(node.getIp());
-        String message = "AUD," + url + ";" + ip;
-        client.pushMessage(message);
-        String response = client.pullMessage();
-        System.out.println(response);
-        if (!response.equals("1")){
-            System.out.println("Url already exists in system");
+        if (node.getId() == guid){
+            return addData(url);
+        } else {
+            System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
+            client.connectToServer(node.getIp());
+            String message = "AUD," + url + ";" + ip;
+            client.pushMessage(message);
+            String response = client.pullMessage();
+            System.out.println(response);
+            if (!response.equals("1")){
+                System.out.println("Url already exists in system");
+            }
+            client.disconnect();
+            return false;
         }
-        client.disconnect();
+        
     }
     
     public void deleteData(String url){
