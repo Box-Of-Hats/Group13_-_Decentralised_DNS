@@ -272,7 +272,6 @@ public class Node{
 
     public void updateFingerTable(FingeredNode s, int i){
         //This method requires network code to step back along the network 
-        //!!! Im unsure of the expected types of s and i. Using int for now, as a placeholder.
         /*
         if (s is between [n, finger[i].node]):
             finger[i].node = s;
@@ -378,7 +377,7 @@ public class Node{
             }
         }
             
-        return node; //!! PLACEHOLDER !!
+        return node;
 
     }
 
