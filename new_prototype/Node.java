@@ -524,7 +524,7 @@ public class Node{
         System.out.println("Closest Preceding Finger To " + id);
         node = this.closestPrecedingFinger(id);
         if (node.getId() == guid){
-            return addData(url);
+            return addData(url,ip);
         } else {
             System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
             client.connectToServer(node.getIp());
