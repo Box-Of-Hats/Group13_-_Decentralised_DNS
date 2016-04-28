@@ -167,7 +167,7 @@ public class Node{
 
         //Set the successor of predecessor and predecessor of successor
         client.connectToServer(predecessor.getIp());
-        String request = "FUT,0;" + fingerTable[0].getNode().getIp() + ";" + Integer.toString(fingerTable[0].getNode().getId());
+        String request = "FUT,0;" + fingerTable[0].getNode().getIp() + ";" + Integer.toString(fingerTable[0].getNode().getId()) + ";" + Integer.toString(guid);
         client.pushMessage(request);
         String response = client.pullMessage();
         client.disconnect();
@@ -301,14 +301,14 @@ public class Node{
         }
     }
 
-    public void forceUpdateFingerTable(FingeredNode s, int fId){
+    public void forceUpdateFingerTable(FingeredNode s, int fId, int nId){
         System.out.println("Updating finger " + fId + " With node " + s.getId());
-        if(fingerTable[fId].getNode().getId() == s.getId()) {
+        if(fingerTable[fId].getNode().getId() == nId) {
             fingerTable[fId].setNode(s);
-            for (int i = 0; i < fingerTable.length; i++){
-                if (fingerTable[i].getNode().getId() == s.getId())
+            /*for (int i = 0; i < fingerTable.length; i++){
+                if (fingerTable[i].getNode().getId() == )
                     fingerTable[i].setNode(s);
-            }
+            }*/
             String predecessorIp = predecessor.getIp();
             client.connectToServer(predecessorIp);
             String request = "FUT," + fId + ";" + s.getIp() + ";" + Integer.toString(s.getId());
