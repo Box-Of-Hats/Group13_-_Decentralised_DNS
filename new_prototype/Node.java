@@ -305,10 +305,10 @@ public class Node{
         System.out.println("Updating finger " + fId + " With node " + s.getId());
         if(fingerTable[fId].getNode().getId() == nId) {
             fingerTable[fId].setNode(s);
-            /*for (int i = 0; i < fingerTable.length; i++){
-                if (fingerTable[i].getNode().getId() == )
+            for (int i = 0; i < fingerTable.length; i++){
+                if (fingerTable[i].getNode().getId() == nId)
                     fingerTable[i].setNode(s);
-            }*/
+            }
             String predecessorIp = predecessor.getIp();
             client.connectToServer(predecessorIp);
             String request = "FUT," + fId + ";" + s.getIp() + ";" + Integer.toString(s.getId());
