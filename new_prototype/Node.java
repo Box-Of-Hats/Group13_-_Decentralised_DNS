@@ -303,6 +303,7 @@ public class Node{
 
     public void forceUpdateFingerTable(FingeredNode s, int fId, int nId){
         System.out.println("Finger " + fId + " currently contains node " + fingerTable[fId].getNode().getId());
+        System.out.println("Node to replace is Node " + nId);
         System.out.println("Updating finger " + fId + " With node " + s.getId());
         if(fingerTable[fId].getNode().getId() == nId) {
             fingerTable[fId].setNode(s);
