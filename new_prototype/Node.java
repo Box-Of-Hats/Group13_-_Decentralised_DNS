@@ -159,7 +159,7 @@ public class Node{
             System.out.println("Closest Preceding Node of " + updateId + " is Node " + p.getId());
             System.out.println("Notifying Node " + p.getId());
             client.connectToServer(p.getIp());
-            String request = "FUT," + i + ";" + p.getIp() + ";" + Integer.toString(p.getId());
+            String request = "FUT," + i + ";" + p.getIp() + ";" + Integer.toString(p.getId()) + ";" + Integer.toString(guid);
             client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();
@@ -167,7 +167,7 @@ public class Node{
 
         //Set the successor of predecessor and predecessor of successor
         client.connectToServer(predecessor.getIp());
-        String request = "FUT,0;" + fingerTable[0].getNode().getIp() + ";" + Integer.toString(fingerTable[0].getNode().getId()) + ";" + Integer.toString(guid);
+        String request = "FUT,0;" + fingerTable[0].getNode().getIp() + ";" + Integer.toString(fingerTable[0].getNode().getId()) + ";" + Integer.toString(guid) + ";" + Integer.toString(guid);
         client.pushMessage(request);
         String response = client.pullMessage();
         client.disconnect();
