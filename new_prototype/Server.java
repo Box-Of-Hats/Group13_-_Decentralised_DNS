@@ -194,12 +194,4 @@ public class Server extends NodeServer implements Runnable{
 		
 	}
 
-	/*
-	                                    
-	Now, that I have your attention:
-		When adding the getter methods for the Server's Node, be sure to make them syncronised since the Server utilises multithreading.
-		Thanks! :)
-
-	*/
-
 }

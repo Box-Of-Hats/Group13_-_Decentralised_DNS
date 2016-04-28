@@ -6,7 +6,9 @@ public class Node{
     public static final int MAXSIZE = 8; //The maximum number of Nodes in the system
     private int guid; //Globally Unique Identifier
     private String ip;
-    private Finger[] fingerTable = new Finger[3];
+    //The length of fingerTable and idealFingerTable is the number of bits used to store the GUID variable.
+    //We are currently using a tableLenth of 3, meaning that the highest GUID currently is 2**3, which is 8.
+    private Finger[] fingerTable = new Finger[3]; 
     private int[] idealFingertable = new int[3];
     private FingeredNode predecessor;
     private Client client;
@@ -88,8 +90,6 @@ public class Node{
 
     public void join(){
         //When called without a bootstrapIP, the Node is assumed to be the first in the network.
-        //Untested but based on Jamie's pseudocode so it should work.
-        //This method requires no network code as it is the first node in the network.
         predecessor = new FingeredNode(ip, guid);
         for (int i = 0; i < fingerTable.length; i++) {
             int start = (int)Math.pow(2, i);
@@ -100,8 +100,7 @@ public class Node{
     }
 
     public void join(String bootstrapNodeIp){
-        //This method requires network code to contact other nodes
-        //MAKE SURE ID ISNT TAKEN REDO IF NEEDED
+        //When passed a node IP, the target node joins the network of that bootstrap node.
         int id = guid;
         Boolean idInNetwork = true;
         while(idInNetwork) {
@@ -186,9 +185,7 @@ public class Node{
     
 
     public void initFingerTable(String bootstrapNodeIp){
-        //This method requires a lot of network code
-        //m is the length of the finger table
-        //n' is the node represented by bootstrapNodeIp
+        //Initialise the finger table of the current node.
         client.connectToServer(bootstrapNodeIp);
         //Call Find successor on bootstrap node with start of first finger. FSU = Find Successor
         String message = "FSU," + Integer.toString(idealFingertable[0]);
@@ -201,11 +198,14 @@ public class Node{
         fingerTable[0] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[0]);
 
         /*
-        for i = 0 to m - 1;
-            if (finger[i + 1].start is between [n, finger[i].node]):
-                finger[i + 1].node = finger[i].node
-            else:
-                finger[i + 1].node = n'.findSucessor(finger[i + 1].start)'
+        Pseudocode used:
+            m is the length of the finger table
+            n' is the node represented by bootstrapNodeIp
+            for i = 0 to m - 1;
+                if (finger[i + 1].start is between [n, finger[i].node]):
+                    finger[i + 1].node = finger[i].node
+                else:
+                    finger[i + 1].node = n'.findSucessor(finger[i + 1].start)'
         */
 
         for (int i = 1; i < fingerTable.length; i++) {
@@ -219,8 +219,6 @@ public class Node{
             fingerTable[i] = new Finger(responseNode[0], Integer.parseInt(responseNode[1]), idealFingertable[i]);
         }
 
-        
-        //predecessor = successor.predecessor // this requires the server to have some method to retrieve its node's predecessor
         client.connectToServer(fingerTable[0].getNode().getIp());
         message = "GPD,0";
         client.pushMessage(message);
@@ -230,7 +228,6 @@ public class Node{
         responseNode = parts[1].split(";");
         predecessor = new FingeredNode(responseNode[0], Integer.parseInt(responseNode[1]));
 
-        //successor.predecessor = n // This requires the server to have some method to set its node's predecessor
         client.connectToServer(fingerTable[0].getNode().getIp());
         message = "SPD," + ip + ";" + Integer.toString(guid); 
         client.pushMessage(message);
@@ -239,11 +236,11 @@ public class Node{
     }
 
     public void updateOthers(){
-        //This method requires network code to update other nodes finger tables
         /*
-        for i = 1 to m:
-            p = findPredecessor(n - 2^(i - 1))
-            p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
+        Pseudocode used:
+            for i = 1 to m:
+                p = findPredecessor(n - 2^(i - 1))
+                p.updateFingerTable(n, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
         
         for (int i = 0; i < fingerTable.length; i++){
@@ -260,26 +257,16 @@ public class Node{
             String response = client.pullMessage();
             client.disconnect();
         }
-        
-        /*
-        for (i=0; i < fingerTable.length; i ++){
-            FingeredNode p = findPredecessor(guid - (int)Math.pow(2,i-1));
-
-            p.updateFingerTable(guid, i);
-            client.connectToServer(p.getIp());
-            client.pushMessage("UFT,"+ "s" + "i" ); //Not sure what S and I are, they should be substituted accordingly
-            //Could pull message here to check if the update was successful but we can skip this.
-        }
-        */
     }
 
     public void updateFingerTable(FingeredNode s, int i){
-        //This method requires network code to step back along the network 
+        //Updates the fingertable of the current node
         /*
-        if (s is between [n, finger[i].node]):
-            finger[i].node = s;
-            p = n.predecessor;
-            p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
+        Psuedocode used:
+            if (s is between [n, finger[i].node]):
+                finger[i].node = s;
+                p = n.predecessor;
+                p.updateFingerTable(s, i)//This requires the server to call its node updateFingerTable method with the given arguments
         */
         int nodeId = s.getId();
         //Deals with Ring Architecture
@@ -323,10 +310,11 @@ public class Node{
     }
 
     public FingeredNode findSuccessor(int id){
-        //This requires network code to retrieve the sucessor of the target node
+        //Find the direct successor of the Node with the provided ID. Can be called by any node in the system upon any other target node.
         /*
-        n' = findPredecessor(id)
-        return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
+        Pseudocode used:
+            n' = findPredecessor(id)
+            return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
         
         FingeredNode node = findPredecessor(id);
@@ -346,12 +334,13 @@ public class Node{
     }
 
     public FingeredNode findPredecessor(int id){
-        //This requires network code
+        //Find the direct predecessor of the Node with the provided ID. Can be called by any node in the system upon any other target node.
         /*
-        n' = n//where n is the current node
-        while (id is not between [n', n'.successor]):
-            n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
-        return n'
+        Pseudocode used:
+            n' = n//where n is the current node
+            while (id is not between [n', n'.successor]):
+                n' = n'.closestPrecedingFinger(id)//This asks the appropriate server to call its node's closestPrecedingFingerMethod
+            return n'
         */
         
         Boolean currentNode = true;
@@ -393,21 +382,17 @@ public class Node{
                 if (node.getId() == prevNode.getId())
                     break;
             }
-        }
-            
+        }    
         return node;
-
     }
 
     public FingeredNode closestPrecedingFinger(int id){
-        //DONE
-        //This appears to be working!
         /*
-        This requires no networking code
-        for i = m - 1 down to 1:
-            if (finger[i].node is between [n ,id]):
-                return finger[i].node;
-        return n;
+        Pseudocode used:
+            for i = m - 1 down to 1:
+                if (finger[i].node is between [n ,id]):
+                    return finger[i].node;
+            return n;
         */
         //Deals with Ring Architecture
         if (id < guid)
@@ -616,7 +601,6 @@ public class Node{
     
     public String getData(String url){
         // Return the ip referred by the given url 
-        // ""null" would be returned if the url does not exist
         return data.get(url);
     }
 }

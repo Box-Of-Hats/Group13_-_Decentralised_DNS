@@ -144,7 +144,7 @@ class Application{
                     break;
                     //Delete URL has been ommitted here to prevent standard users from deleting URLs.
                     //In the future, a system may be put in place to allow admins to delete them.
-                    //Re-enable this feature here:
+                    //Re-enable this feature here by uncommenting code:
                     //if (inSystem == true){
                     //    if (commandList.length != 2){
                     //        System.out.println("Error:\tBad arguements passed to 'delurl'.");
