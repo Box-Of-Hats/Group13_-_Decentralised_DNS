@@ -151,7 +151,10 @@ public class Node{
             System.out.println("Node to notify of departure: " + updateId);
             FingeredNode p = closestPrecedingFinger(updateId);
             if (p.getId() == guid){
-                p = closestPrecedingFinger(p.getId());
+                updateId = p.getId() - 1;
+                if (updateId < 0)
+                    updateId = updateId + MAXSIZE;
+                p = closestPrecedingFinger(updateId);
             }
             System.out.println("Closest Preceding Node of " + updateId + " is Node " + p.getId());
             System.out.println("Notifying Node " + p.getId());
