@@ -150,6 +150,9 @@ public class Node{
             }
             System.out.println("Node to notify of departure: " + updateId);
             FingeredNode p = closestPrecedingFinger(updateId);
+            if (p.getId() == guid){
+                p = closestPrecedingFinger(p.getId());
+            }
             System.out.println("Closest Preceding Node of " + updateId + " is Node " + p.getId());
             System.out.println("Notifying Node " + p.getId());
             client.connectToServer(p.getIp());
