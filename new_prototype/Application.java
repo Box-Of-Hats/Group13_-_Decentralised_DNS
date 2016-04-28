@@ -206,8 +206,13 @@ class Application{
                 case "q":
                 case "exit":
                     if (inSystem == true){
-                        System.out.println("Closing Connections & Reallocating Data...");
-                        node.quit();  
+                        if (node.getSuccessor().getId() != node.getGuid() ){ 
+                            //Only attempt to close node connections if the successor of the current node is not the same as the current node.
+                            //This means that the node is not the last in the system.
+                            //If the node is the last in the sytem, the application terminates without attempting to update finger tables.
+                            System.out.println("Closing Connections & Reallocating Data...");
+                            node.quit();  
+                        }
                     }
                     System.out.println("Exiting System");
                     System.exit(0);
