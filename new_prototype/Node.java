@@ -312,7 +312,7 @@ public class Node{
             }
             String predecessorIp = predecessor.getIp();
             client.connectToServer(predecessorIp);
-            String request = "FUT," + fId + ";" + s.getIp() + ";" + Integer.toString(s.getId());
+            String request = "FUT," + fId + ";" + s.getIp() + ";" + Integer.toString(s.getId()) + ";" + Integer.toString(nId);
             client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();
