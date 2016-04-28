@@ -149,7 +149,7 @@ public class Server extends NodeServer implements Runnable{
 					System.out.println("FUT request found");
 					String[] futRequest = parts[1].split(";");
 					FingeredNode updateNode = new FingeredNode(futRequest[1], Integer.parseInt(futRequest[2]));
-					node.forceUpdateFingerTable(updateNode, Integer.parseInt(futRequest[0]), Integer.parseInt(futRequest[2]));
+					node.forceUpdateFingerTable(updateNode, Integer.parseInt(futRequest[0]), Integer.parseInt(futRequest[3]));
 					String futResponse = "1";
 					pushMessage(futResponse);
 					break;
