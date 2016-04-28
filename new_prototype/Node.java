@@ -307,8 +307,10 @@ public class Node{
         if(fingerTable[fId].getNode().getId() == nId) {
             fingerTable[fId].setNode(s);
             for (int i = 0; i < fingerTable.length; i++){
-                if (fingerTable[i].getNode().getId() == nId)
+                if (fingerTable[i].getNode().getId() == nId){
+                    System.out.println("FINGER " + i + " IS BEING UPDATED");
                     fingerTable[i].setNode(s);
+                }
             }
             String predecessorIp = predecessor.getIp();
             client.connectToServer(predecessorIp);
