@@ -217,7 +217,10 @@ class Application{
                     System.out.println("Exiting System");
                     System.exit(0);
                     break;
-
+                case "finger":
+                    if (inSystem == true){
+                        node.printFingerTable();
+                    }
 
                 default:
                     System.out.println("Command not found: '" + command + "'");

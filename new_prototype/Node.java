@@ -609,4 +609,11 @@ public class Node{
         // Return the ip referred by the given url 
         return data.get(url);
     }
+
+    public void printFingerTable(){
+        for (int i = 0; i < fingerTable.length; i++){
+            System.out.println("FINGER["+i+"]: Node " + fingerTable[i].getNode().getId());
+        }
+    }
+
 }
