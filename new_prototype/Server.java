@@ -101,6 +101,12 @@ public class Server extends NodeServer implements Runnable{
 					String fsuResponse = "1," + successor.getIp() + ";" + Integer.toString(successor.getId());
 					pushMessage(fsuResponse);
 					break;
+				case "GSU":
+					System.out.println("GSU Request Found");
+					FingeredNode nodeSuccessor = node.getSuccessor();
+					String gsuResponse = "1, nodeSuccessor.getIp()" + ";" + Integer.toString(nodeSuccessor.getId());
+					pushMessage(gsuResponse);
+					break;
 				//Closest Preceding Finger
 				case "CPS":
 					System.out.println("CPS Request found");

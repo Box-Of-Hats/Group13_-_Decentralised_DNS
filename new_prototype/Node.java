@@ -322,8 +322,10 @@ public class Node{
             n' = findPredecessor(id)
             return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
-        
+        System.out.println("FINDSUCESSOR");
+        System.out.println("Finding Sucessor of Node " + id);
         FingeredNode node = findPredecessor(id);
+        System.out.println("Predecessor found as Node " + node.getId());
         if (node.getId() == guid) {
             return fingerTable[0].getNode();
         } else {
@@ -388,7 +390,8 @@ public class Node{
                 if (node.getId() == prevNode.getId())
                     break;
             }
-        }    
+        }
+
         return node;
     }
 
