@@ -120,6 +120,7 @@ public class Node{
             else
                 guid = (guid + 1) % MAXSIZE;
         }
+        System.out.println("Joining network with id " + guid);
         //Set up Finger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();

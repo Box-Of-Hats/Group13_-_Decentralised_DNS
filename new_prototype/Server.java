@@ -89,6 +89,7 @@ public class Server extends NodeServer implements Runnable{
 					FingeredNode fpdNode = node.findPredecessor(Integer.parseInt(parts[1]));
 					String fpdResponse = "1," + fpdNode.getIp() + ";" + Integer.toString(fpdNode.getId());
 					pushMessage(fpdResponse);
+					break;
 				//Update Finger Table:
                 case "UFT":
 					System.out.println("UFT Request Found");
