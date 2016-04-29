@@ -366,11 +366,12 @@ public class Node{
             id = id + MAXSIZE;
             successorId = successorId + MAXSIZE;
         }
+
         if (successorId <= nodeId)
             successorId = successorId + MAXSIZE;
-        
-        if ((nodeId < id) && (nodeId < successorId))
-            node = fingerTable[0].getNode();
+
+        if (id > (successorId % MAXSIZE))
+            return fingerTable[0].getNode();
 
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId <= id) && (id <= successorId))) {
