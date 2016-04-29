@@ -107,7 +107,7 @@ public class Node{
             System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
             System.out.println("FINDINGSUCESSOR OF " + (Math.abs(guid) % MAXSIZE) + " Across the network");
-            String request = "FSU," + Integer.toString(Math.abs((guid) % MAXSIZE));
+            String request = "FPD," + Integer.toString(Math.abs((guid) % MAXSIZE));
             client.pushMessage(request);
             String response = client.pullMessage();
             client.disconnect();

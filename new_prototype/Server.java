@@ -83,6 +83,12 @@ public class Server extends NodeServer implements Runnable{
 					String gpdResponseMessage = "1," + gpdPredecessor.getIp() + ";" + Integer.toString(gpdPredecessor.getId());
 					pushMessage(gpdResponseMessage);
 					break;
+				//FindPredecessor
+				case "FPD":
+					System.out.println("FPD Request Found");
+					FingeredNode fpdNode = node.findPredecessor(Integer.parseInt(parts[1]));
+					String fpdResponse = "1," + fpdNode.getIp() + ";" + Integer.toString(fpdNode.getId());
+					pushMessage(fpdResponse);
 				//Update Finger Table:
                 case "UFT":
 					System.out.println("UFT Request Found");
