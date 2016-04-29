@@ -106,6 +106,7 @@ public class Node{
         while(idInNetwork) {
             System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
+            System.out.println("FINDINGSUCESSOR OF " + (Math.abs(guid) % MAXSIZE) + " Across the network");
             String request = "FSU," + Integer.toString(Math.abs((guid) % MAXSIZE));
             client.pushMessage(request);
             String response = client.pullMessage();
@@ -113,6 +114,7 @@ public class Node{
             String[] parts = response.split(",");
             String[] responseNode = parts[1].split(";");
             id = Integer.parseInt(responseNode[1]);
+            System.out.println("SUCCESOR FOUND AS NODE " + id);
             if (id != guid)
                 idInNetwork = false;
             else
