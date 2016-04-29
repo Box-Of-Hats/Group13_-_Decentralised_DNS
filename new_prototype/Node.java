@@ -188,7 +188,7 @@ public class Node{
         //Initialise the finger table of the current node.
         client.connectToServer(bootstrapNodeIp);
         //Call Find successor on bootstrap node with start of first finger. FSU = Find Successor
-        int fingerId = idealFingertable[0] - 1;
+        int fingerId = idealFingertable[0];
         if (fingerId < 0)
             fingerId = fingerId + MAXSIZE;
         String message = "FSU," + Integer.toString(fingerId);
@@ -213,7 +213,7 @@ public class Node{
 
         for (int i = 1; i < fingerTable.length; i++) {
             client.connectToServer(bootstrapNodeIp);
-            fingerId = idealFingertable[0] - 1;
+            fingerId = idealFingertable[0];
             if (fingerId < 0)
                 fingerId = fingerId + MAXSIZE;
             message = "FSU," + Integer.toString(fingerId);
@@ -377,7 +377,7 @@ public class Node{
                 node = new FingeredNode(ip ,guid);
             } else {
                 client.connectToServer(node.getIp());
-                String message = "CPS," + Integer.toString(id % MAXSIZE);     
+                String message = "CPS," + Integer.toString(id % MAXSIZE);
                 client.pushMessage(message);
                 String response = client.pullMessage();
                 client.disconnect();

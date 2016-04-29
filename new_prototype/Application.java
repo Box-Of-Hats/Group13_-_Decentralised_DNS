@@ -221,6 +221,7 @@ class Application{
                     if (inSystem == true){
                         node.printFingerTable();
                     }
+                    break;
 
                 default:
                     System.out.println("Command not found: '" + command + "'");
