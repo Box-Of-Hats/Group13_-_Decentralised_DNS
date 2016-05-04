@@ -31,7 +31,7 @@ public class Client extends NodeClient{
 		}
 		catch (IOException e)
 		{
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		return socket.isConnected();
 	}
@@ -44,11 +44,11 @@ public class Client extends NodeClient{
 			in.close();
 			out.close();
 			socket.close();
-			System.out.println("Socket is closed.");
+			//System.out.println("Socket is closed.");
 		}
 		catch (IOException e)
 		{
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 	}
 	

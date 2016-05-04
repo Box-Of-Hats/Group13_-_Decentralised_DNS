@@ -96,7 +96,7 @@ public class Node{
             Finger f = new Finger(ip, guid, start);
             fingerTable[i] = f;
         }
-        //System.out.println("Started new network");
+        ////System.out.println("Started new network");
     }
 
     public void join(String bootstrapNodeIp){
@@ -104,9 +104,9 @@ public class Node{
         int id = guid;
         Boolean idInNetwork = true;
         while(idInNetwork) {
-            //System.out.println("CHECKING ID");
+            ////System.out.println("CHECKING ID");
             client.connectToServer(bootstrapNodeIp);
-            //System.out.println("FINDINGSUCESSOR OF " + (Math.abs(guid) % MAXSIZE) + " Across the network");
+            ////System.out.println("FINDINGSUCESSOR OF " + (Math.abs(guid) % MAXSIZE) + " Across the network");
             String request = "FSU," + Integer.toString(Math.abs((guid) % MAXSIZE));
             client.pushMessage(request);
             String response = client.pullMessage();
@@ -114,18 +114,18 @@ public class Node{
             String[] parts = response.split(",");
             String[] responseNode = parts[1].split(";");
             id = Integer.parseInt(responseNode[1]);
-            //System.out.println("SUCCESOR FOUND AS NODE " + id);
+            ////System.out.println("SUCCESOR FOUND AS NODE " + id);
             if (id != guid)
                 idInNetwork = false;
             else
                 guid = (guid + 1) % MAXSIZE;
         }
-        //System.out.println("Joining network with id " + guid);
+        ////System.out.println("Joining network with id " + guid);
         //Set up Finger Table and announces exsistance to network
         initFingerTable(bootstrapNodeIp);
         updateOthers();
         takeOwnership();
-        //System.out.println("Joined Specified Network");
+        ////System.out.println("Joined Specified Network");
     }
     
     public void quit(){
@@ -150,7 +150,7 @@ public class Node{
             if (updateId < 0) {
                 updateId = updateId + MAXSIZE;
             }
-            //System.out.println("Node to notify of departure: " + updateId);
+            ////System.out.println("Node to notify of departure: " + updateId);
             FingeredNode p = closestPrecedingFinger(updateId);
             if (p.getId() == guid){
                 updateId = p.getId() - 1;
@@ -158,8 +158,8 @@ public class Node{
                     updateId = updateId + MAXSIZE;
                 p = closestPrecedingFinger(updateId);
             }
-            //System.out.println("Closest Preceding Node of " + updateId + " is Node " + p.getId());
-            //System.out.println("Notifying Node " + p.getId());
+            ////System.out.println("Closest Preceding Node of " + updateId + " is Node " + p.getId());
+            ////System.out.println("Notifying Node " + p.getId());
             client.connectToServer(p.getIp());
             String request = "FUT," + i + ";" + p.getIp() + ";" + Integer.toString(p.getId()) + ";" + Integer.toString(guid);
             client.pushMessage(request);
@@ -197,7 +197,7 @@ public class Node{
         String message = "FSU," + Integer.toString(fingerId);
         client.pushMessage(message);
         String response = client.pullMessage();
-        System.out.println(response);
+        //System.out.println(response);
         client.disconnect();
         String[] parts = response.split(",");
         String[] responseNode = parts[1].split(";");
@@ -257,9 +257,9 @@ public class Node{
             if (updateId < 0) {
                 updateId = updateId + MAXSIZE;
             }
-            //System.out.println("Node to update: " + updateId);
+            ////System.out.println("Node to update: " + updateId);
             FingeredNode p = closestPrecedingFinger(updateId);
-            //System.out.println("Attempting to update finger " + i + " of node " + p.getId());
+            ////System.out.println("Attempting to update finger " + i + " of node " + p.getId());
             client.connectToServer(p.getIp());
             String message = "UFT," + i + ";" + ip + ";" + Integer.toString(guid);
             client.pushMessage(message);
@@ -287,7 +287,7 @@ public class Node{
             fingerId = fingerId + MAXSIZE;
 
         if ((guid < nodeId) && (nodeId < fingerId)){
-            //System.out.println("Updating finger " + i + " with Node of ID " + s.getId());
+            ////System.out.println("Updating finger " + i + " with Node of ID " + s.getId());
             fingerTable[i].setNode(s);
             String message = "UFT," + i + ";" + s.getIp() + ";" + Integer.toString(s.getId());
             client.connectToServer(predecessor.getIp());
@@ -298,14 +298,14 @@ public class Node{
     }
 
     public void forceUpdateFingerTable(FingeredNode s, int fId, int nId){
-        //System.out.println("Finger " + fId + " currently contains node " + fingerTable[fId].getNode().getId());
-        //System.out.println("Node to replace is Node " + nId);
-        //System.out.println("Updating finger " + fId + " With node " + s.getId());
+        ////System.out.println("Finger " + fId + " currently contains node " + fingerTable[fId].getNode().getId());
+        ////System.out.println("Node to replace is Node " + nId);
+        ////System.out.println("Updating finger " + fId + " With node " + s.getId());
         if(fingerTable[fId].getNode().getId() == nId) {
             fingerTable[fId].setNode(s);
             for (int i = 0; i < fingerTable.length; i++){
                 if (fingerTable[i].getNode().getId() == nId){
-                    //System.out.println("FINGER " + i + " IS BEING UPDATED");
+                    ////System.out.println("FINGER " + i + " IS BEING UPDATED");
                     fingerTable[i].setNode(s);
                 }
             }
@@ -325,10 +325,10 @@ public class Node{
             n' = findPredecessor(id)
             return n'.sucessor()//The contacted server should then retrieve the finger[0].node field of its node
         */
-        //System.out.println("FINDSUCESSOR");
-        //System.out.println("Finding Sucessor of Node " + id);
+        ////System.out.println("FINDSUCESSOR");
+        ////System.out.println("Finding Sucessor of Node " + id);
         FingeredNode node = findPredecessor(id);
-        //System.out.println("Predecessor found as Node " + node.getId());
+        ////System.out.println("Predecessor found as Node " + node.getId());
         if (node.getId() == guid) {
             return fingerTable[0].getNode();
         } else {
@@ -375,7 +375,7 @@ public class Node{
 
         //Repeats until it finds a node that should have the ID as its successor
         while (!((nodeId <= id) && (id <= successorId))) {
-            //System.out.println("nodeId: " + nodeId + " id: " + id + " successorId: " + successorId);
+            ////System.out.println("nodeId: " + nodeId + " id: " + id + " successorId: " + successorId);
             if (nodeId == id) {
                 node = new FingeredNode(ip ,guid);
             } else {
@@ -411,7 +411,7 @@ public class Node{
        //iterates backwards through the finger table checking each finger against the requested ID
         for (int i = fingerTable.length - 1; i >= 0; i--) {
             int fingerId = fingerTable[i].getNode().getId();
-            System.out.println("Current FingerId: " + fingerId);
+            //System.out.println("Current FingerId: " + fingerId);
             if (fingerId < guid)
                 fingerId = fingerId + MAXSIZE;
             if ((fingerId > guid) && (fingerId <= id)) {
@@ -436,10 +436,10 @@ public class Node{
             //i needs to be 1, I know it looks dumb
             for (int i = 1; i < urlIpPairs.length; i++){
                 String[] urlIps = urlIpPairs[i].split(" ");
-                System.out.println("Adding data for URL: " + urlIps[0]);
+                //System.out.println("Adding data for URL: " + urlIps[0]);
                 addData(urlIps[0], urlIps[1]);
                 String temp = getData(urlIpPairs[0]);
-                System.out.println(temp);
+                //System.out.println(temp);
             }
         }
     }
@@ -455,15 +455,15 @@ public class Node{
 
         while (it.hasNext()) {
             Map.Entry<String,String> pair = (Map.Entry)it.next();
-            //System.out.println(pair.getKey() + " = " + pair.getValue());
+            ////System.out.println(pair.getKey() + " = " + pair.getValue());
             int hashedId = Math.abs(computeUrl(pair.getKey()) % MAXSIZE);
 
             if (hashedId < guid)
                 hashedId = hashedId + MAXSIZE;
-            //System.out.println("RequestId: " + rId + ", hashedId: " + hashedId + ", nodeId: " + nodeId);
+            ////System.out.println("RequestId: " + rId + ", hashedId: " + hashedId + ", nodeId: " + nodeId);
 
             if ((rId <= hashedId) && (hashedId < nodeId)){
-                //System.out.println("KEY TO TRANSFER FOUND");
+                ////System.out.println("KEY TO TRANSFER FOUND");
                 String url = pair.getKey();
                 String urlIp = pair.getValue();
                 response = response + ";" + url + " " + urlIp;
@@ -474,10 +474,10 @@ public class Node{
         String[] urlsToDel = delUrls.split(";");
         //i needs to be 1, I know it looks dumb
         for (int i = 1; i < urlsToDel.length; i++){
-            //System.out.println("Deleting local record of " + urlsToDel[1]);
+            ////System.out.println("Deleting local record of " + urlsToDel[1]);
             removeData(urlsToDel[i]);
         }
-        //System.out.println(response);
+        ////System.out.println(response);
         return response;
     }
 
@@ -531,22 +531,22 @@ public class Node{
         id = Math.abs(this.computeUrl(url) % MAXSIZE) - 1;
         if (id < 0)
             id = id + MAXSIZE;
-        //System.out.println("Closest Preceding Finger To " + id);
+        ////System.out.println("Closest Preceding Finger To " + id);
         node = this.closestPrecedingFinger(id);
-        //System.out.println("Node to add URL to is Node " + node.getId());
+        ////System.out.println("Node to add URL to is Node " + node.getId());
         if (node.getId() == guid){
             addData(url,ip);
-            //System.out.println("Url added to local node");
+            ////System.out.println("Url added to local node");
             return true;
         } else {
-            //System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
+            ////System.out.println("Assigning " + url + " to closest preceding node " + node.getId());
             client.connectToServer(node.getIp());
             String message = "AUD," + url + ";" + ip;
             client.pushMessage(message);
             String response = client.pullMessage();
-            System.out.println(response);
+            //System.out.println(response);
             if (!response.equals("1")){
-                //System.out.println("Url already exists in system");
+                ////System.out.println("Url already exists in system");
                 return false;
             }
             client.disconnect();
@@ -578,12 +578,12 @@ public class Node{
         //node = this.findSuccessor(id);
         if (id < 0)
             id = id + MAXSIZE;
-        //System.out.println("ID TO CHECK FOR " + id);
+        ////System.out.println("ID TO CHECK FOR " + id);
         node = this.closestPrecedingFinger(id);
         if (node.getId() == guid){
             return getData(url);
         } else {
-            System.out.println("CHECKING NODE " + node.getId() + " FOR URL " + url);
+            //System.out.println("CHECKING NODE " + node.getId() + " FOR URL " + url);
             client.connectToServer(node.getIp());
             String message = "GUD," + url;     
             client.pushMessage(message);
@@ -616,7 +616,7 @@ public class Node{
 
     public void printFingerTable(){
         for (int i = 0; i < fingerTable.length; i++){
-            //System.out.println("FINGER["+i+"]: Node " + fingerTable[i].getNode().getId());
+            ////System.out.println("FINGER["+i+"]: Node " + fingerTable[i].getNode().getId());
         }
     }
 
