@@ -127,6 +127,7 @@ class Application{
                             String ipToAdd = commandList[2];
                             System.out.println("Attempting to add URL/IP pair to the system...");
                             node.passData(urlToAdd, ipToAdd);
+                            System.out.println("URL/IP pair successfully stored.");
                             break;
                         }
                     }
